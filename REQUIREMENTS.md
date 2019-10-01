@@ -46,11 +46,39 @@
 
 ## Use Cases
 
-### Initial Query
+### Basic Query (no specifications)
+
+**Actor:** User asks Alexa to find a flight from point A to point B. Alexa infroms the user of any invalid requests, or confirms the request. Alexa looks for a flight between those two locations and tells the user the details of the found flight. 
+
+### Price Query
 
 **Actor:** User
 
-**Scenario:** User asks Alexa for information on flights and provides constraints for the search. Alexa informs the user of any invalid inputs if there is any and ask for corrections, or confirms the request with user. Alexa fetches data and displays to user. User receives flight details in desired form. 
+**Scenario:** User asks Alexa for the cheapest flight on a specific day from a specific airport to a specific airport. Alexa informs the user of any invalid inputs if there is any and ask for corrections, or confirms the request with user. Alexa looks at flights from and to the respective airports and finds the cheapest option. Alexa tells the user the price and time of the flight.
+
+### Airport Optimizing Price Query
+
+**Actor:** User
+
+**Scenario:** User asks Alexa for the cheapest flight on a specific day from a specific or general location to another general location. Alexa informs the user of any invalid inputs if there is any and ask for corrections, or confirms the request with user. Alexa looks at the two locations and searches the flights between various appropriate airports to find the cheapest possible option. Alexa tells the user the price of the flight, the departure airport, and the arrival airport.
+
+### Day Optimizing Price Query 
+
+**Actor:** User
+
+**Scenario:** User asks Alexa for the cheapest flight within a range of dates from a specific airport to a specific airport. Alexa informs the user of any invalid inputs if there is any and ask for corrections, or confirms the request with user. Alexa searches the flights to find the cheapest flight out of any of the dates in the range. Alexa tells the user the price, day, and time of the flight. 
+
+### Get more Flight Information
+
+**Actor:** User
+
+**Scenario:** User finishes a query and Alexa sends the information to the website. The User logs on to the website and is able to see all of the specifics about the flight including the airline, time, date, price, and a booking link.
+
+### Access Query History
+
+**Actor:** User
+
+**Scenario:** User finishes one or more queries resulting in Alexa sending multiple finished query outputs to the website. The User logs on to the website and is able to see the specifics about any previous flight query, including the airline, time, date, price, and a booking link.
 
 ### Followup Query
 
