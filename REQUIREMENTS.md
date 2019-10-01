@@ -81,8 +81,9 @@
 **Actor:** User  
 **Scenario:** User provides origin, destination, and label of a route. Alexa validates the input and confirms with user. Alexa stores the route. 
 
-## Domain Modeling
+## Domain Model
 
+![Domain Model with Multiplicity](ASSETS/domainModel.png)
 
 
 
