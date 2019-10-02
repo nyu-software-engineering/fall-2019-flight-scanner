@@ -26,7 +26,7 @@
 **Company:** Planet Pizza  
 **Occupation:** Training Specialist  
 **Goal:** Book the earliest flights to Montana from Florida to see her granddaughter who is about to give birth to her great granddaughter.   
-**Challenge:** Unfamiliar with web browser based flight searching technologies, but the matter is too urgent to wait until some comes to help.   
+**Challenge:** Unfamiliar with web browser based flight searching technologies, but the matter is too urgent to wait until someone comes to help.   
 **How We Help:** Allow Mary to find the earliest flight to Montana by chatting with Alexa the way she would with a human. 
 
 ## Use Cases
