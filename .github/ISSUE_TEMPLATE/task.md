@@ -1,13 +1,13 @@
 ---
 name: Task
 about: A sample issue template for a task
-title: Task description here
+title: Short descirption of task here
 labels: Task
 assignees: ''
 
 ---
 
-## Description
+### Description
 <!-- Provide a general description of the task here -->
 
 ### Related User Story

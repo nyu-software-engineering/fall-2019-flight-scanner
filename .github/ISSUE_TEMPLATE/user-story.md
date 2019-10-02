@@ -7,8 +7,8 @@ assignees: ''
 
 ---
 
-## Effort: (between XS and XL)
+### Effort: (between XS and XL)
 
-## Acceptance Criteria
+### Acceptance Criteria
 - [ ] Sample criteria 1
 - [ ] Sample criteria 2
