@@ -5,7 +5,7 @@
 ### Justin K. Carter
 
 **Age:** 44  
-**Company:** EarthHard, Inc 
+**Company:** EarthHard, Inc  
 **Occupation:** Limnologist  
 **Goal:** Book flight tickets for domestic and international flights to study inland water at different locations.  
 **Challenge:** Has a very busy schedule between teaching and research so finding the time to sit down and go through lists of flights is difficult.  
@@ -31,22 +31,22 @@
 
 ## Use Cases
 
-### Basic Query (no specifications)
+### Submit Basic Query (no specifications)
 
 **Actor:** User  
 **Scenario:** User asks Alexa to find a flight on a specific day from a specific airport to another specific airport. Alexa informs the user of any invalid requests and inquires further, or confirms the request. Alexa looks for a flight between the two airports and tells the user the price and time of the found flight. 
 
-### Price Query
+### Submit Price Query
 
 **Actor:** User  
 **Scenario:** User asks Alexa for the cheapest flight on a specific day from a specific airport to another specific airport. Alexa informs the user of any invalid requests and inquires further, or confirms the request. Alexa looks at flights from and to the respective airports and finds the cheapest option. Alexa tells the user the price and time of the found flight.
 
-### Airport Optimizing Price Query
+### Submit Airport Optimizing Price Query
 
 **Actor:** User  
 **Scenario:** User asks Alexa for the cheapest flight on a specific day from a specific or general location to another general location. Alexa informs the user of any invalid requests and inquires further, or confirms the request. Alexa looks at the two locations and searches the flights between various appropriate airports to find the cheapest possible option. Alexa tells the user the price, departure airport, and arrival airport of the found flight.
 
-### Day Optimizing Price Query 
+### Submit Day Optimizing Price Query 
 
 **Actor:** User  
 **Scenario:** User asks Alexa for the cheapest flight within a range of dates from a specific airport to a specific airport. Alexa informs the user of any invalid requests and inquires further, or confirms the request. Alexa searches the flights to find the cheapest flight out of any of the dates in the range. Alexa tells the user the price, day, and time of the flight. 
@@ -61,7 +61,7 @@
 **Actor:** User  
 **Scenario:** User finishes one or more queries resulting in Alexa sending multiple finished query outputs to the website. The User logs on to the website and is able to see the specifics about any previous flight query, including the airline, time, date, price, and a booking link.
 
-### Followup Query
+### Submit Followup Query
 
 **Actor:** User  
 **Scenario:** User receives flight information from previous query and adds new constraints or alters previous search conditions. Alexa fetches previous query, modify conditions, and search for flights. Alexa display results to user in desired format. 
@@ -71,7 +71,7 @@
 **Actor:** User  
 **Scenario:** User requests to bookmark a particular flight for booking or comparison with other flights and gives the flight a label. Alexa stores the reference to the flight in a buffer. Alexa confirms with the user that the flight is bookmarked under the label user specified. 
 
-### Comparison
+### Compare Two Flights
 
 **Actor:** User  
 **Scenario:** User provides references to two flights and criterias for comparison. Alexa fetch data on these flights, generates comparison results, and display them to the user. 
