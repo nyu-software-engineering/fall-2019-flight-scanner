@@ -1,7 +1,7 @@
 ---
 name: User Story
 about: A standard template for User Stories
-title: 'User Story: As a _, I want to _, so that _.'
+title: As a _, I want to _, so that _.
 labels: User Story
 assignees: ''
 
