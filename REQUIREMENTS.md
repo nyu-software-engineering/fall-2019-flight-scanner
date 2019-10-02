@@ -18,7 +18,7 @@
 **Occupation:** College Student  
 **Goal:** Book flights to go home during Spring break  
 **Challenge:** With the limited amount of money he made from tutoring Python, Isaac cannot afford the peak-time tickets but has to come back to school in time for classes.   
-**ow We Help:** Allow Isaac to keep track of the lowest price of flights in a range of time he specifies and update him during his casual conversation with Alexa. 
+**How We Help:** Allow Isaac to keep track of the lowest price of flights in a range of time he specifies and update him during his casual conversation with Alexa. 
 
 ### Mary G. Loya
 
@@ -80,6 +80,9 @@
 
 **Actor:** User  
 **Scenario:** User provides origin, destination, and label of a route. Alexa validates the input and confirms with user. Alexa stores the route. 
+
+### Use Case Diagram
+![Use Case Diagrams in One](ASSETS/user_diagram.png)
 
 ## Domain Model
 
