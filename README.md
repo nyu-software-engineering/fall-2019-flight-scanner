@@ -11,7 +11,7 @@ The idea evolved as a project for a software engineering class.
 ## How to contribute? 
 TBD
 
-## [Project requirements](./REQUIREMENTS.md)
+## Project requirements
 The project requirements documentation can be found [here](./REQUIREMENTS.md). 
 
 ## How to build and test? 
