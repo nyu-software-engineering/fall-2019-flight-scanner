@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-### Effort: (between XS and XL)
+### Effort: (1, 2, 3, 5, 8, 13, 21) 
 
 ### Acceptance Criteria
 - [ ] Sample criteria 1
