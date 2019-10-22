@@ -6,8 +6,8 @@ labels: User Story
 assignees: ''
 
 ---
-
-### Effort: (1, 2, 3, 5, 8, 13, 21) 
+<!-- Effort should be in the range (1, 2, 3, 5, 8, 13, 21) -->
+### Effort: 
 
 ### Acceptance Criteria
 - [ ] Sample criteria 1
