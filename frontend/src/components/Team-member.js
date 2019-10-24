@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class History extends Component{
+class Teammember extends Component{
     constructor(props){
       super(props);
     }
@@ -8,10 +8,9 @@ class History extends Component{
   
     render (){
       return (
-          
-       <h1>Flight history</h1>
+       <p>Teammember component will show up here</p>
       );
    }
   }
 
-export default History;
+export default Teammember;
