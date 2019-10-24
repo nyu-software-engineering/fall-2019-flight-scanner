@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Profile extends Component{
+class Article extends Component{
     constructor(props){
       super(props);
     }
@@ -8,9 +8,9 @@ class Profile extends Component{
   
     render (){
       return (
-       <h1>Profile</h1>
+       <p>Article component will show up here</p>
       );
    }
   }
 
-export default Profile;
+export default Article;
