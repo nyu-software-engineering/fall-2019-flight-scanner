@@ -1,19 +1,15 @@
 import React from 'react';
 import './App.css';
-import Article from "./components/Article"
-import Miniarticle from "./components/Mini-article"
-import Teammember from "./components/Team-member"
-import Navbar from "./components/Navbar"
+import NavbarUI from "./components/Navbar_materialize"
+import Search from "./components/Search"
 
 function App() {
   return (
     <div className="App">
-      <Navbar></Navbar>
-      <Article></Article>
-      <Miniarticle></Miniarticle>
-      <Teammember></Teammember>
-      
-      
+
+      <Search></Search>
+      <NavbarUI></NavbarUI>
+    
     </div>
   );
 }
