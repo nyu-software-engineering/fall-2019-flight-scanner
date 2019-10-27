@@ -1,17 +1,15 @@
 import React from 'react';
 import './App.css';
-import Article from "./components/Article"
-import Miniarticle from "./components/Mini-article"
-import Teammember from "./components/Team-member"
+import NavbarUI from "./components/Navbar_materialize"
+import Search from "./components/Search"
 
 function App() {
   return (
     <div className="App">
-      Welcome to LightShare! 
-      <Article></Article>
-      <Miniarticle></Miniarticle>
-      <Teammember></Teammember>
-      
+
+      <Search></Search>
+      <NavbarUI></NavbarUI>
+    
     </div>
   );
 }
