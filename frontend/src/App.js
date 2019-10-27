@@ -3,14 +3,16 @@ import './App.css';
 import Article from "./components/Article"
 import Miniarticle from "./components/Mini-article"
 import Teammember from "./components/Team-member"
+import Navbar from "./components/Navbar"
 
 function App() {
   return (
     <div className="App">
-      Welcome to LightShare! 
+      <Navbar></Navbar>
       <Article></Article>
       <Miniarticle></Miniarticle>
       <Teammember></Teammember>
+      
       
     </div>
   );
