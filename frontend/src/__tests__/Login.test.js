@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login, { checkEmailExists } from '../components/Login';
+import Login from '../components/Login';
 
-import { checkEmailExists, checkSignInProvider, checkSignedIn, availableSignInOptions, emailValid, passwordHasSpecialChars, passwordLongEnough } from '../components/Login'
+import { passwordEntered,conversion, checkEmailExists, checkSignInProvider, checkSignedIn, availableSignInOptions, emailValid, passwordHasSpecialChars, passwordLongEnough } from '../components/Login'
 
 it('renders login component', () => {
     const div = document.createElement('div');
@@ -39,4 +39,13 @@ it('validates an email address', () => {
 
 it('check if email exists', () => {
     expect(checkEmailExists("test@test.com", ["nothing@here.com", "something@there.com"])).not.toBeTruthy()
+})
+
+it('generate asterix', () => {
+    expect(conversion("12345")).toEqual("*****")
+})
+
+it('check password entered', () => {
+    expect(passwordEntered("")).not.toBeTruthy()
+    expect(passwordEntered("test")).toBeTruthy()
 })

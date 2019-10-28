@@ -53,10 +53,18 @@ function checkEmailExists(email, listOfEmails){
     return listOfEmails.includes(email);
 }
 
+function conversion(password) {
+    return '*'.repeat(password.length)
+}
+
+function passwordEntered(password){
+    return !(password.length == 0)
+}
+
 // function (){
 
 // }
 
 export default Login
 
-export { checkEmailExists, checkSignedIn, checkSignInProvider, availableSignInOptions, emailValid, emailRegex, passwordHasSpecialChars, passwordLongEnough }
+export { passwordEntered,conversion, checkEmailExists, checkSignedIn, checkSignInProvider, availableSignInOptions, emailValid, emailRegex, passwordHasSpecialChars, passwordLongEnough }
