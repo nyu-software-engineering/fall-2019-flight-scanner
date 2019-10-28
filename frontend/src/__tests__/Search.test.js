@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom';
 import Search from '../components/Search';
 import SearchAppBar from '../components/Search';
 import TestRenderer from 'react-test-renderer';
-import NavbarUI from "../components/Navbar_materialize";
 import {searchvalidity, lenval, split, match, popularity} from "../components/Search";
-import Navbar from "../components/Navbar_bootstrap";
-import Teammember from "../components/Team-member";
+
 
 // Search renders without crashing
 it('renders without crashing', () => {
@@ -24,32 +22,6 @@ describe("SearchAppBar Component", () => {
       expect(shot).toMatchSnapshot()
     })
 });
-
-// Snapshot for the navbar(Materlize version)
-// Same comments are as the previous one
-describe("Navbar(M) Component", () => {
-    it('Matches with the snapshot', () => {
-        const shot = TestRenderer.create(<NavbarUI/>).toJSON()
-        expect(shot).toMatchSnapshot()
-    })
-});
-
-// Snapshot of the Bootstrap Navbar 
-describe("Navbar(B) Component", () => {
-    it('Matches with the snapshot', () => {
-        const shot = TestRenderer.create(<Navbar/>).toJSON()
-        expect(shot).toMatchSnapshot()
-    })
-});
-
-// Snapshot of the the Teammember Component
-describe("Teammember Component", () => {
-    it('Matches with the snapshot', () => {
-        const shot = TestRenderer.create(<Teammember/>).toJSON()
-        expect(shot).toMatchSnapshot()
-    })
-});
-
 
 // Test for the validity of search input 
 it('Searchvalidity test - content', () => {
