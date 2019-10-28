@@ -32,4 +32,4 @@ function availableSignInOptions() {
 
 export default Login
 
-export {, checkSignedIn, checkSignInProvider, availableSignInOptions }
+export { checkSignedIn, checkSignInProvider, availableSignInOptions }
