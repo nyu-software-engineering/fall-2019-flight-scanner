@@ -1,30 +1,30 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 
-class Login extends Component{
-  
-    render (){
-      return (
-      <div>
-        <h2>Login</h2>
-        <button onClick={googleSignIn()}>Login with Google</button>
-      </div>
-      );
-    }    
+class Login extends Component {
+
+    render() {
+        return (
+            <div>
+                <h2>Login</h2>
+                <button onClick={googleSignIn()}>Login with Google</button>
+            </div>
+        );
+    }
 }
 
-function googleSignIn(){
+function googleSignIn() {
 }
 
-function checkSignedIn(){
+function checkSignedIn() {
     return true;
 }
 
-function checkSignInProvider(){
+function checkSignInProvider() {
     return "google";
 }
 
-function availableSignInOptions(){
+function availableSignInOptions() {
     return ["Google", "Guest"]
 }
 
@@ -32,4 +32,4 @@ function availableSignInOptions(){
 
 export default Login
 
-export {googleSignIn, checkSignedIn, checkSignInProvider, availableSignInOptions}
+export {, checkSignedIn, checkSignInProvider, availableSignInOptions }

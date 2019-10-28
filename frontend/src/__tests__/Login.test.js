@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Login from '../components/Login';
 
-import { googleSignIn, checkSignInProvider, checkSignedIn, availableSignInOptions } from '../components/Login'
+import { checkSignInProvider, checkSignedIn, availableSignInOptions } from '../components/Login'
 
 it('renders login component', () => {
     const div = document.createElement('div');
