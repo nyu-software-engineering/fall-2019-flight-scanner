@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Login from '../components/Login';
 
-import { checkSignInProvider, checkSignedIn, availableSignInOptions } from '../components/Login'
+import { checkSignInProvider, checkSignedIn, availableSignInOptions, emailRegex, emailValid, passwordHasSpecialChars, passwordLongEnough } from '../components/Login'
 
 it('renders login component', () => {
     const div = document.createElement('div');
@@ -21,6 +21,19 @@ it('checks whether user signed in', () => {
 it('checks available sign in options', () => {
     expect(availableSignInOptions()).toEqual(["Google", "Guest"])
 })
-// it('tests sign in', () => {
-//     expect(googleSignIn()).toBe("Successful")
-// })
+
+it('checks password is long enough', () => {
+    expect(passwordLongEnough("abc")).not.toBeTruthy()
+    expect(passwordLongEnough("abcdefghi")).toBeTruthy()
+})
+
+it('checks password has special chards', () => {
+    expect(passwordHasSpecialChars("abcdef")).not.toBeTruthy()
+    expect(passwordHasSpecialChars("adef&*12!")).toBeTruthy()
+})
+
+it('validates an email address', () => {
+    expect(emailValid("myname@myplace.com")).toBeTruthy()
+    expect(emailValid("cannotbeanemail.haha")).not.toBeTruthy()
+})
+
