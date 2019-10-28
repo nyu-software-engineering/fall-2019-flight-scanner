@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from '../components/Login';
+import Login, { checkEmailExists } from '../components/Login';
 
-import { checkSignInProvider, checkSignedIn, availableSignInOptions, emailRegex, emailValid, passwordHasSpecialChars, passwordLongEnough } from '../components/Login'
+import { checkEmailExists, checkSignInProvider, checkSignedIn, availableSignInOptions, emailValid, passwordHasSpecialChars, passwordLongEnough } from '../components/Login'
 
 it('renders login component', () => {
     const div = document.createElement('div');
@@ -37,3 +37,6 @@ it('validates an email address', () => {
     expect(emailValid("cannotbeanemail.haha")).not.toBeTruthy()
 })
 
+it('check if email exists', () => {
+    expect(checkEmailExists("test@test.com", ["nothing@here.com", "something@there.com"])).not.toBeTruthy()
+})

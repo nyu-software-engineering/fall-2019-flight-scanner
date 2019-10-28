@@ -10,7 +10,7 @@ class Login extends Component {
         return (
             <div>
                 <h2>Login</h2>
-                <input type="text" defaultValue="Name" name="Password" />
+                <input type="text" name="Email" />
                 <input type="password" name="Password" />
                 <button onClick={validateItems()}>Login</button>
             </div>
@@ -49,6 +49,14 @@ function availableSignInOptions() {
     return ["Google", "Guest"]
 }
 
+function checkEmailExists(email, listOfEmails){
+    return listOfEmails.includes(email);
+}
+
+// function (){
+
+// }
+
 export default Login
 
-export { checkSignedIn, checkSignInProvider, availableSignInOptions, emailValid, emailRegex, passwordHasSpecialChars, passwordLongEnough }
+export { checkEmailExists, checkSignedIn, checkSignInProvider, availableSignInOptions, emailValid, emailRegex, passwordHasSpecialChars, passwordLongEnough }
