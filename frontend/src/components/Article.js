@@ -1,19 +1,5 @@
 import React, { Component } from 'react';
 
-<<<<<<< HEAD
-class Article extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <p>Article component will show up here</p>
-    );
-  }
-}
-
-=======
 class Article extends Component{
     //constructor(props){
     //  super(props);
@@ -45,5 +31,4 @@ Article.defaultProps = {
     imgURL: "ASSETS/defaultBanner.png"
     
 }
->>>>>>> 72eaccec47d38794151264bd3f700c6ae0409f40
 export default Article;
