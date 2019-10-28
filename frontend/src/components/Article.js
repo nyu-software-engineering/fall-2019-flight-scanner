@@ -10,7 +10,7 @@ class Article extends Component{
       return (
       <div>
           <img alt = "Banner" src={this.props.imgURL} width = "900" height = "600"/>
-          <h2>{this.props.title}</h3>
+          <h3>{this.props.title}</h3>
           <p style = "text-align:left;">
               By {this.props.author}
               <span style="float:right;">
@@ -27,7 +27,7 @@ Article.defaultProps = {
     title: "Default Title", 
     author: "Someone", 
     datePublised: "12/12/2020",
-    content: "Default content"
+    content: "Default content",
     imgURL: "ASSETS/defaultBanner.png"
     
 }
