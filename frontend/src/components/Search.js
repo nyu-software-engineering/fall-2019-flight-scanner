@@ -10,7 +10,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
-
   title: {
     flexGrow: 1,
     display: 'none',
@@ -58,9 +57,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SearchAppBar() {
-  const classes = useStyles();
 
+function SearchAppBar() {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <AppBar position="static" style={{ background: '#2E3B55' }}>
@@ -85,5 +84,60 @@ export default function SearchAppBar() {
       </AppBar>
     </div>
   );}
+
+  function searchvalidity(input){ 
+    if(input.length == 0){
+      return "Invalid Search"; 
+    }
+    return input; 
+  };
+
+  function lenval(input){
+    if (input.length <= 40){
+      return 1;
+    }
+    return 0;
+  };
+
+  function split(input){
+    let input_list = input.split(" ")
+    if (input_list.length == 1){
+      return input_list[0]
+    }
+    else{
+      return input_list
+    }
+  }
+
+  function match(input_word,title){
+    let title_list = title.split(" ") 
+    var counter = 0; 
+    var i; 
+    for(i = 0; i < title_list.length; i++){
+      if (input_word.toLowerCase() == title_list[i].toLowerCase()){
+        counter ++; 
+      }
+    }
+    return counter; 
+  }
+
+  function popularity(input, history){
+    let temp = []
+    var i; 
+    for(i = 0; i< 2; i++){
+      if (history[i] == input){
+        return history
+      }
+      else{
+        temp.push(history[i])}
+    }; 
+
+    temp.push(input)
+    return temp;
+  }
+
+export{searchvalidity, lenval, useStyles, split, match, popularity}
+
+export default SearchAppBar;
 
 

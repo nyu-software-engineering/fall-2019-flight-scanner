@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 
+
 // containers => horizontal width 
 // spacing/utility => spacing & alignment 
 // .navbar => responsive collapsing
@@ -11,14 +12,12 @@ class Navbar extends Component{
       this.state = { 
         pressed: 'home', 
       }
-    }
-
+    }  
     presshandler = (event) => {
       this.setState({
         pressed: event.target.value,
       })
     }
-  
     // set value and function call to all the navbar buttons/selections
     render (){
       return (<div>
@@ -49,6 +48,6 @@ class Navbar extends Component{
 </nav>
       </div>);
    }
-  }
+}
 
 export default Navbar;
