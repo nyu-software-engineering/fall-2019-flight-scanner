@@ -5,3 +5,9 @@ node_js:
 
 notifications:
   slack: nyuagile:4evR8QyWUaphCQ4OHyC3Iwjn
+
+install:
+  - npm install
+
+script: 
+  -npm test
