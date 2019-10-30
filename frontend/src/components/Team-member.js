@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { memberExpression, isFlowBaseAnnotation } from '@babel/types';
 
 
 class Teammember extends Component{
@@ -33,7 +32,7 @@ function getFirstName(name){
 }
 
 function validateRole(role){
-  if(role != "Admin" && role != "Editor"){
+  if(role !== "Admin" && role !== "Editor"){
     return "Invalid Role"; 
   }
   return role; 
@@ -48,11 +47,11 @@ function trimBio(bio){
 
 
 function checkAuthority(role, action){
-  if(role == "Admin"){
+  if(role === "Admin"){
     return true; 
   }
   else{
-    if (action == "Add Editor" || action == "Delete Editor"){
+    if (action === "Add Editor" || action === "Delete Editor"){
       return false; 
     }
     else{
@@ -91,10 +90,10 @@ function generateInfoArray(name, role){
 }
 
 function makeRolesBinary(role){
-  if(role == "Admin"){
+  if(role === "Admin"){
     return 1; 
   }
-  else if(role == "Editor"){
+  else if(role === "Editor"){
     return 0; 
   }
   else{

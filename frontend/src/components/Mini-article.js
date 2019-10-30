@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 
 
 class Miniarticle extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+  
   render() {
     return (
       <div>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -86,7 +86,7 @@ function SearchAppBar() {
   );}
 
   function searchvalidity(input){ 
-    if(input.length == 0){
+    if(input.length === 0){
       return "Invalid Search"; 
     }
     return input; 
@@ -101,7 +101,7 @@ function SearchAppBar() {
 
   function split(input){
     let input_list = input.split(" ")
-    if (input_list.length == 1){
+    if (input_list.length === 1){
       return input_list[0]
     }
     else{
@@ -114,7 +114,7 @@ function SearchAppBar() {
     var counter = 0; 
     var i; 
     for(i = 0; i < title_list.length; i++){
-      if (input_word.toLowerCase() == title_list[i].toLowerCase()){
+      if (input_word.toLowerCase() === title_list[i].toLowerCase()){
         counter ++; 
       }
     }
@@ -125,7 +125,7 @@ function SearchAppBar() {
     let temp = []
     var i; 
     for(i = 0; i< 2; i++){
-      if (history[i] == input){
+      if (history[i] === input){
         return history
       }
       else{
