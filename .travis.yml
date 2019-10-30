@@ -5,6 +5,7 @@ node_js:
 
 before_install:
   - cd frontend
+  - npx jest --ci
 
 notifications:
   slack: nyuagile:4evR8QyWUaphCQ4OHyC3Iwjn
