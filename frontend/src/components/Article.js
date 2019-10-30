@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 class Article extends Component{
-    //constructor(props){
-    //  super(props);
-    //}
-  
-  
+    constructor(props){
+      super(props);
+    }
+
+
     render (){
       return (
       <div>
           <img alt = "Banner" src={this.props.imgURL} width = "900" height = "600"/>
-          <h3>{this.props.title}</h3>
-          <p style = "text-align:left;">
-              By {this.props.author}
-              <span style="float:right;">
-                  {this.props.datePublished}
-              </span>
-          </p>
+          <h1>{this.props.title}</h1>
+          <h4>By {this.props.author}</h4>
+          <h4>{this.props.datePublised}</h4>
           <p>{this.props.content}</p>
       </div>
       );
@@ -24,11 +22,12 @@ class Article extends Component{
 }
 
 Article.defaultProps = {
-    title: "Default Title", 
-    author: "Someone", 
+    title: "Default Title",
+    author: "Someone",
     datePublised: "12/12/2020",
-    content: "Default content",
+    content: "Default Full Article content",
     imgURL: "ASSETS/defaultBanner.png"
-    
+
 }
 export default Article;
+
