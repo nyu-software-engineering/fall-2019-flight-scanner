@@ -1,7 +1,17 @@
 language: node_js
 node_js: 
   - "node"
-  - "7"
+  - "12.9"
+
+before_install:
+  - cd frontend
 
 notifications:
   slack: nyuagile:4evR8QyWUaphCQ4OHyC3Iwjn
+
+cache:
+  directories:
+    - node_modules
+script:
+  - npm run test -- -u
+  - npm run build
