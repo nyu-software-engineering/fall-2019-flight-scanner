@@ -1,6 +1,6 @@
 # LightShare
 
-[![Build Status](https://travis-ci.com/nyu-software-engineering/fall-2019-lightshare.svg?branch=spike%2F87%2Fadd-travis-file)](https://travis-ci.com/nyu-software-engineering/fall-2019-lightshare)
+[![Build Status](https://travis-ci.com/nyu-software-engineering/fall-2019-lightshare.svg?branch=master)](https://travis-ci.com/nyu-software-engineering/fall-2019-lightshare)
 
 ## What is it? 
 LightShare is lightweight, plug and play solution for individuals or groups looking start their own content writing platform. At it's core, LightShare is a blogging tool that can be simply downloaded, configured and deployed without having to worry about garbage overhead and scaling. 
