@@ -3,6 +3,9 @@ node_js:
   - "node"
   - "7"
 
+before_install:
+  - cd frontend
+
 notifications:
   slack: nyuagile:4evR8QyWUaphCQ4OHyC3Iwjn
 
