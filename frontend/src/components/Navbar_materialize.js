@@ -9,6 +9,8 @@ import Box from '@material-ui/core/Box';
 import Article from "./Article"
 import Miniarticle from "./Mini-article"
 import Teammember from "./Team-member"
+import Grid from '@material-ui/core/Grid';
+import { GridList } from '@material-ui/core';
 
 
 function TabPanel(props) {
@@ -56,7 +58,7 @@ export default function NavbarUI() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -106,7 +108,14 @@ export default function NavbarUI() {
         <Miniarticle></Miniarticle>
       </TabPanel>
       <TabPanel value={value} index={6}>
-        <Teammember></Teammember>
+        <Grid container direction={'row'} spacing={24} padding={20}>
+          <Grid item md={3}><Teammember></Teammember></Grid>
+          <Grid item md={3}><Teammember></Teammember></Grid>
+          <Grid item md={3}><Teammember></Teammember></Grid>
+          <Grid item md={3}><Teammember></Teammember></Grid>
+          <Grid item md={3}><Teammember></Teammember></Grid>
+          <Grid item md={3}><Teammember></Teammember></Grid>
+        </Grid>
       </TabPanel>
       
     </div>
