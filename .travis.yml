@@ -7,7 +7,12 @@ before_install:
   - cd frontend
 
 notifications:
-  slack: nyuagile:4evR8QyWUaphCQ4OHyC3Iwjn
+  email:
+    - zw1400@nyu.edu
+    - arz268@nyu.edu
+    - kk3609@nyu.edu
+    - ns3774@nyu.edu
+    - ys2792@nyu.edu
 
 cache:
   directories:
