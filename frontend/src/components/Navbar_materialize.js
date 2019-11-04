@@ -68,10 +68,10 @@ export default function NavbarUI() {
           indicatorColor="primary"
           textColor="primary"
           centered
-          // Cannot be scrollable and centered at the same time 
-          // scrollButtons="auto"
-          // centered={appBarWidth > 1179}
-          // scrollable={appBarWidth < 1179}
+        // Cannot be scrollable and centered at the same time 
+        // scrollButtons="auto"
+        // centered={appBarWidth > 1179}
+        // scrollable={appBarWidth < 1179}
         >
           <Tab label="Sport" {...a11yProps(0)} />
           <Tab label="Drama" {...a11yProps(1)} />
@@ -81,31 +81,25 @@ export default function NavbarUI() {
           <Tab label="Agile" {...a11yProps(5)} />
           <Tab label="Team" {...a11yProps(6)} />
         </Tabs>
-      {/* convert to mappin? */}
+        {/* convert to mappin? */}
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Article></Article>
-        <Miniarticle></Miniarticle>
+        <Miniarticle />
       </TabPanel>
       <TabPanel value={value} index={1}>
-      <Article></Article>
-        <Miniarticle></Miniarticle>
+        <Article />
       </TabPanel>
       <TabPanel value={value} index={2}>
-      <Article></Article>
-        <Miniarticle></Miniarticle>
+        <Article />
       </TabPanel>
       <TabPanel value={value} index={3}>
-      <Article></Article>
-        <Miniarticle></Miniarticle>
+        <Article />
       </TabPanel>
       <TabPanel value={value} index={4}>
-      <Article></Article>
-        <Miniarticle></Miniarticle>
+        <Article />
       </TabPanel>
       <TabPanel value={value} index={5}>
-      <Article></Article>
-        <Miniarticle></Miniarticle>
+        <Article />
       </TabPanel>
       <TabPanel value={value} index={6}>
         <GridList>
@@ -120,7 +114,7 @@ export default function NavbarUI() {
 		</GridList>
 
       </TabPanel>
-      
+
     </div>
 
   );
