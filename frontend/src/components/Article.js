@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { minWidth } from '@material-ui/system';
 
 const useStyles = makeStyles({
     root: {
@@ -42,7 +41,7 @@ const ArticleComponent = (props) => {
         <div className={classes.root}>
             <div className={classes.page}>
 
-                <img className='bannerImage' src={props.banner} style={{ maxWidth: "100%" }} />
+                <img className='bannerImage' alt="banner for article" src={props.banner} style={{ maxWidth: "100%" }} />
 
                 <Typography variant="subtitle1" className={classes.teaser}>{
                     props.teaser}
