@@ -23,3 +23,18 @@ Article_date (date of publishing)
 
 Article_status (published/unpublished) 
 
+### Author / Crew
+
+(PK) Author ID (unique ID)
+
+First Name (text)
+
+Last Name (text)
+
+Email Address (text)
+
+Profile Picture (URL)
+
+Role (text)
+
+Bio (text ~250 word limit)
