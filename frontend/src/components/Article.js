@@ -19,7 +19,7 @@ const useStyles = makeStyles({
         textTransform: "uppercase",
         fontWeight: "600",
         objectFit: "contain",
-        textAlign: "left", 
+        textAlign: "left",
         marginBottom: "10px"
     },
     teaser: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
         textAlign: "left"
     },
     articleBody: {
-        marginTop: "15px", 
+        marginTop: "15px",
         textAlign: "left"
     }
 });
@@ -42,8 +42,8 @@ const ArticleComponent = (props) => {
         <div className={classes.root}>
             <div className={classes.page}>
 
-            <img className='bannerImage' src={props.banner} style={{ maxWidth: "100%" }} />
-                
+                <img className='bannerImage' src={props.banner} style={{ maxWidth: "100%" }} />
+
                 <Typography variant="subtitle1" className={classes.teaser}>{
                     props.teaser}
                 </Typography>
