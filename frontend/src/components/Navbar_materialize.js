@@ -108,14 +108,17 @@ export default function NavbarUI() {
         <Miniarticle></Miniarticle>
       </TabPanel>
       <TabPanel value={value} index={6}>
-        <Grid container direction={'row'} spacing={24} padding={20}>
-          <Grid item md={3}><Teammember></Teammember></Grid>
-          <Grid item md={3}><Teammember></Teammember></Grid>
-          <Grid item md={3}><Teammember></Teammember></Grid>
-          <Grid item md={3}><Teammember></Teammember></Grid>
-          <Grid item md={3}><Teammember></Teammember></Grid>
-          <Grid item md={3}><Teammember></Teammember></Grid>
-        </Grid>
+        <GridList>
+			<Teammember></Teammember>
+			<Teammember></Teammember>
+			<Teammember></Teammember>
+			<Teammember></Teammember>
+			<Teammember></Teammember>
+			<Teammember></Teammember>
+			<Teammember></Teammember>
+			<Teammember></Teammember>
+		</GridList>
+
       </TabPanel>
       
     </div>
