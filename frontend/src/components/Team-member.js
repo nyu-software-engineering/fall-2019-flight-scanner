@@ -19,7 +19,11 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
 	card: {
-	  maxWidth: 345,
+    maxWidth: 345,
+    maxHeight: 800,
+    margin: "20px"
+
+    
 	},
 	media: {
 	  height: 260,
@@ -29,7 +33,8 @@ const useStyles = makeStyles(theme => ({
 export default function Teammember(props){
 	const classes = useStyles();
 		return (
-			
+      
+    
 		<Card className={classes.card}>
 			<CardActionArea>
 				<CardMedia
@@ -40,12 +45,12 @@ export default function Teammember(props){
 					<Typography gutterBottom variant="h5" component="h2">
 						{props.name}
 					</Typography>
-					<Typography gutterBottom variant="h5" component="h3">
+					<Typography gutterBottom variant="h6" component="h6">
 						{props.role}
 					</Typography>
-				<Typography variant="body2" color="textSecondary" component="p">
+				{/* <Typography variant="body2" color="textSecondary" component="p">
 					{props.bio}
-				</Typography>
+				</Typography> */}
 				</CardContent>
 			</CardActionArea>
 			<CardActions>

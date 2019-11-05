@@ -11,6 +11,9 @@ First design for article page
 First design for category page 
 ![Category page](IMG/Categorypage.png) 
 
+Current version of profile page
+![Profile page](IMG/Profilepage.png)
+
 
 Inspiration for our initial approach was drawn from the [The New Yorker](https://www.newyorker.com/)
 ![The New Yorker Inspo](IMG/Inspiration.png) 

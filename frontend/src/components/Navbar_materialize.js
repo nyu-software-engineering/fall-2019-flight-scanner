@@ -49,6 +49,9 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
+  gridList: {
+    justifyContent: "center",
+  }
 }));
 
 export default function NavbarUI() {
@@ -102,7 +105,7 @@ export default function NavbarUI() {
         <Article />
       </TabPanel>
       <TabPanel value={value} index={6}>
-        <GridList>
+		<GridList className = {classes.gridList}>
 			<Teammember></Teammember>
 			<Teammember></Teammember>
 			<Teammember></Teammember>
