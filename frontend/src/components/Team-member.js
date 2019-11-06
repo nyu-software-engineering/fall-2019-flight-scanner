@@ -55,7 +55,7 @@ export default function Teammember(props){
 			</CardActionArea>
 			<CardActions>
 				<Button size="small" color="primary">
-					Lear More
+					Learn More
 				</Button>
 			</CardActions>
 		</Card>
