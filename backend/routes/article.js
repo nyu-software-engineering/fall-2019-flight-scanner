@@ -1,5 +1,5 @@
 const router = require('express').Router();
-
+let Article = require('../models/article.model'); 
 // waiting for the mongoose bit to be added, no axios just yet either
 
 router.route('/').get((req, res) => {

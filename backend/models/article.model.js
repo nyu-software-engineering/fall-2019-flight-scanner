@@ -11,7 +11,7 @@ const Article = new Schema(
         article_teaser: {type: String}, 
         article_text: {type: String, required: true}, 
         article_category: {type: String, requried: true}, // still need to figure out indexing
-        article_date: {type: Date, required: true}, 
+        article_date: {type: String, required: true}, 
         article_status: {type: String, required: true} //controlled vocabulary? 
 
     },
