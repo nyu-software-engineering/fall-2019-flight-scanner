@@ -3,16 +3,16 @@ const Schema = mongoose.Schema;
 
 const Article = new Schema(
     {
-        article_id: {type: String, required: true, unique: true},
-        article_authors: {type: [String], required: true},
-        article_title: {type: String, required: true}, 
-        article_img: {type: String},
-        article_img_desc: {type: String},
-        article_teaser: {type: String}, 
-        article_text: {type: String, required: true}, 
-        article_category: {type: String, requried: true}, // still need to figure out indexing
-        article_date: {type: String, required: true}, 
-        article_status: {type: String, required: true} //controlled vocabulary? 
+        articleId: {type: String, required: true, unique: true},
+        articleAuthors: {type: [String], required: true}, //Couldn't get String Array to show
+        articleTitle: {type: String, required: true}, 
+        articleImg: {type: String},
+        articleImgDesc: {type: String},
+        articleTeaser: {type: String}, 
+        articleText: {type: String, required: true}, 
+        articleCategory: {type: String, requried: true}, // still need to figure out indexing
+        articleDate: {type: Date, required: true}, 
+        articleStatus: {type: String, required: true} //controlled vocabulary? 
 
     },
     {timestamps: true},
