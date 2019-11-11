@@ -8,7 +8,7 @@ const Article = new Schema(
         articleTitle: {type: String, required: true}, 
         articleImg: {type: String},
         articleImgDesc: {type: String},
-        articleTeaser: {type: String}, 
+        articleTeaser: {type: String, maxlength: 200}, 
         articleText: {type: String, required: true}, 
         articleCategory: {type: String, requried: true}, // still need to figure out indexing
         articleDate: {type: Date, required: true}, 

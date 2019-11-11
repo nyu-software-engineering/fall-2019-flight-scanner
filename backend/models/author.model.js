@@ -9,7 +9,7 @@ const Author = new Schema(
         authorEmail: {type: String},
         authorProfileUrl: {type: String},
         authorRole: {type: String, required: true}, //controlled vocabulary? 
-        authorBio: {type: String} //word limit? 
+        authorBio: {type: String, maxlength: 1000} 
 
     },
     {timestamps: true},
