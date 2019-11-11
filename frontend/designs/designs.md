@@ -14,6 +14,13 @@ First design for category page
 Current version of profile page
 ![Profile page](IMG/Profilepage.png)
 
+Current version of the Admin side My Articles page 
+![Admin, My Article](IMG/Admin-Myarticles.png)
+
+Current version of the Admin side Create page 
+![Admin, Create](IMG/Admin-Create.png)
+
+
 
 Inspiration for our initial approach was drawn from the [The New Yorker](https://www.newyorker.com/)
 ![The New Yorker Inspo](IMG/Inspiration.png) 
