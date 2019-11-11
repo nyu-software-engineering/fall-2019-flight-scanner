@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 
 class Login extends Component {
-    constructor(props) {
-        super(props)
-    }
+    // constructor(props) {
+    //     super(props)
+    // }
 
     render() {
         return (
@@ -18,7 +18,7 @@ class Login extends Component {
     }
 }
 
-const emailRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+const emailRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
 const alphanumericOnly = new RegExp("^[a-zA-Z0-9]*$")
 
 function validateItems(){
@@ -58,12 +58,8 @@ function conversion(password) {
 }
 
 function passwordEntered(password){
-    return !(password.length == 0)
+    return !(password.length === 0)
 }
-
-// function (){
-
-// }
 
 export default Login
 
