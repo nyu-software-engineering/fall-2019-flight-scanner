@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { Converter } from 'showdown';
+
+
+function markdown2html(markdown) {
+    return new Converter().makeHtml(markdown);
+}
 
 const useStyles = makeStyles({
     root: {
@@ -53,8 +59,7 @@ const ArticleComponent = (props) => {
                 <Typography variant="h5" className={classes.author}>
                     {props.author}
                 </Typography>
-                <Typography variant="body1" className={classes.articleBody}>
-                    {props.body}
+                <Typography variant="body1" className={classes.articleBody} dangerouslySetInnerHTML={{__html:markdown2html(props.body)}}>
                 </Typography>
 
             </div>
@@ -63,11 +68,7 @@ const ArticleComponent = (props) => {
 }
 
 class Article extends Component {
-    constructor(props) {
-        super(props)
-        console.log(props)
-    }
-
+    
     render() {
         return (
             <ArticleComponent props={this.props} />
@@ -80,8 +81,10 @@ Article.defaultProps = {
     title: "Dummy Title goes here and here and here",
     teaser: "A teaser for the dummy article here.Integer laoreet, felis vitae tempor ultricies, quam metus condimentum massa, sed porttitor ante sapien nec nibh. Nam dictum vel augue non gravida. ",
     author: "Dummy Author 1",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec pretium nisl, eleifend pellentesque metus. Quisque maximus leo purus, non tempus enim blandit quis. Sed at tristique nulla. Suspendisse pulvinar quam nibh, a posuere sapien scelerisque at. Nunc elementum dolor in facilisis auctor. Maecenas faucibus diam at ante euismod, vitae lobortis justo auctor. In dignissim urna a massa pulvinar, et pulvinar ligula auctor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc ullamcorper leo a magna posuere, sed pretium enim consectetur. Etiam dignissim blandit aliquet. Proin in ullamcorper quam, sed tincidunt nulla. Aliquam eget quam ullamcorper, porttitor nisi non, congue urna. Suspendisse a eleifend libero, tempus fermentum ex. Nulla leo felis, vulputate vitae viverra ut, mattis a massa. \n
+    body: `## Some subtitle
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec pretium nisl, eleifend pellentesque metus. Quisque maximus leo purus, non tempus enim blandit quis. Sed at tristique nulla. Suspendisse pulvinar quam nibh, a posuere sapien scelerisque at. Nunc elementum dolor in facilisis auctor. Maecenas faucibus diam at ante euismod, vitae lobortis justo auctor. In dignissim urna a massa pulvinar, et pulvinar ligula auctor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc ullamcorper leo a magna posuere, sed pretium enim consectetur. Etiam dignissim blandit aliquet. Proin in ullamcorper quam, sed tincidunt nulla. Aliquam eget quam ullamcorper, porttitor nisi non, congue urna. Suspendisse a eleifend libero, tempus fermentum ex. Nulla leo felis, vulputate vitae viverra ut, mattis a massa. \n
 
+### There is another subtitle
 Cras bibendum tempor mi ut vehicula. Quisque id risus ut mauris ultrices porttitor. Curabitur tristique nisl vel odio sagittis tristique. Praesent blandit lorem risus, ac imperdiet metus tincidunt dignissim. Praesent sollicitudin purus nisi, nec suscipit sem tempus viverra. Suspendisse sed venenatis risus, eu ultrices felis. Mauris luctus, lectus et fringilla eleifend, lorem tellus placerat velit, sed euismod purus orci quis justo. Mauris at odio scelerisque, eleifend leo sed, volutpat augue. Sed rhoncus mattis arcu vitae feugiat. Integer pellentesque tempor felis quis feugiat. Donec eu volutpat dui.
 
 Integer molestie ultricies odio. Sed id leo ac libero sollicitudin gravida sed ut arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut et dolor vel nisi volutpat dapibus at in lacus. Ut ut leo tempus, cursus lacus quis, lobortis nisl. Curabitur bibendum neque erat, et pharetra dui aliquam sed. Integer lacinia lacus egestas erat gravida, quis bibendum eros eleifend. Curabitur posuere libero tellus, id pellentesque nibh luctus a. Ut efficitur tristique magna quis pellentesque.
@@ -92,3 +95,5 @@ Integer laoreet, felis vitae tempor ultricies, quam metus condimentum massa, sed
 }
 
 export default Article
+
+export { markdown2html }
