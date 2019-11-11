@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 
 class Login extends Component {
-    constructor(props) {
-        super(props)
-    }
+    // constructor(props) {
+    //     super(props)
+    // }
 
     render() {
         return (
@@ -58,12 +58,8 @@ function conversion(password) {
 }
 
 function passwordEntered(password){
-    return !(password.length == 0)
+    return !(password.length === 0)
 }
-
-// function (){
-
-// }
 
 export default Login
 

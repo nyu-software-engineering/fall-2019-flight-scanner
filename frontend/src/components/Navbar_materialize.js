@@ -11,6 +11,7 @@ import Miniarticle from "./Mini-article"
 import Teammember from "./Team-member"
 // import Grid from '@material-ui/core/Grid';
 import { GridList } from '@material-ui/core';
+import Admin from "./Admin";
 
 
 function TabPanel(props) {
@@ -99,7 +100,7 @@ export default function NavbarUI() {
         <Article />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <Article />
+        <Admin> </Admin>
       </TabPanel>
       <TabPanel value={value} index={5}>
         <Article />
