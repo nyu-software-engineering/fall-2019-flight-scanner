@@ -6,6 +6,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Article from './Article'
+import MiniArticle from './Mini-article'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,11 +14,17 @@ const useStyles = makeStyles(theme => ({
   },
   backButton: {
     marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  nextButton :{
+    background: '#2E3B55', 
+    color: 'white', 
+    marginBottom: theme.spacing(1)
+  }
 }));
 
 function getSteps() {
@@ -27,10 +34,14 @@ function getSteps() {
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0: 
-      return ('Article info retrieved from database: URL Title Teaser Author Content in Markdown')
+      return ('Article info retrieved from database: URL Title Teaser Author Content in Markdown');
     case 1:
       return (<Article></Article>)
       ;
+    case 2:
+      return (<MiniArticle></MiniArticle>);
+    default:
+      return 
   }
 }
 
@@ -67,9 +78,11 @@ export default function ProgressBar() {
               >
                 Back
               </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Publish' : 'Next'}
+              <Button className={classes.nextButton} variant="contained" onClick={handleNext} disabled = {activeStep === 2}>
+                Next
               </Button>
+              <br></br>
+              <Button className={classes.nextButton} variant="contained" disabled = {activeStep !== 2}> Publish </Button>
             </div>
           </div>
       </div>
