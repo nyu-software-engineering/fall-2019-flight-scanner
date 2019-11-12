@@ -1,4 +1,5 @@
 import Login from "./Login"
+import ProgressBar from "./Progress"
 import React, { Component } from 'react';
 
 
@@ -10,7 +11,7 @@ class Admin extends Component {
     render() {
         return (
             <div>
-                <Login></Login>
+                <ProgressBar></ProgressBar>
             </div>
         );
     }
