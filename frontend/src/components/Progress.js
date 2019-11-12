@@ -5,8 +5,8 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Article from './Article'
-import MiniArticle from './Mini-article'
+import Article from './Article';
+import MiniArticle from './Mini-article';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,7 +24,11 @@ const useStyles = makeStyles(theme => ({
     background: '#2E3B55', 
     color: 'white', 
     marginBottom: theme.spacing(1)
+  },
+  stepIcon: {
+    color: '#2E3B55',
   }
+  
 }));
 
 function getSteps() {
@@ -58,12 +62,16 @@ export default function ProgressBar() {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
 
+  const handlePublish = () => {
+    alert("attempting to publish article")
+  };
+
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper  activeStep={activeStep} alternativeLabel>
         {steps.map(label => (
           <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+            <StepLabel StepIconProps={{classes: { root: classes.stepIcon }}}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
@@ -82,7 +90,7 @@ export default function ProgressBar() {
                 Next
               </Button>
               <br></br>
-              <Button className={classes.nextButton} variant="contained" disabled = {activeStep !== 2}> Publish </Button>
+              <Button className={classes.nextButton} variant="contained" onClick={handlePublish} disabled = {activeStep !== 2}> Publish </Button>
             </div>
           </div>
       </div>

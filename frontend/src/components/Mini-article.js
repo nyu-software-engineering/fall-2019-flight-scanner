@@ -52,7 +52,7 @@ const MiniArticleComponent = (props) => {
                   <Typography variant="h6" className = {classes.title}>
                       {props.title}
                   </Typography>
-                  <Typography variant="h7" className = {classes.author} style = {{ fontWeight: "200"}}>
+                  <Typography variant="h6" className = {classes.author} style = {{ fontWeight: "200"}}>
                       {props.author}
                   </Typography>
                   <Typography variant="subtitle1" className = {classes.teaser}>

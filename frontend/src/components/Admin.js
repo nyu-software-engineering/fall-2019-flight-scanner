@@ -1,4 +1,3 @@
-import Login from "./Login"
 import ProgressBar from "./Progress"
 import React, { Component } from 'react';
 
