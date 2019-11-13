@@ -18,7 +18,7 @@ const useStyles = makeStyles({
         maxWidth: "1080px"
     },
     bannerImage: {
-
+        maxWidth: "100%"
     },
     title: {
         textTransform: "uppercase",
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     },
     articleBody: {
         marginTop: "15px",
-        textAlign: "left"
+        textAlign: "left", 
     }
 });
 
@@ -47,7 +47,7 @@ const ArticleComponent = (props) => {
         <div className={classes.root}>
             <div className={classes.page}>
 
-                <img className='bannerImage' alt="banner for article" src={props.banner} style={{ maxWidth: "100%" }} />
+                <img className={classes.bannerImage} alt="banner for article" src={props.banner} />
 
                 <Typography variant="subtitle1" className={classes.teaser}>{
                     props.teaser}
