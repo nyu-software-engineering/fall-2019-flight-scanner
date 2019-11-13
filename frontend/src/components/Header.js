@@ -1,45 +1,56 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
-const headerStyles = makeStyles({
-    nav: {
+export default class Header extends Component{
 
-    },
-    container: {
+    constructor(props){
+        super(props)
+        this.state = {categories: []}
+    }
 
-    },
-    nav_item: {
+    componentDidMount() {
+        axios.get("")
+        .then(response => {
+            this.setState({categories: response.data})
+        })
+        .catch(error => {
+            console.log("Error! ", error)
+        })
+    }
 
-    },
-    nav_link: {
-        textTransform: "uppercase",
-        fontFamily: "sans-serif"
-    },
+    loadCategories = (categories, styles) => {
+        return categories.map(category => {
+            return (<li className={styles.nav_item}>
+                <Link className={styles.nav_link} to={`/${category}`}>{category}</Link>
+            </li>)
+        })
+    }
 
-})
+    styles = makeStyles({
+        nav: {
 
-const tempCategories = [
-    "sport", 
-    "politics", 
-    "agile"
-]
+        },
+        container: {
 
-const loadCategories = (categories) => {
-    return categories.map(category => {
-        <li className={styles.nav_item}>
-            <Link className={styles.nav_link} to={`/${category}`}>{category}</Link>
-        </li>
+        },
+        nav_item: {
+
+        },
+        nav_link: {
+            textTransform: "uppercase",
+            fontFamily: "sans-serif"
+        },
+
     })
-}
 
-export default function Header(props) {
-    const styles = makeStyles();
-    return (
-        <nav className={styles.nav}>
-            <div className={styles.container}>
-                <ul className="Nav__item-wrapper"> {loadCategories(temCategories)} </ul>
-            </div>
-        </nav>
-    );
+    render() {
+        return (
+            <nav className={styles.nav}>
+                <div className={styles.container}>
+                    <ul className="Nav__item-wrapper"> {loadCategories(tempCategories, styles)} </ul>
+                </div>
+            </nav>
+        );
+    }
 }

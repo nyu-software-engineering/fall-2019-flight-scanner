@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import { Router, Switch, Route } from 'react-router';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Header from './components/Header';
 import './App.css';
+import Article from './components/Article';
+import Admin from './components/Admin'
+import Footer from './components/Footer'
 
 const NavRoute = ({ exact, path, component: Component }) => (
 	<Route exact={exact} path={path} render={(props) => (
 		<div>
 			<Header />
 			<Component {...props} />
+			{/* <Footer /> */}
 		</div>
 	)} />
 )
@@ -17,11 +22,12 @@ class App extends Component {
 			<div className="App">
 				<Router>
 					<Switch>
-						<NavRoute exactly component={Landing} pattern="/" />
-						<Route exactly component={Login} pattern="/admin" />
-						<NavRoute exactly component={Category} pattern="/category/:cat" />
-						<NavRoute exactly component={Category} pattern="/category/:cat" />
-						<NavRoute component={Page404} />
+						<NavRoute exactly component={Article} pattern="/" >
+							{/* <NavRoute>
+
+							</NavRoute> */}
+						</NavRoute>
+						<Route exactly component={Admin} pattern="/admin" />
 					</Switch>
 				</Router>
 			</div>
