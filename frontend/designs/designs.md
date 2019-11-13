@@ -14,11 +14,24 @@ First design for category page
 Current version of profile page
 ![Profile page](IMG/Profilepage.png)
 
-Current version of the Admin side My Articles page 
-![Admin, My Article](IMG/Admin-Myarticles.png)
+Current version of the Admin side Saved Articles page 
+![Admin, My Article](IMG/Saved-Articles.png)
 
 Current version of the Admin side Create page 
-![Admin, Create](IMG/Admin-Create.png)
+![Admin, Create](IMG/Create-Article-preview.png)
+
+Current version of the Admin side Account page 
+![Admin, Account](IMG/Account.png)
+
+Current version of the Admin side Publishing page 
+![Admin, Publishing](IMG/Publishing.png)
+
+Current version of the Admin side Team Management page 
+![Admin, Team management](IMG/Team-management.png)
+![Admin, Team management](IMG/Team-management-modification.png)
+
+
+
 
 
 
