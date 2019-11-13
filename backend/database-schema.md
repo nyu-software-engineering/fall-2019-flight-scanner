@@ -38,3 +38,8 @@ Profile Picture (URL)
 Role (text)
 
 Bio (text ~250 word limit)
+
+
+### Category
+
+(PK) Category Name (unique ID)
