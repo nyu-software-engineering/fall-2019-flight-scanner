@@ -23,13 +23,26 @@ const styles = theme => ({
     preview: {
         marginTop: theme.spacing(5),
         marginBottom: theme.spacing(2),
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
         background: '#2E3B55', 
         color: 'white',
+        '&:hover': {
+            background: '#586481',
+        },
     },
-    '&:hover': {
-        backgroundColor: '#2E3B55',
-        borderColor: '#2E3B55',
-        boxShadow: 'none',
+    deleteB: {
+        marginTop: theme.spacing(5),
+        marginBottom: theme.spacing(2),
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        background: '#93160d', 
+        color: 'white',
+        '&:hover': {
+            background: '#ca4b35',
+        }
+    
+
     },
 })
 
@@ -183,14 +196,24 @@ class Create extends Component {
                         className={classes.inputbox}
 
                     />
+                    </ThemeProvider>
 
                     <div>
                     <Button className={classes.preview} onClick={this.handlePreviewLoad}>{this.handleload()}</Button>
                     {this.showpreview()}
-
                     </div>
 
-                </ThemeProvider>
+                    <div>
+                        <Button className={classes.preview}>
+                            SAVE
+                        </Button>
+                        <Button className={classes.preview}>
+                            SEND TO PUBLISHING
+                        </Button>
+                    </div>
+                    <div><Button className={classes.deleteB}> DELETE</Button></div>
+
+                
             </div >
         );
     }
