@@ -106,6 +106,24 @@ class Create extends Component {
         }
     }
 
+    handleSave = () => {
+        alert("Attempting to save")
+    }
+
+    handleSendToPublish = () => {
+        // alert("Attempting to send to publish")
+       alert("Attempting to send to publish")
+    }
+
+    handleDelete = () =>{
+        const answer = prompt("Are you sure you want to delete your article?\nTypes yes to confirm or cancel ")
+        if (answer){
+            if (answer.toUpperCase() === 'YES'){
+                alert("DELETE THE RECORD FROM DB")
+            }
+        }
+    }
+
     render() {
         const { classes } = this.props
         return (
@@ -194,7 +212,6 @@ class Create extends Component {
                         onChange={this.handleinput}
                         multiline
                         className={classes.inputbox}
-
                     />
                     </ThemeProvider>
 
@@ -204,14 +221,14 @@ class Create extends Component {
                     </div>
 
                     <div>
-                        <Button className={classes.preview}>
+                        <Button onClick={this.handleSave} className={classes.preview}>
                             SAVE
                         </Button>
-                        <Button className={classes.preview}>
+                        <Button onClick={this.handleSendToPublish} className={classes.preview}>
                             SEND TO PUBLISHING
                         </Button>
                     </div>
-                    <div><Button className={classes.deleteB}> DELETE</Button></div>
+                    <div><Button onClick={this.handleDelete} className={classes.deleteB}> DELETE</Button></div>
 
                 
             </div >
