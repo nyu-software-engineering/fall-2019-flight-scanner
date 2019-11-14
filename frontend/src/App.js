@@ -5,6 +5,7 @@ import './App.css';
 import Article from './components/Article';
 import Admin from './components/Admin'
 import Footer from './components/Footer'
+import Category from './components/Category';
 
 const NavRoute = ({ exact, path, component: Component }) => (
 	<Route exact={exact} path={path} render={(props) => (
@@ -21,14 +22,9 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Router>
-					<Switch>
-						<NavRoute exactly component={Article} pattern="/" >
-							{/* <NavRoute>
-
-							</NavRoute> */}
-						</NavRoute>
-						<Route exactly component={Admin} pattern="/admin" />
-					</Switch>
+					<NavRoute exact path="/" component={Article}/>
+					<NavRoute exact path="/category/:id" component={Category} />
+					<Route exact path="/admin" component={Admin}  />
 				</Router>
 			</div>
 		);

@@ -8,7 +8,13 @@ export default class Header extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { categories: [] }
+        this.state = {
+            categories: [
+                "dummy", 
+                "not",
+                "dynamic"
+            ]
+        }
         this.styles = makeStyles({
             nav: {
 
@@ -28,15 +34,12 @@ export default class Header extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://10.253.105.223:5000/category/getAllCategories")
+        // Engineer's Note: the call will return dummy categories only unless you run the node server in the /backend folder too
+        axios.get("http://localhost:5000/category/getAllCategories")
             .then(response => {
+                console.log("response rcvd", response)
                 this.setState({
-                    categories: response.data.forEach((cat, id) => {
-                        return {
-                            _id: id, 
-                            category: cat
-                        }
-                    })
+                    categories: response.data
                 })
             })
             .catch(error => {
@@ -45,10 +48,11 @@ export default class Header extends Component {
     }
 
     loadCategories = (categories, styles) => {
-        return categories.map((key, category) => {
-            console.log(key, category)
-            return (<li className={styles.nav_item}>
-                <Link className={styles.nav_link} to={`/${category}`} key={key}>{category}</Link>
+        return categories.map(category => {
+            // Temporarily converting everything to lower case
+            category = category.toLowerCase()
+            return (<li className={styles.nav_item} key={category}>
+                <Link className={styles.nav_link} to={`/category/${category}`}>{category}</Link>
             </li>)
         })
     }
