@@ -5,15 +5,22 @@ import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem'
+import { withStyles } from '@material-ui/core/styles';
+import { height } from '@material-ui/system';
+import { createMuiTheme } from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/core/styles'
 
-// const useStyles = makeStyles(theme => ({
 
-//     textField: {
-//         marginLeft: theme.spacing(1),
-//         marginRight: theme.spacing(1),
 
-//     },
-// }));
+const styles = theme =>({
+
+    test:{
+        borderColour: 'green',
+        width: "100%", 
+        maxWidth: "1000px",
+    },
+})
 
 class Create extends Component {
     constructor(props) {
@@ -32,63 +39,127 @@ class Create extends Component {
     }
 
     // Dynamically changing the states depending on the field that is being changed 
-    handleinput = (event) =>{ 
+    handleinput = (event) => {
         this.setState({
             [event.target.id]: event.target.value
         })
     }
 
-    render() {
-        return (
-            <div>
-                <p>CREATE A NEW ARTICLE</p>
+    returnTheme = () => {
+        const theme = createMuiTheme({
+            palette: {
+              primary: {
+                main: '#2E3B55',
+              },
+            },
+        });
 
+        return theme 
+    }
+
+    render() {
+        const {classes} = this.props
+        
+        return (
+            <div >
+                <p>CREATE A NEW ARTICLE</p>
+                <ThemeProvider theme={this.returnTheme()}>
                 <TextField
                     id="title"
                     label="Title"
                     margin="normal"
                     variant="outlined"
-                    style={{ width: '70%' }}
-                    onChange = {this.handleinput}
+                    // style={{width: "100%", maxWidth: "1000px" }}
+                    onChange={this.handleinput}
+                    className = {classes.test}
+                    InputProps={{
+                        classes: {
+                          notchedOutline: classes.notchedOutline
+                        }
+                    }}
                 />
-
+                
                 <TextField
                     id="URL"
                     label="URL"
-                    className={this.props.textField}
+                    
                     margin="normal"
                     variant="outlined"
-                    style={{ width: '70%' }}
-                    onChange = {this.handleinput}
+                    style={{ width: '51%' }}
+                    onChange={this.handleinput}
+
+                />
+
+                <TextField
+                    id="img_alt_text"
+                    label="Image alternative text"
+                    
+                    margin="normal"
+                    variant="outlined"
+                    style={{ width: '51%' }}
+                    onChange={this.handleinput}
+
+                />
+
+                <TextField
+                    id="img_caption"
+                    label="Image caption"
+                    
+                    margin="normal"
+                    variant="outlined"
+                    style={{ width: '51%' }}
+                    onChange={this.handleinput}
+
+                />
+
+                <TextField
+                    id="teaser"
+                    label="Teaser"
+                    
+                    margin="normal"
+                    variant="outlined"
+                    style={{ width: '51%' }}
+                    onChange={this.handleinput}
+                    multiline
+
+                />
+
+                <TextField
+                    id="keywords"
+                    label="Keywords"
+                    margin="normal"
+                    variant="outlined"
+                    style={{ width: '51%' }}
+                    onChange={this.handleinput}
 
                 />
 
                 <TextField
                     id="category"
-                    label="URL"
-                    className={this.props.textField}
+                    label="Category MAKE INTO DROPDOWN"
+                    select
                     margin="normal"
                     variant="outlined"
-                    style={{ width: '70%' }}
-                    onChange = {this.handleinput}
+                    style={{ width: '51%' }}
+                    onChange={this.handleinput}
 
                 />
 
-            <TextField
-                    id="URL"
-                    label="URL"
-                    className={this.props.textField}
+                <TextField
+                    id="text"
+                    label="Text"
                     margin="normal"
                     variant="outlined"
-                    style={{ width: '70%' }}
-                    onChange = {this.handleinput}
+                    style={{ width: '51%' }}
+                    onChange={this.handleinput}
+                    multiline
 
                 />
 
-
+                </ThemeProvider>
             </div >
         );
     }
 }
 
-export default Create; 
+export default withStyles(styles)(Create); 
