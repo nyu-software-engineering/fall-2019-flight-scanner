@@ -149,7 +149,7 @@ class Create extends Component {
             var string = ''
             var i
             for (i=0; i<missing.length; i++){
-                string = string  + missing[i] 
+                string = string +' '+ missing[i] 
             }
             alert(`Please provide correct information in the following fields: ${string}`)
         }
