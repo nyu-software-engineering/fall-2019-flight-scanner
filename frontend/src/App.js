@@ -26,6 +26,10 @@ class App extends Component {
 					<NavRoute exact path="/category/:id" component={Category} />
 					<Route exact path="/admin" component={Admin}  />
 					<NavRoute exact path="/sampleArticle" component={Article}/>
+					{/* <Route exact path="/" component={Article} />
+					<Route exact path="/category/:id" component={Category} />
+					<Route exact path="/admin" component={Admin} />
+					<Route exact path="/sampleArticle" component={Article} /> */}
 				</Router>
 			</div>
 		);

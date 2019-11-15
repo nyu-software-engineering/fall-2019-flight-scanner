@@ -15,7 +15,7 @@ export default class Category extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://10.253.105.223:5000/article/getByCategory/${this.props.match.params.id}`)
+        axios.get(`http://localhost:5000/article/getByCategory/${this.props.match.params.id}`)
             .then(response => {
                 console.log("didmount", response.data)
                 this.setState({
@@ -30,7 +30,7 @@ export default class Category extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
             // This means that the query param has changed! We need to reload the articles
-            axios.get(`http://10.253.105.223:5000/article/getByCategory/${this.props.match.params.id}`)
+            axios.get(`http://localhost:5000/article/getByCategory/${this.props.match.params.id}`)
                 .then(response => {
                     console.log("didupdate", response.data)
                     this.setState({

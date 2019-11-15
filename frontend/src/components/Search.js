@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import { Link } from 'react-router-dom';
 
 
 // MaterialUI styles 
@@ -46,6 +47,10 @@ const useStyles = makeStyles(theme => ({
 	inputRoot: {
 		color: 'inherit',
 	},
+	link: {
+		textDecoration: "none",
+		color: "white"
+	}, 
 	inputInput: {
 		padding: theme.spacing(1, 1, 1, 7),
 		transition: theme.transitions.create('width'),
@@ -69,8 +74,8 @@ const SearchAppBar = (props) => {
 			<AppBar position="static" style={{ background: '#2E3B55' }}>
 				<Toolbar>
 					<Typography className={classes.title} variant="h6" noWrap>
-						The LightShare News
-          </Typography>
+						<Link to="/" className={classes.link}>The LightShare News</Link>
+          			</Typography>
 					<div className={classes.search}>
 						<div className={classes.searchIcon}>
 							<SearchIcon />
