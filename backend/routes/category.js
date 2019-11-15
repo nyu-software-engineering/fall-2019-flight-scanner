@@ -22,9 +22,10 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//updated to return categories in lowercase
 router.route('/getAllCategories').get((req, res) => {
     Category.distinct('categoryName')
-    .then(category => res.json(category))
+    .then(category => res.json(category.toLocaleString().toLowerCase().split(',')))
     .catch(err => res.status(400).json('Error : '+err));
 });
 
@@ -33,5 +34,6 @@ router.route('/:id').get((req, res) =>{
     .then(category => res.json(category))
     .catch(err => res.status(400).json('Error: '+ err));
 });
+
 
 module.exports = router;
