@@ -1,27 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Search from '../components/Search';
-import SearchAppBar from '../components/Search';
-import TestRenderer from 'react-test-renderer';
 import {searchvalidity, lenval, split, match, popularity} from "../components/Search";
-
-
-// Search renders without crashing
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Search />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
-
-// Creating a snapshot for the Search bar 
-// The test should be run twice => first to create the snapshot and then to make the comparison
-// I gitignored the JSON files it creates, since not highly relevant to out project
-describe("SearchAppBar Component", () => {
-    it('Matches with the snapshot', () =>{
-      const shot = TestRenderer.create(<SearchAppBar/>).toJSON()
-      expect(shot).toMatchSnapshot()
-    })
-});
 
 // Test for the validity of search input 
 it('Searchvalidity test - content', () => {

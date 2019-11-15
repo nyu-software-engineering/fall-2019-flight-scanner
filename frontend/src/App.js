@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/Header';
 import './App.css';
 import Article from './components/Article';
 import Admin from './components/Admin'
-import Footer from './components/Footer'
 import Category from './components/Category';
 
 const NavRoute = ({ exact, path, component: Component }) => (
