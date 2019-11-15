@@ -178,7 +178,7 @@ class Create extends Component {
     getMenu = () => {
         // call the database
         const categories = ['ONE', 'TWO', 'THREE']
-        return (categories.map((cat) => { return <MenuItem value={cat}>{cat}</MenuItem> }))
+        return (categories.map((cat) => { return <MenuItem key={cat} value={cat}>{cat}</MenuItem> }))
     }
 
     render() {

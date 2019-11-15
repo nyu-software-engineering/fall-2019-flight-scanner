@@ -88,7 +88,7 @@ export default function NavbarUI() {
         {/* convert to mappin? */}
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Create />
+        <Create /> 
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Article />
