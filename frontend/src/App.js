@@ -1,18 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Header from './components/Header';
 import './App.css';
-import NavbarUI from "./components/Navbar_materialize"
-import Search from "./components/Search"
+import Article from './components/Article';
+import Admin from './components/Admin'
+import Category from './components/Category';
+import Create from './components/Create';
 
-function App() {
-  return (
-    <div className="App">
+const NavRoute = ({ exact, path, component: Component }) => (
+	<Route exact={exact} path={path} render={(props) => (
+		<div>
+			<Header />
+			<Component {...props} />
+			{/* <Footer /> */}
+		</div>
+	)} />
+)
 
-      <Search></Search>
-      <NavbarUI></NavbarUI>
-      
-    
-    </div>
-  );
+class App extends Component {
+	render() {
+		return (
+			<div className="App">
+				<Router>
+					<NavRoute exact path="/" component={Article}/>
+					<NavRoute exact path="/category/:id" component={Category} />
+					<Route exact path="/admin" component={Admin}  />
+					<Route exact path="/admin/create" component={Create}/>
+					<NavRoute exact path="/sampleArticle" component={Article}/>
+					{/* <Route exact path="/" component={Article} />
+					<Route exact path="/category/:id" component={Category} />
+					<Route exact path="/admin" component={Admin} />
+					<Route exact path="/sampleArticle" component={Article} /> */}
+				</Router>
+			</div>
+		);
+	}
 }
 
 export default App;
