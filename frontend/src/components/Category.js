@@ -5,10 +5,7 @@ export default class Category extends Component {
 
     constructor(props) {
         super(props)
-        // this.categories = [
-        //     {articleText: "bc"}
-        // ]
-
+        // To add in some default articles for when DB does not provide any, add them to the Array Below
         this.state = {
             articles: []
         }
@@ -52,48 +49,4 @@ export default class Category extends Component {
             </div>
         )
     }
-
-    // componentDidMount(){
-    //     axios.get(`http://10.253.105.223:5000/article/getByCategory/${this.props.match.params.id}`)
-    //         .then(response => {
-    //             console.log("didmount", response.data)
-    //             this.categories = response.data
-    //             this.forceUpdate()
-    //         })
-    //         .catch(error => {
-    //             console.log("ERROR in Category loading ", error)
-    //         })
-
-    // }
-
-    // componentDidUpdate(){
-    //     axios.get(`http://10.253.105.223:5000/article/getByCategory/${this.props.match.params.id}`)
-    //         .then(response => {
-    //             console.log("update",this.props.match.params.id, response.data)
-    //             this.categories = response.data
-    //             // this.forceUpdate()
-    //         })
-    //         .catch(error => {
-    //             console.log("ERROR in Category loading ", error)
-    //         })
-    // }
-
-
-    // render() {    
-    //     return (
-    //         <div>
-    //             {/* {this.props.match.params.id} */}
-    //             {/* {this.state.categories} */}
-    //             {/* <h1>Helo</h1> */}
-    //             <div>
-    //                 {this.categories.map(article => {
-    //                     return(<p>
-    //                         {article.articleText}
-    //                     </p>)
-    //                 })}
-    //             </div>
-    //         </div>
-    //     )
-    // }
-
 }

@@ -40,6 +40,7 @@ class Header extends Component {
     constructor(props) {
         super(props)
         this.state = {}
+        // Default categories can be provided in the format below, currently commented out. 
         // this.state = {
         //     categories: [
         //         "sample",
@@ -49,22 +50,6 @@ class Header extends Component {
         //         "no-work"
         //     ]
         // }
-        // this.styles = makeStyles({
-        //     nav: {
-        //         marginBottom: "15px",
-        //     },
-        //     container: {
-
-        //     },
-        //     nav_item: {
-
-        //     },
-        //     nav_link: {
-        //         textTransform: "uppercase",
-        //         fontFamily: "sans-serif"
-        //     },
-
-        // })
     }
 
     componentDidMount() {

@@ -1,0 +1,1 @@
+// Currently a blank file. Can create an optional sticky footer component here and uncomment it's call in App.js
