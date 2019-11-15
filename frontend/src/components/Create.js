@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem'
 import { withStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles'
-import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button'
 import Article from './Article';
-
+// import Chip from '@material-ui/core/Chip';
 
 const styles = theme => ({
 
@@ -25,7 +19,7 @@ const styles = theme => ({
         marginBottom: theme.spacing(2),
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
-        background: '#2E3B55', 
+        background: '#2E3B55',
         color: 'white',
         '&:hover': {
             background: '#586481',
@@ -36,12 +30,12 @@ const styles = theme => ({
         marginBottom: theme.spacing(2),
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
-        background: '#93160d', 
+        background: '#93160d',
         color: 'white',
         '&:hover': {
             background: '#ca4b35',
         }
-    
+
 
     },
 })
@@ -53,21 +47,32 @@ class Create extends Component {
             title: '',
             URL: '',
             img_alt_text: '',
-            img_capt: '',
+            img_caption: '',
             teaser: '',
             keywords: [],
-            category: 'Category',
+            category: '',
             text: '',
             preview: false
         }
     }
 
     // Dynamically changing the states depending on the field that is being changed 
-    handChange = (event) => {
+    handleChange = (event) => {
         this.setState({
             [event.target.id]: event.target.value
         })
-        console.log('elo', event.target.value)
+    }
+
+    handleKeywords = (event) => {
+        console.log('new enter', event.target.value)
+        //getting the list of inputs 
+        const list = event.target.value.split(" ")
+        //filtering out the spaces from the list
+        const processed = list.filter((value) => {
+            return value !== ""
+        })
+        console.log(processed)
+    
     }
 
     handleCategory = (event) => {
@@ -88,10 +93,10 @@ class Create extends Component {
     }
 
     handleload = () => {
-        if (this.state.preview){
+        if (this.state.preview) {
             return "UNLOAD PREVIEW"
         }
-        else {return 'LOAD PREVIEW'}
+        else { return 'LOAD PREVIEW' }
     }
 
     handlePreviewLoad = () => {
@@ -101,8 +106,12 @@ class Create extends Component {
     }
 
     showpreview = () => {
-        if (this.state.preview){
-            return <Article></Article>
+        if (this.state.preview) {
+            return <Article title={this.state.title}
+                            banner={this.state.URL}  
+                            teaser={this.state.teaser}    
+                            body={this.state.text} 
+                            ></Article>
         }
     }
 
@@ -110,18 +119,66 @@ class Create extends Component {
         alert("Attempting to save")
     }
 
-    handleSendToPublish = () => {
-        // alert("Attempting to send to publish")
-       alert("Attempting to send to publish")
+    allProvided = () => {
+        const missing = []
+        if (this.state.title === ''){
+            missing.push('Title')
+        }
+        if (this.state.URL === ''){
+            missing.push('URL')
+        }
+        if (this.state.img_alt_text === ''){
+            missing.push('Image alternative text')
+        }
+        if (this.state.img_caption === ''){
+            missing.push('Image caption')
+        }
+        if (this.state.teaser === ''){
+            missing.push('Teaser')
+        }
+        if (this.state.category === ''){
+            missing.push('Category')
+        }
+        if (this.state.text === ''){
+            missing.push('Text')
+        }
+        if ((this.state.keywords).length === 0){
+            missing.push("Keywords")
+        }
+        if (missing.length !== 0){
+            var string = ''
+            var i
+            for (i=0; i<missing.length; i++){
+                string = string  + missing[i] 
+            }
+            alert(`Please provide correct information in the following fields: ${string}`)
+        }
+        else {
+           return true
+        }
+
     }
 
-    handleDelete = () =>{
+    handleSendToPublish = () => {
+        if (this.allProvided()){
+            alert("Attempting to send to publish")
+        }
+
+    }
+
+    handleDelete = () => {
         const answer = prompt("Are you sure you want to delete your article?\nTypes yes to confirm or cancel ")
-        if (answer){
-            if (answer.toUpperCase() === 'YES'){
+        if (answer) {
+            if (answer.toUpperCase() === 'YES') {
                 alert("DELETE THE RECORD FROM DB")
             }
         }
+    }
+
+    getMenu = () => {
+        // call the database
+        const categories = ['ONE', 'TWO', 'THREE']
+        return (categories.map((cat) => { return <MenuItem value={cat}>{cat}</MenuItem> }))
     }
 
     render() {
@@ -135,7 +192,7 @@ class Create extends Component {
                         label="Title"
                         margin="normal"
                         variant="outlined"
-                        onChange={this.handleinput}
+                        onChange={this.handleChange}
                         className={classes.inputbox}
                     />
 
@@ -144,7 +201,7 @@ class Create extends Component {
                         label="URL"
                         margin="normal"
                         variant="outlined"
-                        onChange={this.handleinput}
+                        onChange={this.handleChange}
                         className={classes.inputbox}
 
                     />
@@ -154,7 +211,7 @@ class Create extends Component {
                         label="Image alternative text"
                         margin="normal"
                         variant="outlined"
-                        onChange={this.handleinput}
+                        onChange={this.handleChange}
                         className={classes.inputbox}
 
                     />
@@ -164,7 +221,7 @@ class Create extends Component {
                         label="Image caption"
                         margin="normal"
                         variant="outlined"
-                        onChange={this.handleinput}
+                        onChange={this.handleChange}
                         className={classes.inputbox}
 
                     />
@@ -174,7 +231,7 @@ class Create extends Component {
                         label="Teaser"
                         margin="normal"
                         variant="outlined"
-                        onChange={this.handleinput}
+                        onChange={this.handleChange}
                         multiline
                         className={classes.inputbox}
 
@@ -182,13 +239,14 @@ class Create extends Component {
 
                     <TextField
                         id="keywords"
-                        label="Keywords"
+                        label="Keywords (separate by space)"
                         margin="normal"
                         variant="outlined"
-                        onChange={this.handleinput}
+                        onChange={this.handleChange}
                         className={classes.inputbox}
+                        onKeyPress={this.handleKeywords}
 
-                    />
+                    > </TextField>
 
                     <TextField
                         id="category"
@@ -200,37 +258,41 @@ class Create extends Component {
                         value={this.state.category}
                         className={classes.inputbox}
                     >
-                        <MenuItem value='One' >One</MenuItem>
-                        <MenuItem value='Two' >Two</MenuItem>
+                        {/* <MenuItem value='One' >One</MenuItem>
+                        <MenuItem value='Two' >Two</MenuItem> */}
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        {this.getMenu()}
                     </TextField>
-                    
+
                     <TextField
                         id="text"
                         label="Text"
                         margin="normal"
                         variant="outlined"
-                        onChange={this.handleinput}
+                        onChange={this.handleChange}
                         multiline
                         className={classes.inputbox}
                     />
-                    </ThemeProvider>
+                </ThemeProvider>
 
-                    <div>
+                <div>
                     <Button className={classes.preview} onClick={this.handlePreviewLoad}>{this.handleload()}</Button>
                     {this.showpreview()}
-                    </div>
+                </div>
 
-                    <div>
-                        <Button onClick={this.handleSave} className={classes.preview}>
-                            SAVE
+                <div>
+                    <Button onClick={this.handleSave} className={classes.preview}>
+                        SAVE
                         </Button>
-                        <Button onClick={this.handleSendToPublish} className={classes.preview}>
-                            SEND TO PUBLISHING
+                    <Button onClick={this.handleSendToPublish} className={classes.preview}>
+                        SEND TO PUBLISHING
                         </Button>
-                    </div>
-                    <div><Button onClick={this.handleDelete} className={classes.deleteB}> DELETE</Button></div>
+                </div>
+                <div><Button onClick={this.handleDelete} className={classes.deleteB}> DELETE</Button></div>
 
-                
+
             </div >
         );
     }

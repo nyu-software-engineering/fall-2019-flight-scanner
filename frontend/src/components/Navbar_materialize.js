@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Article from "./Article"
-import Miniarticle from "./Mini-article"
+// import Miniarticle from "./Mini-article"
 import Teammember from "./Team-member"
 // import Grid from '@material-ui/core/Grid';
 import { GridList } from '@material-ui/core';
