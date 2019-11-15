@@ -9,6 +9,7 @@ function App() {
 
       <Search></Search>
       <NavbarUI></NavbarUI>
+      
     
     </div>
   );
