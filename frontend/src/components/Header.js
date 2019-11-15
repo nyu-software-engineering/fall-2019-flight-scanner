@@ -1,36 +1,70 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import AppBar from '@material-ui/core/AppBar';
+import Search from './Search';
 
+const styles = theme => ({
+    nav: {
+        background: "#2E3B55",
+        boxShadow: "none",
+        marginBottom: "15px",
+    },
+    container: {
+        textAlign: "center"
+    },
+    nav_item: {
+        listStyleType: "none",
+        float: "left",
+        margin: "10px",
+    },
+    nav_link: {
+        textTransform: "uppercase",
+        fontFamily: "sans-serif",
+        textDecoration: "none",
+        color: "white",
+        "&:hover": {
+            color: "grey"
+        }
+    },
+    wrapperUL: {
+        margin: "auto",
+        display: "inline-block",
+        padding: "0px"
+    }
+})
 
-export default class Header extends Component {
+class Header extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            categories: [
-                "dummy", 
-                "not",
-                "dynamic"
-            ]
-        }
-        this.styles = makeStyles({
-            nav: {
+        this.state = {}
+        // this.state = {
+        //     categories: [
+        //         "sample",
+        //         "categories",
+        //         "here", 
+        //         "database", 
+        //         "no-work"
+        //     ]
+        // }
+        // this.styles = makeStyles({
+        //     nav: {
+        //         marginBottom: "15px",
+        //     },
+        //     container: {
 
-            },
-            container: {
+        //     },
+        //     nav_item: {
 
-            },
-            nav_item: {
+        //     },
+        //     nav_link: {
+        //         textTransform: "uppercase",
+        //         fontFamily: "sans-serif"
+        //     },
 
-            },
-            nav_link: {
-                textTransform: "uppercase",
-                fontFamily: "sans-serif"
-            },
-
-        })
+        // })
     }
 
     componentDidMount() {
@@ -58,12 +92,21 @@ export default class Header extends Component {
     }
 
     render() {
+        const { classes } = this.props
         return (
-            <nav className={this.styles.nav}>
-                <div className={this.styles.container}>
-                    <ul className="Nav__item-wrapper"> {this.loadCategories(this.state.categories, this.styles)} </ul>
-                </div>
-            </nav>
+            <div>
+                <Search />
+                <AppBar className={classes.nav} position='static'>
+                    <div className={classes.container}>
+                        <ul className={classes.wrapperUL}> {
+                            this.state.categories ?
+                                this.loadCategories(this.state.categories, classes) : null
+                        } </ul>
+                    </div>
+                </AppBar>
+            </div>
         );
     }
 }
+
+export default withStyles(styles)(Header)
