@@ -71,7 +71,6 @@ class Header extends Component {
         // Engineer's Note: the call will return dummy categories only unless you run the node server in the /backend folder too
         axios.get("http://localhost:5000/category/getAllCategories")
             .then(response => {
-                console.log("response rcvd", response)
                 this.setState({
                     categories: response.data
                 })

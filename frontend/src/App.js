@@ -5,6 +5,7 @@ import './App.css';
 import Article from './components/Article';
 import Admin from './components/Admin'
 import Category from './components/Category';
+import Create from './components/Create';
 
 const NavRoute = ({ exact, path, component: Component }) => (
 	<Route exact={exact} path={path} render={(props) => (
@@ -24,6 +25,7 @@ class App extends Component {
 					<NavRoute exact path="/" component={Article}/>
 					<NavRoute exact path="/category/:id" component={Category} />
 					<Route exact path="/admin" component={Admin}  />
+					<Route exact path="/admin/create" component={Create}/>
 					<NavRoute exact path="/sampleArticle" component={Article}/>
 					{/* <Route exact path="/" component={Article} />
 					<Route exact path="/category/:id" component={Category} />
