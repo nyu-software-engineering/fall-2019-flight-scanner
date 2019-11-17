@@ -5,9 +5,9 @@ const styles = theme => ({
 	card: {
 		maxWidth: "960px",
 		boxShadow: "none",
+		borderRadius: "5px", 
 	  },
 	  media: {
-		// height: 140,
 		height: "auto", 
 		borderRadius: "5px"
 	  },
@@ -22,13 +22,17 @@ class MiniArticle extends Component {
 		console.log(props)
 	}
 
+	handleClick = () => {
+		alert("Coming soon!")
+	}
+
 	render() {
 		const { classes } = this.props
 		return (
 			// <MiniArticleComponent props={this.props} />
 			<div>
 				<Card className={classes.card}>
-					<CardActionArea>
+					<CardActionArea onClick={this.handleClick}>
 						<CardMedia
 							className={classes.media}
 							image={this.props.banner}
