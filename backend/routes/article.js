@@ -80,6 +80,8 @@ router.route('/update/:id').post((req, res) => {
 //need to create sub-routes if youre trying to get something by some value
 
 router.route("/getByCategory/:category").get((req, res) => {
+    console.log(req.params.category);
+    console.log("invoked");
     Article.find({'articleCategory':req.params.category})
     .then(article => res.json(article))
     .catch(err => res.status(400).json('Error: ' + err));

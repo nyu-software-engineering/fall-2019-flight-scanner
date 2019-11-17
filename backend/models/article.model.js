@@ -10,7 +10,7 @@ const Article = new Schema(
         articleImgDesc: {type: String, required: true},
         articleTeaser: {type: String, maxlength: 200, required: true}, 
         articleText: {type: String, required: true}, 
-        articleCategory: {type: String, required: true, index: true}, // still need to figure out indexing
+        articleCategory: {type: String, required: true, index: true}, // still need to figure out indexing. Indexing sorted - Abdullah 
         articleDate: {type: Date, required: true}, 
         articleStatus: {type: String, required: true} //controlled vocabulary? 
 
