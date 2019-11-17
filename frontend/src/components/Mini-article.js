@@ -1,72 +1,20 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
+import { Card, CardActionArea, CardMedia, CardContent, withStyles, Typography } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
-	root: {
-		flexGrow: 1,
-		textAlign: "left"
-	},
-	control: {
-		padding: theme.spacing(2)
-	},
-	page: {
-		display: "inline-block",
-		width: "100%",
-		maxWidth: "1080px"
-	},
-	bannerImage: {
-
-	},
-	title: {
-		textTransform: "uppercase",
-		fontWeight: "400",
-		textAlign: "left"
-	},
-	teaser: {
-		textAlign: "left",
-		fontStyle: "italic"
-	},
-	author: {
-		textAlign: "left"
-	},
-}));
-
-const MiniArticleComponent = (props) => {
-	const classes = useStyles()
-	props = props.props
-	return (
-		<div className={classes.page}>
-			<Grid container className={classes.root} spacing={2}>
-				<Grid item xs={12}>
-					<Grid container justify="center" spacing={10}>
-						{[0].map(value => (
-							<Grid key={value} item>
-								<Box
-									width={300}
-									lineHeight={1}
-									float="left">
-									<img className='bannerImage' alt="banner for mini article component" src={props.banner} style={{ maxWidth: "300px" }} />
-									<Typography variant="h6" className={classes.title}>
-										{props.title}
-									</Typography>
-									<Typography variant="h6" className={classes.author} style={{ fontWeight: "200" }}>
-										{props.author}
-									</Typography>
-									<Typography variant="subtitle1" className={classes.teaser}>
-										{props.teaser}
-									</Typography>
-								</Box>
-							</Grid>
-						))}
-					</Grid>
-				</Grid>
-			</Grid>
-		</div>
-	)
-}
+const styles = theme => ({
+	card: {
+		maxWidth: "960px",
+		boxShadow: "none",
+	  },
+	  media: {
+		// height: 140,
+		height: "auto", 
+		borderRadius: "5px"
+	  },
+	  titleStyle: {
+		  textTransform: "uppercase"
+	  }
+})
 
 class MiniArticle extends Component {
 	constructor(props) {
@@ -75,17 +23,38 @@ class MiniArticle extends Component {
 	}
 
 	render() {
+		const { classes } = this.props
 		return (
-			<MiniArticleComponent props={this.props} />
+			// <MiniArticleComponent props={this.props} />
+			<div>
+				<Card className={classes.card}>
+					<CardActionArea>
+						<CardMedia
+							className={classes.media}
+							image={this.props.banner}
+							title={this.props.title}
+							component="img"
+						/>
+						<CardContent>
+							<Typography align="left" variant="h5" component="h2" className={classes.titleStyle}>
+								{this.props.title}
+          					</Typography>
+							<Typography variant="body2" color="textSecondary" component="p" align="left">
+								{this.props.teaser}
+          					</Typography>
+						</CardContent>
+					</CardActionArea>
+				</Card>
+			</div>
 		)
 	}
 }
 
 MiniArticle.defaultProps = {
-	banner: "ASSETS/trumpCartoon.jpg",
+	banner: "https://lorempixel.com/960/540",
 	title: "Dummy Title goes here",
 	teaser: "A teaser for the dummy article here and even more teaser",
 	author: "Dummy Author 1"
 }
 
-export default MiniArticle
+export default withStyles(styles)(MiniArticle)
