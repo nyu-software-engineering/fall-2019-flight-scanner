@@ -21,7 +21,7 @@ const styles = theme => ({
     cardPic: {
         marginLeft: '5%',
         width: '20%',
-		height: '370px',
+		height: '40%',
 		margin: "20px",
 
       },
@@ -35,7 +35,7 @@ const styles = theme => ({
 	// 	height: '270px',
     // },
     button: {
-        marginTop: theme.spacing(3),
+        // marginTop: theme.spacing(3),
         // marginBottom: theme.spacing(1),
         // marginLeft: theme.spacing(1),
         // marginRight: theme.spacing(1),
