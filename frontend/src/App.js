@@ -6,6 +6,7 @@ import Article from './components/Article';
 import Admin from './components/Admin'
 import Category from './components/Category';
 import Create from './components/Create';
+import Account from './components/Account'; 
 
 const NavRoute = ({ exact, path, component: Component }) => (
 	<Route exact={exact} path={path} render={(props) => (
@@ -27,6 +28,8 @@ class App extends Component {
 					<Route exact path="/admin" component={Admin}  />
 					<Route exact path="/admin/create" component={Create}/>
 					<NavRoute exact path="/sampleArticle" component={Article}/>
+					<NavRoute exact path="/Account" component={Account}/>
+
 					{/* <Route exact path="/" component={Article} />
 					<Route exact path="/category/:id" component={Category} />
 					<Route exact path="/admin" component={Admin} />
