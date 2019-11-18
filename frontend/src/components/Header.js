@@ -41,15 +41,15 @@ class Header extends Component {
         super(props)
         this.state = {}
         // Default categories can be provided in the format below, currently commented out. 
-        // this.state = {
-        //     categories: [
-        //         "sample",
-        //         "categories",
-        //         "here", 
-        //         "database", 
-        //         "no-work"
-        //     ]
-        // }
+        this.state = {
+            categories: [
+                "sample",
+                "categories",
+                "here", 
+                "database", 
+                "no-work"
+            ]
+        }
     }
 
     componentDidMount() {
