@@ -65,6 +65,7 @@ class Category extends Component {
                                 teaser={article.articleTeaser}
                                 title={article.articleTitle}
                                 author={article.articleAuthor}
+                                slug={article.articleId}
                             />
                         </Grid>
                     )}

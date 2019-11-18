@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     },
     articleBody: {
         marginTop: "15px",
-        textAlign: "left", 
+        textAlign: "left",
     }
 });
 
@@ -59,7 +59,7 @@ const ArticleComponent = (props) => {
                 <Typography variant="h5" className={classes.author}>
                     {props.author}
                 </Typography>
-                <Typography variant="body1" className={classes.articleBody} dangerouslySetInnerHTML={{__html:markdown2html(props.body)}}>
+                <Typography variant="body1" className={classes.articleBody} dangerouslySetInnerHTML={{ __html: markdown2html(props.body) }}>
                 </Typography>
 
             </div>
@@ -68,7 +68,7 @@ const ArticleComponent = (props) => {
 }
 
 class Article extends Component {
-    
+
     render() {
         return (
             <ArticleComponent props={this.props} />
