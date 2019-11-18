@@ -80,7 +80,7 @@ Article.defaultProps = {
     banner: "ASSETS/trumpCartoon.jpg",
     title: "Dummy Title goes here and here and here",
     teaser: "A teaser for the dummy article here.Integer laoreet, felis vitae tempor ultricies, quam metus condimentum massa, sed porttitor ante sapien nec nibh. Nam dictum vel augue non gravida. ",
-    author: "Dummy Author 1",
+    author: "Author Author",
     body: `## Some subtitle
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec pretium nisl, eleifend pellentesque metus. Quisque maximus leo purus, non tempus enim blandit quis. Sed at tristique nulla. Suspendisse pulvinar quam nibh, a posuere sapien scelerisque at. Nunc elementum dolor in facilisis auctor. Maecenas faucibus diam at ante euismod, vitae lobortis justo auctor. In dignissim urna a massa pulvinar, et pulvinar ligula auctor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc ullamcorper leo a magna posuere, sed pretium enim consectetur. Etiam dignissim blandit aliquet. Proin in ullamcorper quam, sed tincidunt nulla. Aliquam eget quam ullamcorper, porttitor nisi non, congue urna. Suspendisse a eleifend libero, tempus fermentum ex. Nulla leo felis, vulputate vitae viverra ut, mattis a massa. \n
 

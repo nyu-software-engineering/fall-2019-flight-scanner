@@ -234,7 +234,7 @@ class Create extends Component {
         const { classes } = this.props
         return (
             <div >
-                <p>CREATE A NEW ARTICLE</p>
+                <h1>CREATE A NEW ARTICLE</h1>
                 <Container className={classes.container}>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={5}>
@@ -258,8 +258,8 @@ class Create extends Component {
 
                                 />
                                 <TextField
-                                    id="title"
-                                    label="Title"
+                                    id="slug"
+                                    label="Slug"
                                     margin="normal"
                                     variant="outlined"
                                     onChange={this.handleChange}
