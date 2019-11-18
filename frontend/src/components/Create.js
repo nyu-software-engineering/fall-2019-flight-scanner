@@ -9,7 +9,7 @@ import Article from './Article';
 // import Chip from '@material-ui/core/Chip';
 import axios from 'axios';
 
-const authorName = "Abdullah Zameek" //temp author name added for the sake of it 
+//const authorName = "Abdullah Zameek" //temp author name added for the sake of it 
 
 const styles = theme => ({
 
@@ -206,13 +206,13 @@ class Create extends Component {
         // call the database
         axios.get(`http://localhost:5000/category/getAllCategories`)
         .then(response => {
-            console.log("didmount", response.data)
+            //console.log("didmount", response.data)
             this.setState({
                 categories: response.data
             })
         })
         .catch(error => {
-            console.log("ERROR in Category loading ", error)
+            //console.log("ERROR in Category loading ", error)
         })
         
         return (this.state.categories.map((cat) => { return <MenuItem key={cat} value={cat}>{cat}</MenuItem> }))

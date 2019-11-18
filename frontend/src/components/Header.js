@@ -61,7 +61,7 @@ class Header extends Component {
                 })
             })
             .catch(error => {
-                console.log("Error! ", error)
+                // console.log("Error! ", error)
             })
     }
 
