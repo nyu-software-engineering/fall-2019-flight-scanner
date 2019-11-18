@@ -6,12 +6,9 @@ import Article from './components/Article';
 import Admin from './components/Admin'
 import Category from './components/Category';
 import Create from './components/Create';
-<<<<<<< HEAD
 import Account from './components/Account'; 
-=======
 import Profile from './components/Teammember-profile';
 import MiniArticle from './components/Mini-article';
->>>>>>> 78c33697cf2bc93f5139c6715e9f7d9fd510d0a8
 
 const NavRoute = ({ exact, path, component: Component }) => (
 	<Route exact={exact} path={path} render={(props) => (
@@ -33,12 +30,9 @@ class App extends Component {
 					<Route exact path="/admin" component={Admin}  />
 					<Route exact path="/admin/create" component={Create}/>
 					<NavRoute exact path="/sampleArticle" component={Article}/>
-<<<<<<< HEAD
 					<NavRoute exact path="/Account" component={Account}/>
-=======
 					<NavRoute exact path="/profile" component = {Profile}/>
 					<NavRoute exact path="/samplemini" component={MiniArticle} />
->>>>>>> 78c33697cf2bc93f5139c6715e9f7d9fd510d0a8
 
 					{/* <Route exact path="/" component={Article} />
 					<Route exact path="/category/:id" component={Category} />

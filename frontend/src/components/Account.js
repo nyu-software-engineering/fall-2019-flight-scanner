@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import Box from '@material-ui/core/Box';
 import ImageUploader from 'react-images-upload';
+import Grid from '@material-ui/core/Grid'
+import Container from '@material-ui/core/Container';
+import Profile from './Teammember-profile'; 
 
 
 
@@ -19,20 +17,13 @@ const styles = theme => ({
         width: '100%',
     },
 
-    cardPic: {
-        marginLeft: '5%',
-        width: '20%',
-		height: '370px',
-        margin: "20px",
-        boxShadow: "none"
 
-      },
-    cardBio: {
-        width: '60%',
-        height: '370px',
-        marginRight: '5%',
-        marginTop: '20px', 
-        boxShadow: "none"
+    pic: {
+        width: "100%", 
+    },
+
+    updateBio: {
+        // verticalAlign: "middle"
     },
 
     button: {
@@ -45,32 +36,14 @@ const styles = theme => ({
         },
     },
 
-    cardActions: {
-        justifyContent: 'center',
-
-    },
 
     box: {
         justifyContent: 'space-between'
     },
 
-    inputbox: {
-        width: '90%',
-        height: '270px',
 
-        marginTop: '20px'
-    },
-
-    bioActionArea:{
-        height: '100px'
-    },
-
-    cardActionArea: {
-        maxHeight: "300px",
-        minHeight: "300px"
-    },
     updatePictureButton:{
-
+        marginTop: "10px",
         background: '#2E3B55',
         color: 'white',
         '&:hover': {
@@ -85,10 +58,11 @@ class Account extends Component{
     constructor(props){
         super(props); 
         this.state = {
-            bio: '', 
+            bio: 'Welcome to your complete guide to the best Chow Chow names, giving you plenty of ideas for what to call your beautiful and powerful Chow Chow. Chow Chow dog names should highlight this ancient Chinese breed’s best qualities. Be that their gorgeous mane of red, white, blue, cream, blue, or tawny fur; their legendary “tough dog” presence; or perhaps their Chinese roots! No matter what inspires your potential dog names for Chow Chow, there are some things to keep in mind to ensure that your pooch both knows and answers to their name.', 
             imgURL: '',
             pictures: [],
-            onDrop:  this.onDrop.bind(this)
+            onDrop:  this.onDrop.bind(this), 
+            tempBio: ""
         }
     }
 
@@ -104,12 +78,13 @@ class Account extends Component{
 
     updateBio= () =>{
         alert("updateBio function called"); 
-        alert(this.state.bio); 
+        alert(this.state.bio);
+        this.setState({bio: this.state.tempBio}) 
     }
 
     handleChange = (event) => {
         this.setState({
-            bio: event.target.value
+            tempBio: event.target.value
         })
         
     }
@@ -119,59 +94,51 @@ class Account extends Component{
     render(){
         const {classes} = this.props; 
         return(
-            <div class="flex-container" className={classes.root}>
-                
+
+
+
+
+
+
+
+            <Container className={classes.container}>
                 <Typography gutterBottom variant="h5" component="h2">
                     Customize your profile visible to readers!
                 </Typography>
-
-                <Box display='flex' p={1} className={classes.box}>
-                <Card className={classes.cardPic}>
-                <CardActionArea className={classes.cardActionArea}>
-                    <CardMedia
-                    component="img"
-                    alt="Admin Profile Picture"
-                    image="./ASSETS/default_profile.png"
-                    title="Admin Profile Picutre"
+                <Grid container spacing={6}>
+                    <Grid item xs={12} sm={4}>
+                    <img alt={this.props.name} className={classes.pic} src={this.props.picture}></img>
+                    <ImageUploader
+                        withIcon={false}
+                        withLabel={false}
+                        buttonText='Choose images'
+                        onChange={this.onDrop}
+                        imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                        maxFileSize={5242880}
                     />
-                </CardActionArea>
+                    </Grid>
+                    <Grid item xs={12} sm={8}>
+                        <div className={classes.updateBio}>
+                            <TextField
+                                id="Bio"
+                                label="Bio"
+                                rows='18'
+                                variant="outlined"
+                                multiline
+                                fullWidth
+                                onChange={this.handleChange}
 
-                </Card>
+                            />
+                            <Button  onClick={this.updateBio} className={classes.updatePictureButton}>
+                                Update Bio
+                            </Button>
+                        </div>
+                    </Grid>
 
+                </Grid>
+                <Profile picture={this.state.picture} bio={this.state.bio}></Profile>
 
-                <Card className={classes.cardBio}>
-                <CardActionArea >
-                <TextField
-                    id="Bio"
-                    label="Bio"
-                    rows='11'
-                    variant="outlined"
-                    multiline
-                    onChange={this.handleChange}
-                    className={classes.inputbox}
-
-                />
-
-                </CardActionArea>
-                <CardActions className={classes.cardActions}>
-
-                    <Button  onClick={this.updateBio} className={classes.updatePictureButton}>
-                    Update Bio
-                    </Button>
-
-                </CardActions>
-                </Card>
-                </Box>
-
-                <ImageUploader
-                withIcon={false}
-                withLabel={false}
-                buttonText='Choose images'
-                onChange={this.onDrop}
-                imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                maxFileSize={5242880}
-            />
-            </div>
+            </Container>
 
             
         ); 
@@ -179,3 +146,10 @@ class Account extends Component{
 }
 
 export default withStyles(styles)(Account); 
+
+Account.defaultProps = {
+    picture: 'http://lorempixel.com/300/300/',
+    name: 'Author Author',
+    role: 'Chief Editor',
+    bio: "Welcome to your complete guide to the best Chow Chow names, giving you plenty of ideas for what to call your beautiful and powerful Chow Chow. Chow Chow dog names should highlight this ancient Chinese breed’s best qualities. Be that their gorgeous mane of red, white, blue, cream, blue, or tawny fur; their legendary “tough dog” presence; or perhaps their Chinese roots! No matter what inspires your potential dog names for Chow Chow, there are some things to keep in mind to ensure that your pooch both knows and answers to their name.",
+}
