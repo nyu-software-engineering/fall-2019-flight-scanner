@@ -138,7 +138,7 @@ class Create extends Component {
             "articleText": this.state.text,
             "articleCategory": this.state.category,
             "articleDate": "11/17/2019",
-            "articleStatus": "notpublished"
+            "articleStatus": "published"
         };
 
         axios.post(`http://localhost:5000/article/add`, articleJSON)
@@ -194,9 +194,26 @@ class Create extends Component {
 
     handleSendToPublish = () => {
         if (this.allProvided()) {
-            alert("Attempting to send to publish")
+            alert("Attempting to send to publish");
+            // const articleJSON = {
+            //     "articleId": this.state.slug,
+            //     "articleAuthor": this.state.authorName,
+            //     "articleTitle": this.state.title,
+            //     "articleImg": this.state.URL,
+            //     "articleImgDesc": this.state.img_caption,
+            //     "articleTeaser": this.state.teaser,
+            //     "articleText": this.state.text,
+            //     "articleCategory": this.state.category,
+            //     "articleDate": "11/17/2019",
+            //     "articleStatus": "published"
+            // };
+            // console.log(this.state.slug);
+            // axios.post(`http://localhost:5000/article/update/${this.state.slug}`, articleJSON)
+            // .then(res => {
+            //     console.log(res);
+            //     console.log(res.data);
+            // })
         }
-
     }
 
     handleDelete = () => {
