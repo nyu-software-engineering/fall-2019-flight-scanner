@@ -6,6 +6,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Article from './Article';
+import Grid from '@material-ui/core/Grid';
+import { Container } from '@material-ui/core';
+
 // import Chip from '@material-ui/core/Chip';
 
 const styles = theme => ({
@@ -37,6 +40,10 @@ const styles = theme => ({
         }
 
 
+    },
+    container: {
+        margin: 'auto',
+        maxWidth: '1400px'
     },
 })
 
@@ -72,7 +79,7 @@ class Create extends Component {
             return value !== ""
         })
         console.log(processed)
-    
+
     }
 
     handleCategory = (event) => {
@@ -105,14 +112,19 @@ class Create extends Component {
         }))
     }
 
-    showpreview = () => {
-        if (this.state.preview) {
-            return <Article title={this.state.title}
-                            banner={this.state.URL}  
-                            teaser={this.state.teaser}    
-                            body={this.state.text} 
-                            ></Article>
-        }
+    showPreview = () => {
+        // if (this.state.preview) {
+        //     return <Article title={this.state.title}
+        //                     banner={this.state.URL}  
+        //                     teaser={this.state.teaser}    
+        //                     body={this.state.text} 
+        //                     ></Article>
+        // }
+        return <Article title={this.state.title}
+            banner={this.state.URL}
+            teaser={this.state.teaser}
+            body={this.state.text}
+        ></Article>
     }
 
     handleSave = () => {
@@ -121,46 +133,46 @@ class Create extends Component {
 
     allProvided = () => {
         const missing = []
-        if (this.state.title === ''){
+        if (this.state.title === '') {
             missing.push('Title')
         }
-        if (this.state.URL === ''){
+        if (this.state.URL === '') {
             missing.push('URL')
         }
-        if (this.state.img_alt_text === ''){
+        if (this.state.img_alt_text === '') {
             missing.push('Image alternative text')
         }
-        if (this.state.img_caption === ''){
+        if (this.state.img_caption === '') {
             missing.push('Image caption')
         }
-        if (this.state.teaser === ''){
+        if (this.state.teaser === '') {
             missing.push('Teaser')
         }
-        if (this.state.category === ''){
+        if (this.state.category === '') {
             missing.push('Category')
         }
-        if (this.state.text === ''){
+        if (this.state.text === '') {
             missing.push('Text')
         }
-        if ((this.state.keywords).length === 0){
+        if ((this.state.keywords).length === 0) {
             missing.push("Keywords")
         }
-        if (missing.length !== 0){
+        if (missing.length !== 0) {
             var string = ''
             var i
-            for (i=0; i<missing.length; i++){
-                string = string +' '+ missing[i] 
+            for (i = 0; i < missing.length; i++) {
+                string = string + ' ' + missing[i]
             }
             alert(`Please provide correct information in the following fields: ${string}`)
         }
         else {
-           return true
+            return true
         }
 
     }
 
     handleSendToPublish = () => {
-        if (this.allProvided()){
+        if (this.allProvided()) {
             alert("Attempting to send to publish")
         }
 
@@ -186,101 +198,109 @@ class Create extends Component {
         return (
             <div >
                 <p>CREATE A NEW ARTICLE</p>
-                <ThemeProvider theme={this.returnTheme()}>
-                    <TextField
-                        id="title"
-                        label="Title"
-                        margin="normal"
-                        variant="outlined"
-                        onChange={this.handleChange}
-                        className={classes.inputbox}
-                    />
+                <Container className={classes.container}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} sm={5}>
+                            <ThemeProvider theme={this.returnTheme()}>
+                                <TextField
+                                    id="title"
+                                    label="Title"
+                                    margin="normal"
+                                    variant="outlined"
+                                    onChange={this.handleChange}
+                                    className={classes.inputbox}
+                                />
 
-                    <TextField
-                        id="URL"
-                        label="URL"
-                        margin="normal"
-                        variant="outlined"
-                        onChange={this.handleChange}
-                        className={classes.inputbox}
+                                <TextField
+                                    id="URL"
+                                    label="URL"
+                                    margin="normal"
+                                    variant="outlined"
+                                    onChange={this.handleChange}
+                                    className={classes.inputbox}
 
-                    />
+                                />
 
-                    <TextField
-                        id="img_alt_text"
-                        label="Image alternative text"
-                        margin="normal"
-                        variant="outlined"
-                        onChange={this.handleChange}
-                        className={classes.inputbox}
+                                <TextField
+                                    id="img_alt_text"
+                                    label="Image alternative text"
+                                    margin="normal"
+                                    variant="outlined"
+                                    onChange={this.handleChange}
+                                    className={classes.inputbox}
 
-                    />
+                                />
 
-                    <TextField
-                        id="img_caption"
-                        label="Image caption"
-                        margin="normal"
-                        variant="outlined"
-                        onChange={this.handleChange}
-                        className={classes.inputbox}
+                                <TextField
+                                    id="img_caption"
+                                    label="Image caption"
+                                    margin="normal"
+                                    variant="outlined"
+                                    onChange={this.handleChange}
+                                    className={classes.inputbox}
 
-                    />
+                                />
 
-                    <TextField
-                        id="teaser"
-                        label="Teaser"
-                        margin="normal"
-                        variant="outlined"
-                        onChange={this.handleChange}
-                        multiline
-                        className={classes.inputbox}
+                                <TextField
+                                    id="teaser"
+                                    label="Teaser"
+                                    margin="normal"
+                                    variant="outlined"
+                                    onChange={this.handleChange}
+                                    multiline
+                                    className={classes.inputbox}
 
-                    />
+                                />
 
-                    <TextField
-                        id="keywords"
-                        label="Keywords (separate by space)"
-                        margin="normal"
-                        variant="outlined"
-                        onChange={this.handleChange}
-                        className={classes.inputbox}
-                        onKeyPress={this.handleKeywords}
+                                <TextField
+                                    id="keywords"
+                                    label="Keywords (separate by space)"
+                                    margin="normal"
+                                    variant="outlined"
+                                    onChange={this.handleChange}
+                                    className={classes.inputbox}
+                                    onKeyPress={this.handleKeywords}
 
-                    > </TextField>
+                                > </TextField>
 
-                    <TextField
-                        id="category"
-                        label='Category'
-                        select
-                        margin="normal"
-                        variant="outlined"
-                        onChange={this.handleCategory}
-                        value={this.state.category}
-                        className={classes.inputbox}
-                    >
-                        {/* <MenuItem value='One' >One</MenuItem>
+                                <TextField
+                                    id="category"
+                                    label='Category'
+                                    select
+                                    margin="normal"
+                                    variant="outlined"
+                                    onChange={this.handleCategory}
+                                    value={this.state.category}
+                                    className={classes.inputbox}
+                                >
+                                    {/* <MenuItem value='One' >One</MenuItem>
                         <MenuItem value='Two' >Two</MenuItem> */}
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        {this.getMenu()}
-                    </TextField>
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    {this.getMenu()}
+                                </TextField>
 
-                    <TextField
-                        id="text"
-                        label="Text"
-                        margin="normal"
-                        variant="outlined"
-                        onChange={this.handleChange}
-                        multiline
-                        className={classes.inputbox}
-                    />
-                </ThemeProvider>
+                                <TextField
+                                    id="text"
+                                    label="Text"
+                                    margin="normal"
+                                    variant="outlined"
+                                    onChange={this.handleChange}
+                                    multiline
+                                    className={classes.inputbox}
+                                />
+                            </ThemeProvider>
+                        </Grid>
 
-                <div>
-                    <Button className={classes.preview} onClick={this.handlePreviewLoad}>{this.handleload()}</Button>
-                    {this.showpreview()}
-                </div>
+                        <Grid item xs={12} sm={7}>
+                            <div>
+                                {/* <Button className={classes.preview} onClick={this.handlePreviewLoad}>{this.handleload()}</Button> */}
+                                {this.showPreview()}
+                            </div>
+                        </Grid>
+                    </Grid>
+                </Container>
 
                 <div>
                     <Button onClick={this.handleSave} className={classes.preview}>
