@@ -10,12 +10,15 @@ import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core';
 
 // import Chip from '@material-ui/core/Chip';
+import axios from 'axios';
+
+//const authorName = "Abdullah Zameek" //temp author name added for the sake of it 
 
 const styles = theme => ({
 
     inputbox: {
         width: "100%",
-        maxWidth: "1000px",
+        maxWidth: "80vw",
     },
     preview: {
         marginTop: theme.spacing(5),
@@ -59,7 +62,9 @@ class Create extends Component {
             keywords: [],
             category: '',
             text: '',
-            preview: false
+            slug: '',
+            preview: false,
+            categories: [],
         }
     }
 
@@ -128,8 +133,27 @@ class Create extends Component {
     }
 
     handleSave = () => {
-        alert("Attempting to save")
+        alert("Attempting to save");
+        const articleJSON = {
+            "articleId": this.state.slug,
+            "articleAuthor": this.state.authorName,
+            "articleTitle": this.state.title,
+            "articleImg": this.state.URL,
+            "articleImgDesc": this.state.img_caption,
+            "articleTeaser": this.state.teaser,
+            "articleText": this.state.text,
+            "articleCategory": this.state.category,
+            "articleDate": "11/17/2019",
+            "articleStatus": "notpublished"
+        };
+
+        axios.post(`http://localhost:5000/article/add`, articleJSON)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
     }
+
 
     allProvided = () => {
         const missing = []
@@ -141,6 +165,9 @@ class Create extends Component {
         }
         if (this.state.img_alt_text === '') {
             missing.push('Image alternative text')
+        }
+        if (this.state.slug === '') {
+            missing.push('Slug')
         }
         if (this.state.img_caption === '') {
             missing.push('Image caption')
@@ -189,8 +216,18 @@ class Create extends Component {
 
     getMenu = () => {
         // call the database
-        const categories = ['ONE', 'TWO', 'THREE']
-        return (categories.map((cat) => { return <MenuItem key={cat} value={cat}>{cat}</MenuItem> }))
+        axios.get(`http://localhost:5000/category/getAllCategories`)
+            .then(response => {
+                //console.log("didmount", response.data)
+                this.setState({
+                    categories: response.data
+                })
+            })
+            .catch(error => {
+                //console.log("ERROR in Category loading ", error)
+            })
+
+        return (this.state.categories.map((cat) => { return <MenuItem key={cat} value={cat}>{cat}</MenuItem> }))
     }
 
     render() {
@@ -213,13 +250,23 @@ class Create extends Component {
 
                                 <TextField
                                     id="URL"
-                                    label="URL"
+                                    label="Image URL"
                                     margin="normal"
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
 
                                 />
+                                <TextField
+                                    id="title"
+                                    label="Title"
+                                    margin="normal"
+                                    variant="outlined"
+                                    onChange={this.handleChange}
+                                    className={classes.inputbox}
+                                />
+
+
 
                                 <TextField
                                     id="img_alt_text"
