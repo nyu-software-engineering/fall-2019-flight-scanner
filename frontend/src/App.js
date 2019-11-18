@@ -25,13 +25,12 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Router>
-					<NavRoute exact path="/" component={Article}/>
+					<NavRoute exact path="/" component={Article} />
 					<NavRoute exact path="/category/:id" component={Category} />
-					<Route exact path="/admin" component={Admin}  />
-					<Route exact path="/admin/create" component={Create}/>
-					<NavRoute exact path="/sampleArticle" component={Article}/>
-					<NavRoute exact path="/Account" component={Account}/>
-					<NavRoute exact path="/profile" component = {Profile}/>
+					<Route exact path="/admin" component={Admin} />
+					<Route exact path="/admin/create" component={Create} />
+					<NavRoute exact path="/sampleArticle" component={Article} />
+					<NavRoute exact path="/profile" component={Profile} />
 					<NavRoute exact path="/samplemini" component={MiniArticle} />
 
 					{/* <Route exact path="/" component={Article} />
