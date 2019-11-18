@@ -13,6 +13,7 @@ import Box from '@material-ui/core/Box';
 
 
 
+
 const styles = theme => ({
     root: {
         width: '100%',
@@ -21,26 +22,29 @@ const styles = theme => ({
     cardPic: {
         marginLeft: '5%',
         width: '20%',
-		height: '40%',
-		margin: "20px",
+		height: '370px',
+        margin: "20px",
+        boxShadow: "none"
 
       },
     cardBio: {
         width: '60%',
         height: '370px',
         marginRight: '5%',
-        marginTop: '20px'
+        marginTop: '20px', 
+        boxShadow: "none"
     },
     // media: {
 	// 	height: '270px',
     // },
     button: {
-        // marginTop: theme.spacing(3),
-        // marginBottom: theme.spacing(1),
+        // marginTop: "10%",
+        // marginBottom: "20%",
         // marginLeft: theme.spacing(1),
         // marginRight: theme.spacing(1),
         background: '#2E3B55',
         color: 'white',
+        // height: "20%",
         '&:hover': {
             background: '#586481',
         },
@@ -79,13 +83,13 @@ const styles = theme => ({
         },
     },
 
-    nameAndRole: {
-        marginTop: theme.spacing(1),
-    },
+    // nameAndRole: {
+    //     marginTop: theme.spacing(1),
+    // },
 
-    bioText: {
-        maxHeight: '300px'
-    }
+    // bioText: {
+    //     maxHeight: '300px'
+    // }
 
 
 
@@ -116,9 +120,12 @@ const styles = theme => ({
 })
 
 class Account extends Component{
-    // constructor(props){
-    //     super(props); 
-    // }
+    constructor(props){
+        super(props); 
+        this.state = {
+
+        }
+    }
 
     updatePicture = () =>{
         alert("updatePicture function called"); 
@@ -128,9 +135,9 @@ class Account extends Component{
         alert("updateBio function called"); 
     }
 
-    showPreviews= () => {
-        alert("showPreviews function called")
-    }
+    // showPreviews= () => {
+    //     alert("showPreviews function called")
+    // }
 
     render(){
         const {classes} = this.props; 
@@ -143,14 +150,13 @@ class Account extends Component{
 
                 <Box display='flex' p={1} className={classes.box}>
                 <Card className={classes.cardPic}>
-                <CardActionArea>
+                <CardActionArea className={classes.cardActionArea}>
                     <CardMedia
                     component="img"
                     alt="Admin Profile Picture"
                     image="./ASSETS/default_profile.png"
                     title="Admin Profile Picutre"
                     />
-
                 </CardActionArea>
                 <CardActions className={classes.cardActions}>
                     <Button onClick={this.updatePicture} className={classes.button}>
@@ -186,8 +192,8 @@ class Account extends Component{
 
 
 
-                <Box display='flex' p={1} className={classes.box}>
-                <Card className={classes.cardPic}>
+                {/* <Box display='flex' p={1} className={classes.box}> */}
+                {/* <Card className={classes.cardPic}>
                 <CardActionArea>
                     <CardMedia
                     component="img"
@@ -205,9 +211,9 @@ class Account extends Component{
                 </Typography>
 
                 </CardActions>
-                </Card>
+                </Card> */}
 
-                <Card className={classes.cardBio}>
+                {/* <Card className={classes.cardBio}>
                 <CardActionArea className = {classes.cardActionArea}>
                 <Typography gutterBottom variant="h5" component="h2" className={classes.bioText}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempus dui quis sapien lacinia eleifend. Nulla ullamcorper magna a massa ornare fringilla. Nunc ut tortor non purus sollicitudin vehicula ac non sapien. Ut nunc risus, eleifend non tortor non, auctor sagittis turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed faucibus purus et enim facilisis, vel congue justo venenatis. Proin egestas, purus in ultricies tincidunt, orci mi feugiat leo, id pharetra elit erat sed nisi. Donec ipsum est, lobortis quis tortor at, facilisis euismod risus. Praesent pretium mauris ut neque tempor interdum. Nullam imperdiet ex sed facilisis fringilla.
@@ -221,11 +227,11 @@ class Account extends Component{
                     </Button> 
 
                 </CardActions>
-                </Card>
-                </Box>
-                <Button  onClick={this.showPreviews} className={classes.updatePictureButton}>
+                </Card> */}
+                {/* </Box> */}
+                {/* <Button  onClick={this.showPreviews} className={classes.updatePictureButton}>
                     Show Previews
-                </Button> 
+                </Button>  */}
             </div>
         ); 
     }
