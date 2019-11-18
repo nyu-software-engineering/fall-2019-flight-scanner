@@ -64,7 +64,8 @@ class Create extends Component {
             text: '',
             slug: '',
             preview: false,
-            categories: [],
+            categories: ["None"],
+            gottenCatagories: false,
         }
     }
 
@@ -118,18 +119,11 @@ class Create extends Component {
     }
 
     showPreview = () => {
-        // if (this.state.preview) {
-        //     return <Article title={this.state.title}
-        //                     banner={this.state.URL}  
-        //                     teaser={this.state.teaser}    
-        //                     body={this.state.text} 
-        //                     ></Article>
-        // }
         return <Article title={this.state.title}
             banner={this.state.URL}
             teaser={this.state.teaser}
             body={this.state.text}
-        ></Article>
+        />
     }
 
     handleSave = () => {
@@ -216,17 +210,21 @@ class Create extends Component {
 
     getMenu = () => {
         // call the database
-        axios.get(`http://localhost:5000/category/getAllCategories`)
-            .then(response => {
-                //console.log("didmount", response.data)
-                this.setState({
-                    categories: response.data
+        if (this.state.gottenCatagories === false) {
+            this.setState({
+                gottenCatagories: true
+            })
+            axios.get(`http://localhost:5000/category/getAllCategories`)
+                .then(response => {
+                    //console.log("didmount", response.data)
+                    this.setState({
+                        categories: response.data
+                    })
                 })
-            })
-            .catch(error => {
-                //console.log("ERROR in Category loading ", error)
-            })
-
+                .catch(error => {
+                    //console.log("ERROR in Category loading ", error)
+                })
+        }
         return (this.state.categories.map((cat) => { return <MenuItem key={cat} value={cat}>{cat}</MenuItem> }))
     }
 
@@ -320,11 +318,6 @@ class Create extends Component {
                                     value={this.state.category}
                                     className={classes.inputbox}
                                 >
-                                    {/* <MenuItem value='One' >One</MenuItem>
-                        <MenuItem value='Two' >Two</MenuItem> */}
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
                                     {this.getMenu()}
                                 </TextField>
 
