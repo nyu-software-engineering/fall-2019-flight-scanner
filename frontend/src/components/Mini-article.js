@@ -13,6 +13,10 @@ const styles = theme => ({
 	  },
 	  titleStyle: {
 		  textTransform: "uppercase"
+	  }, 
+	  content: {
+		  paddingTop: "16px", 
+		  paddingLeft: "4px"
 	  }
 })
 
@@ -24,12 +28,12 @@ class MiniArticle extends Component {
 
 	handleClick = () => {
 		alert("Coming soon!")
+		window.localtion = "/article"+this.props.slug
 	}
 
 	render() {
 		const { classes } = this.props
 		return (
-			// <MiniArticleComponent props={this.props} />
 			<div>
 				<Card className={classes.card}>
 					<CardActionArea onClick={this.handleClick}>
@@ -39,7 +43,7 @@ class MiniArticle extends Component {
 							title={this.props.title}
 							component="img"
 						/>
-						<CardContent>
+						<CardContent className={classes.content}>
 							<Typography align="left" variant="h5" component="h2" className={classes.titleStyle}>
 								{this.props.title}
           					</Typography>
@@ -58,7 +62,8 @@ MiniArticle.defaultProps = {
 	banner: "https://lorempixel.com/960/540",
 	title: "Dummy Title goes here",
 	teaser: "A teaser for the dummy article here and even more teaser",
-	author: "Dummy Author 1"
+	author: "Dummy Author 1", 
+	slug: "samplearticle"
 }
 
 export default withStyles(styles)(MiniArticle)

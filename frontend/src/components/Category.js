@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import MiniArticle from './Mini-article';
+import { Grid, Container } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles';
 
-export default class Category extends Component {
+const styles = theme => ({
+    container: {
+        maxWidth: "80vw",
+        margin: "auto"
+    },
+    gridContainer: {
+
+    }
+})
+
+class Category extends Component {
 
     constructor(props) {
         super(props)
@@ -41,12 +54,24 @@ export default class Category extends Component {
     }
 
     render() {
+        const { classes } = this.props
         return (
-            <div>
-                {this.state.articles.map(article =>
-                    <p>{article.articleText}</p>
-                )}
-            </div>
+            <Container className={classes.container}>
+                <Grid container spacing={3} className={classes.gridContainer} alignItems="flex-start">
+                    {this.state.articles.map(article =>
+                        // <p>{article.articleText}</p>
+                        <Grid item xs={12} sm={6} lg={4} key={article.articleId}>
+                            <MiniArticle banner={article.articleImg}
+                                teaser={article.articleTeaser}
+                                title={article.articleTitle}
+                                author={article.articleAuthor}
+                            />
+                        </Grid>
+                    )}
+                </Grid>
+            </Container>
         )
     }
 }
+
+export default withStyles(styles)(Category)
