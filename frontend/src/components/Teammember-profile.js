@@ -20,12 +20,8 @@ const styles = theme => ({
         padding: theme.spacing(2),
         margin: 'auto',
         maxWidth: '1000px'
-
     }
-
-
 })
-
 
 class Profile extends Component {
     // constructor(props) {
