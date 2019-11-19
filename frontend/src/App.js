@@ -32,7 +32,7 @@ class App extends Component {
 					<NavRoute exact path="/sampleArticle" component={Article} />
 					<NavRoute exact path="/profile" component={Profile} />
 					<NavRoute exact path="/samplemini" component={MiniArticle} />
-					<NavRoute exact patj="/account" component={Account} />
+					<NavRoute exact path="/account" component={Account} />
 					{/* <Route exact path="/" component={Article} />
 					<Route exact path="/category/:id" component={Category} />
 					<Route exact path="/admin" component={Admin} />
