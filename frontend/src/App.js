@@ -6,6 +6,7 @@ import Article from './components/Article';
 import Admin from './components/Admin'
 import Category from './components/Category';
 import Create from './components/Create';
+import Account from './components/Account'; 
 import Profile from './components/Teammember-profile';
 import MiniArticle from './components/Mini-article';
 
@@ -31,7 +32,7 @@ class App extends Component {
 					<NavRoute exact path="/sampleArticle" component={Article} />
 					<NavRoute exact path="/profile" component={Profile} />
 					<NavRoute exact path="/samplemini" component={MiniArticle} />
-
+					<NavRoute exact path="/account" component={Account} />
 					{/* <Route exact path="/" component={Article} />
 					<Route exact path="/category/:id" component={Category} />
 					<Route exact path="/admin" component={Admin} />
