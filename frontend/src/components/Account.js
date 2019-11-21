@@ -59,6 +59,8 @@ class Account extends Component{
         }
     }
 
+    //Taken from 
+    //http://jsfiddle.net/fMCFB/1/
     isUriImage = (uri) => {
         //make sure we remove any nasty GET params 
         uri = uri.split('?')[0];
