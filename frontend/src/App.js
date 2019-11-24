@@ -6,7 +6,7 @@ import Article from './components/Article';
 import Admin from './components/Admin'
 import Category from './components/Category';
 import Create from './components/Create';
-import Account from './components/Account'; 
+import Account from './components/Account';
 import Profile from './components/Teammember-profile';
 import MiniArticle from './components/Mini-article';
 import MyArticles from './components/MyArticles';
@@ -26,7 +26,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Router>
-					<NavRoute exact path="/" component={Article} />
+					<NavRoute exact path="/" component={MiniArticle} />
 					<NavRoute exact path="/category/:id" component={Category} />
 					<Route exact path="/admin" component={Admin} />
 					<Route exact path="/admin/create" component={Create} />
@@ -39,6 +39,7 @@ class App extends Component {
 					<Route exact path="/category/:id" component={Category} />
 					<Route exact path="/admin" component={Admin} />
 					<Route exact path="/sampleArticle" component={Article} /> */}
+					<NavRoute exact path="/article/:id" component={Article} />
 				</Router>
 			</div>
 		);
