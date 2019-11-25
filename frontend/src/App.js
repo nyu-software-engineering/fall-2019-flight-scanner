@@ -9,7 +9,9 @@ import Create from './components/Create';
 import Account from './components/Account';
 import Profile from './components/Teammember-profile';
 import MiniArticle from './components/Mini-article';
+import Management from './components/Management';
 import MyArticles from './components/MyArticles';
+
 
 const NavRoute = ({ exact, path, component: Component }) => (
 	<Route exact={exact} path={path} render={(props) => (
@@ -33,6 +35,7 @@ class App extends Component {
 					<NavRoute exact path="/sampleArticle" component={Article} />
 					<NavRoute exact path="/profile" component={Profile} />
 					<NavRoute exact path="/samplemini" component={MiniArticle} />
+					<NavRoute exact path="/admin/account" component={Account} />
 					<NavRoute exact path="/account" component={Account} />
 					<NavRoute exact path="/my-articles" component={MyArticles} />
 					{/* <Route exact path="/" component={Article} />
@@ -40,6 +43,7 @@ class App extends Component {
 					<Route exact path="/admin" component={Admin} />
 					<Route exact path="/sampleArticle" component={Article} /> */}
 					<NavRoute exact path="/article/:id" component={Article} />
+					<NavRoute exact path="/admin/team-management" component = {Management} />
 				</Router>
 			</div>
 		);
