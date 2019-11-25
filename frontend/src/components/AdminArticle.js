@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Converter } from 'showdown';
-import axios from 'axios';
 
 
 function markdown2html(markdown) {
     return new Converter().makeHtml(markdown);
 }
 
-const styles = theme => ({
+const useStyles = makeStyles({
     root: {
         textAlign: "center"
     },
@@ -41,61 +40,38 @@ const styles = theme => ({
     }
 });
 
+const ArticleComponent = (props) => {
+    const classes = useStyles()
+    props = props.props
+    return (
+        <div className={classes.root}>
+            <div className={classes.page}>
+
+                <img className={classes.bannerImage} alt="banner for article" src={props.banner} />
+
+                <Typography variant="subtitle1" className={classes.teaser}>{
+                    props.teaser}
+                </Typography>
+                <br />
+                <Typography variant="h4" className={classes.title}>
+                    {props.title}
+                </Typography>
+                <Typography variant="h5" className={classes.author}>
+                    {props.author}
+                </Typography>
+                <Typography variant="body1" className={classes.articleBody} dangerouslySetInnerHTML={{ __html: markdown2html(props.body) }}>
+                </Typography>
+
+            </div>
+        </div>
+    )
+}
+
 class Article extends Component {
 
-    constructor(props){
-        super(props)
-        this.state = {
-            article: {
-                articleImg: "", 
-                articleText: "", 
-                articleTeaser: "", 
-                articleAuthor: "", 
-                articleTitle: ""
-            }
-        }
-    }
-
-    componentDidMount(){
-
-        const slug = this.props.match.params.id
-        axios.get(`http://localhost:5000/article/getBySlug/${slug}`)
-                .then(response => {
-                    console.log("response ", response.data)
-                    this.setState({
-                        article: response.data[0]
-                    })
-                })
-                .catch(error => {
-                    console.log("ERROR in Category loading ", error)
-                })
-
-    }
-
     render() {
-        const { classes } = this.props
-
         return (
-            <div className={classes.root}>
-                <div className={classes.page}>
-
-                    <img className={classes.bannerImage} alt="banner for article" src={this.state.article.articleImg} />
-
-                    <Typography variant="subtitle1" className={classes.teaser}>
-                        {this.state.article.articleTeaser}
-                    </Typography>
-                    <br />
-                    <Typography variant="h4" className={classes.title}>
-                        {this.state.article.articleTitle}
-                    </Typography>
-                    <Typography variant="h5" className={classes.author}>
-                        {this.state.article.articleAuthor}
-                    </Typography>
-                    <Typography variant="body1" className={classes.articleBody}
-                        dangerouslySetInnerHTML={{ __html: markdown2html(this.state.article.articleText) }} />
-
-                </div>
-            </div>
+            <ArticleComponent props={this.props} />
         )
     }
 }
@@ -118,6 +94,6 @@ Duis ut massa nec neque venenatis viverra at in elit. Sed vel posuere nibh, ac i
 Integer laoreet, felis vitae tempor ultricies, quam metus condimentum massa, sed porttitor ante sapien nec nibh. Nam dictum vel augue non gravida. Vestibulum ornare congue placerat. Nulla aliquam, eros eget elementum gravida, velit ligula pharetra felis, in ullamcorper sem sem nec sem. Curabitur sodales scelerisque magna at posuere. Mauris vitae urna hendrerit, varius nisi a, eleifend massa. Sed laoreet sem ante, sed blandit massa condimentum vulputate. Duis vitae augue nec ex sagittis gravida ac ac justo. Quisque dignissim dapibus posuere. In aliquam odio cursus, scelerisque sapien ac, sagittis nisi. Vivamus sit amet mi ipsum. Curabitur a mauris vitae massa iaculis dictum at quis eros. Nunc ac consequat ex. Pellentesque pulvinar leo ultrices ante faucibus accumsan quis pellentesque risus. Phasellus ullamcorper vestibulum eros sed aliquet.`
 }
 
-export default withStyles(styles)(Article)
+export default Article
 
 export { markdown2html }
