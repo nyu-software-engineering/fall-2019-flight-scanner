@@ -12,23 +12,10 @@ import Profile from './Teammember-profile';
 
 
 const styles = theme => ({
-    root: {
-        width: '100%',
-    },
 
 
     pic: {
         width: "100%", 
-    },
-
-    button: {
-
-        background: '#2E3B55',
-        color: 'white',
-
-        '&:hover': {
-            background: '#586481',
-        },
     },
 
 
@@ -62,6 +49,7 @@ class Account extends Component{
     //Taken from 
     //http://jsfiddle.net/fMCFB/1/
     isUriImage = (uri) => {
+
         //make sure we remove any nasty GET params 
         uri = uri.split('?')[0];
         //moving on, split the uri into parts that had dots before them
@@ -80,17 +68,23 @@ class Account extends Component{
 
     updatePicture = () =>{
         let newImg = prompt("Please enter image URL: "); 
+        if(newImg == null){
+            return; 
+        }
         while(!this.isUriImage(newImg)){
             newImg = prompt("Invalid URL, Please enter again: "); 
         }
+        
         this.setState({imgURL: newImg}); 
         
     }
 
     updateBio= () =>{
-        alert("updateBio function called"); 
-        alert(this.state.bio);
+        alert("Bio Updated"); 
         this.setState({bio: this.state.tempBio}) 
+
+        
+        
     }
 
     handleChange = (event) => {
@@ -106,12 +100,6 @@ class Account extends Component{
         const {classes} = this.props; 
         return(
 
-
-
-
-
-
-
             <Container className={classes.container}>
                 <Typography gutterBottom variant="h5" component="h2">
                     Customize your profile visible to readers!
@@ -126,6 +114,7 @@ class Account extends Component{
                     <Grid item xs={12} sm={8}>
                         <div className={classes.updateBio}>
                             <TextField
+                                // name="bio"
                                 id="Bio"
                                 label="Bio"
                                 rows='18'
