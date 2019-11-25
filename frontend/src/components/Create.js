@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-import Article from './Article';
+import Article from './AdminArticle';
 import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core';
 
