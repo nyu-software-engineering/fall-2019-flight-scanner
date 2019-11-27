@@ -1,6 +1,6 @@
 const router = require('express').Router();
 let Article = require('../models/article.model');
-// waiting for the mongoose bit to be added, no axios just yet either
+
 
 router.route('/').get((req, res) => {
     console.log("hi we here");
@@ -56,7 +56,7 @@ router.route('/:id').delete((req, res) => {
 });
 
 router.route('/update/:id').post((req, res) => {
-    Article.findById(req.params.id)
+    Article.find({'articleId':req.params.slug})
         .then(article => {
             article.articleId = req.body.articleId;
             article.articleTitle = req.body.articleTitle;
@@ -67,7 +67,7 @@ router.route('/update/:id').post((req, res) => {
             article.articleText = req.body.articleText;
             article.articleCategory = req.body.articleCategory;
             article.articleDate = Date.parse(req.body.articleDate);
-            article.articleStatus = req.body.articleStatus; //will be sent as string, not bool
+            article.articleStatus = 'published'; //will be sent as string, not bool
 
             article.save()
                 .then(() => res.json('Article Updated'))

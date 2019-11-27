@@ -128,6 +128,9 @@ class Create extends Component {
 
     handleSave = () => {
         alert("Attempting to save");
+        var dayDate = new Date().getDate(); //Current Date
+        var month = new Date().getMonth() + 1; //Current Month
+        var year = new Date().getFullYear(); //Current Year
         const articleJSON = {
             "articleId": this.state.slug,
             "articleAuthor": this.state.authorName,
@@ -137,8 +140,8 @@ class Create extends Component {
             "articleTeaser": this.state.teaser,
             "articleText": this.state.text,
             "articleCategory": this.state.category,
-            "articleDate": "11/17/2019",
-            "articleStatus": "published"
+            "articleDate": month.toString()+'/'+dayDate.toString()+'/'+year.toString(),
+            "articleStatus": "unpublished"
         };
 
         axios.post(`http://localhost:5000/article/add`, articleJSON)
