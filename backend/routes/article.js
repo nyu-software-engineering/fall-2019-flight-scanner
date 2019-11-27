@@ -93,5 +93,11 @@ router.route("/getBySlug/:slug").get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 })
 
+router.route("/getByState/:state").get((req, res) => {
+    Article.find({'articleStatus':req.params.state})
+    .then(article => res.json(article))
+    .catch(err => res.status(400).json('Error: ' + err));
+})
+
 
 module.exports = router;

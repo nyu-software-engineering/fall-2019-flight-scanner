@@ -128,9 +128,9 @@ class Create extends Component {
 
     handleSave = () => {
         alert("Attempting to save");
-        var dayDate = new Date().getDate(); //Current Date
-        var month = new Date().getMonth() + 1; //Current Month
-        var year = new Date().getFullYear(); //Current Year
+        let dayDate = new Date().getDate(); //Current Date
+        let month = new Date().getMonth() + 1; //Current Month
+        let year = new Date().getFullYear(); //Current Year
         const articleJSON = {
             "articleId": this.state.slug,
             "articleAuthor": this.state.authorName,
@@ -198,24 +198,27 @@ class Create extends Component {
     handleSendToPublish = () => {
         if (this.allProvided()) {
             alert("Attempting to send to publish");
-            // const articleJSON = {
-            //     "articleId": this.state.slug,
-            //     "articleAuthor": this.state.authorName,
-            //     "articleTitle": this.state.title,
-            //     "articleImg": this.state.URL,
-            //     "articleImgDesc": this.state.img_caption,
-            //     "articleTeaser": this.state.teaser,
-            //     "articleText": this.state.text,
-            //     "articleCategory": this.state.category,
-            //     "articleDate": "11/17/2019",
-            //     "articleStatus": "published"
-            // };
-            // console.log(this.state.slug);
-            // axios.post(`http://localhost:5000/article/update/${this.state.slug}`, articleJSON)
-            // .then(res => {
-            //     console.log(res);
-            //     console.log(res.data);
-            // })
+            let dayDate = new Date().getDate(); //Current Date
+            let month = new Date().getMonth() + 1; //Current Month
+            let year = new Date().getFullYear(); //Current Year
+            const articleJSON = {
+                "articleId": this.state.slug,
+                "articleAuthor": this.state.authorName,
+                "articleTitle": this.state.title,
+                "articleImg": this.state.URL,
+                "articleImgDesc": this.state.img_caption,
+                "articleTeaser": this.state.teaser,
+                "articleText": this.state.text,
+                "articleCategory": this.state.category,
+                "articleDate": month.toString()+'/'+dayDate.toString()+'/'+year.toString(),
+                "articleStatus": "published"
+            };
+            console.log(this.state.slug);
+            axios.post(`http://localhost:5000/article/add`, articleJSON)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
         }
     }
 

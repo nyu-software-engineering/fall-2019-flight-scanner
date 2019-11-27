@@ -4,7 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles'
-
+import axios from 'axios';
 
 const styles = theme => ({
 
@@ -32,36 +32,49 @@ class MyArticles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            savedArticles: [1,2,3,4], //dummy for now, will be a list of json objects
-            waitingArticles: [1,2,3]
+            savedArticles: [], //dummy for now, will be a list of json objects
+            waitingArticles: []
         }
     }
 
+    componentDidMount() {
+        axios.get(`http://localhost:5000/article/getByState/pendingreview`)
+            .then(response => {
+                console.log("didmount", response.data)
+                this.setState({
+                    savedArticles: response.data
+                })
+            })
+            .catch(error => {
+                console.log("Could not get the pending review articles: ", error)
+            })
+        
+        axios.get(`http://localhost:5000/article/getByState/unpublished`)
+            .then(response => {
+                console.log("didmount", response.data)
+                this.setState({
+                    waitingArticles: response.data
+                })
+            })
+            .catch(error => {
+                console.log("Could not get the unpublished articles: ", error)
+            })
+    }
+
+
     showWaiting = () => {
-        // parsing throught the json to get the necessary details 
-      
-        let banner = "https://lorempixel.com/960/540"
-        let title = "Dummy Title"
-        let teaser= "A dummy article waiting to be published"
-        // let author="KertuKertu "
-        // let slug="waiting-publishing"
+
 
         return <Grid container spacing={3}>
-            {this.state.waitingArticles.map(() => { return <Grid item xs={6} sm={3}><Miniarticle banner={banner} teaser={teaser} title={title} /> </Grid> })}
+            {this.state.waitingArticles.map( (article) => { return <Grid item xs={6} sm={3}><Miniarticle banner={article.articleImg} teaser={article.articleTeaser} title={article.articleTitle} /> </Grid> })}
             </Grid>
 
     }
 
     showSaved = () => {
 
-        let banner = "https://lorempixel.com/960/540"
-        let title = "Dummy Saved Title"
-        let teaser= "A dummy article that has been saved"
-        // let author="KertuKertu "
-        // let slug="saved"
-
         return <Grid container spacing={3}>
-            {this.state.savedArticles.map(() => { return <Grid item xs={6} sm={3}><Miniarticle banner={banner} teaser={teaser} title={title} /> </Grid> })}
+            {this.state.savedArticles.map((article) => { return <Grid item xs={6} sm={3}><Miniarticle banner={article.articleImg} teaser={article.articleTeaser} title={article.articleTitle} /> </Grid> })}
             </Grid>
     }
 
