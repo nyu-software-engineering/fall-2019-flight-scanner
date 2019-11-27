@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-import Teammember from "./Team-member"
+import Teammember from "./AdminTeammember"
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -20,7 +20,10 @@ const styles = theme => ({
     },
 
     box: {
-        marginBottom: "0"
+        marginBottom: "0", 
+        width: "40%", 
+        minWidth: "250px",
+        
     }
 
 });
@@ -33,7 +36,8 @@ class Management extends Component {
             first_name: '',
             last_name: '',
             role: '',
-            access: ''
+            access: '',
+            errors:[]
         }
     }
 
@@ -52,6 +56,42 @@ class Management extends Component {
         this.setState({
             [event.target.id]: event.target.value
         })
+    }
+
+    handleCreate = () => { 
+        if(this.isGmail() & this.allFilled()){
+            alert("ADD DAT DUDE")
+        }
+        else{
+            alert("Please provide correct information!")
+        }
+        
+    }
+
+    //helper functions 
+
+    isGmail = () => { 
+        //const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+        if (this.state.gmail.includes('@gmail.com') ){
+            return true 
+        }
+        else{
+            return false 
+        }
+    }
+
+    allFilled = () => { 
+        // first_name: '',
+        //     last_name: '',
+        //     role: '',
+        //     access: ''
+        if (this.state.first_name === "" || this.state.last_name === "" || this.state.role === '' || this.state.access === ""){
+            return false
+        }
+        else {
+            return true 
+        }
+
     }
 
     render() {
@@ -78,6 +118,8 @@ class Management extends Component {
                                 margin="normal"
                                 variant="outlined"
                                 className={classes.box}
+                                onChange={this.handleChange}
+
                             />
                         </Grid>
 
@@ -89,6 +131,7 @@ class Management extends Component {
                                 margin="normal"
                                 variant="outlined"
                                 className={classes.box}
+                                onChange={this.handleChange}
                             />
                         </Grid>
 
@@ -100,6 +143,8 @@ class Management extends Component {
                                 margin="normal"
                                 variant="outlined"
                                 className={classes.box}
+                                onChange={this.handleChange}
+
                             />
                         </Grid>
 
@@ -110,6 +155,8 @@ class Management extends Component {
                                 label="Access"
                                 margin="normal"
                                 variant="outlined"
+                                onChange={this.handleChange}
+                                className={classes.box}
                             />
                         </Grid>
 
@@ -117,7 +164,7 @@ class Management extends Component {
 
                 </ThemeProvider>
 
-                <Button className={classes.create}> Create new Teammember </Button>
+                <Button className={classes.create} onClick={this.handleCreate}> Create new Teammember </Button>
 
                 <Grid>
                     <Teammember></Teammember>
