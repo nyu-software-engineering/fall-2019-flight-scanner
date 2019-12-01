@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button'
 import Teammember from "./AdminTeammember"
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
+import axios from 'axios';
+
 
 
 const styles = theme => ({
@@ -37,7 +39,7 @@ class Management extends Component {
             last_name: '',
             role: '',
             access: '',
-            errors:[]
+            members:[],
         }
     }
 
@@ -81,16 +83,36 @@ class Management extends Component {
     }
 
     allFilled = () => { 
-        // first_name: '',
-        //     last_name: '',
-        //     role: '',
-        //     access: ''
         if (this.state.first_name === "" || this.state.last_name === "" || this.state.role === '' || this.state.access === ""){
             return false
         }
         else {
             return true 
         }
+
+    }
+
+    componentDidMount() {
+        axios.get(`http://localhost:5000/author/`)
+            .then(response => {
+                console.log("didmount", response.data)
+                this.setState({
+                    members: response.data
+                })
+            })
+            .catch(error => {
+                console.log("ERROR in Teammember loading ", error)
+            })
+    }
+
+    showTeam = () => {
+        return <Grid container spacing={0}>
+        {this.state.members.map((member) => { return <Grid item xs={6} sm={3}><Teammember email={member.email} firstName={member.authorFirstName} lastName={member.authorLastName} role={member.authorRole} id={member._id} /> </Grid> })}
+        </Grid>
+    }
+
+    pressEdit = () => { 
+        //opent the editing option 
 
     }
 
@@ -166,8 +188,11 @@ class Management extends Component {
 
                 <Button className={classes.create} onClick={this.handleCreate}> Create new Teammember </Button>
 
-                <Grid>
-                    <Teammember></Teammember>
+                <br></br>
+                <Button className={classes.create} onClick={this.pressEdit}> Dummy edit </Button>
+
+                <Grid container spacing={2}>
+                    {this.showTeam()}
                 </Grid>
 
 

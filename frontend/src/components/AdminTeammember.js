@@ -19,6 +19,22 @@ const useStyles = makeStyles(theme => ({
     media: {
         height: 260,
     },
+    delete:{
+        color: 'red',
+        '&:hover': {
+            background: 'red',
+            color: 'white'
+        }, 
+        margin: '0'
+
+    },
+    button:{
+        color:  '#2E3B55',
+        '&:hover': {
+            background: '#2E3B55',
+            color: 'white'
+        }
+    }
 }));
 
 export default function Teammember(props) {
@@ -34,7 +50,7 @@ export default function Teammember(props) {
                     title={props.name} />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {props.name}
+                        {props.firstName+" "+props.lastName}
                     </Typography>
                     <Typography gutterBottom variant="h6" component="h6">
                         {props.role}
@@ -43,13 +59,13 @@ export default function Teammember(props) {
             </CardActionArea>
             <CardActions>
                 <Grid>
-                    <Button size="small" >
+                    <Button size="small" className={classes.button} >
                         See Profile
 				</Button>
-                    <Button size="small" className >
+                    <Button size="small" className={classes.delete} >
                         Delete
                 </Button>
-                    <Button size="small">
+                    <Button size="small" className={classes.button}>
                         Edit
                 </Button>
                 </Grid>
@@ -60,9 +76,11 @@ export default function Teammember(props) {
 
 
 Teammember.defaultProps = {
-    name: "Anonymous User",
+    firstName: "Anonymous",
+    lastName: "User",
     role: "Classified Role",
     bio: "A very private person. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lacinia odio quis magna dictum sodales. Sed ac nibh orci. In eu libero ornare, iaculis nunc id, mattis orci. Etiam nibh eros, ornare sit amet massa ac, facilisis scelerisque elit. Aliquam venenatis porta neque, eget egestas elit iaculis quis. Etiam augue tortor, ultrices a porta et, ornare non lacus. Etiam vehicula bibendum blandit. Etiam ac erat vitae mauris rutrum iaculis. Mauris vehicula eget lectus vitae efficitur. Nulla ornare vitae est et tincidunt.Phasellus id mauris nibh. Pellentesque vitae nunc massa. Etiam tincidunt mattis ultricies. Etiam suscipit lacus augue, ut pellentesque nisl dapibus et. Nam ullamcorper orci id hendrerit ultrices. Mauris semper est nec ipsum bibendum, rhoncus ultrices velit bibendum. Donec at lobortis magna. Mauris at nibh nibh. Cras sit amet tempor est. Sed euismod id nunc non consequat. Proin blandit ipsum metus, nec fermentum leo luctus sit amet. Nulla ligula purus, rhoncus eu libero ut, pharetra posuere elit. Aenean vel mollis arcu. Ut nec lacinia metus. Praesent volutpat mattis tellus sit amet scelerisque.Phasellus at scelerisque mi, id ultricies purus. Maecenas in mollis leo. Etiam massa dui, ultrices vitae mattis sed, sagittis blandit libero. Phasellus bibendum mauris id ex egestas, eget iaculis justo lobortis. Aliquam iaculis eros eu leo mollis, sit amet lacinia lacus mollis. Pellentesque sit amet egestas odio, eu cursus sapien. Cras eu velit quam. Donec ac nibh vel nisl mattis malesuada. Duis vel dapibus nisl, luctus varius magna. In porttitor elit purus, eu porta nulla suscipit ut. Sed elementum libero eu arcu blandit, ac bibendum lacus vestibulum.",
-    imgURL: 'http://lorempixel.com/600/800/'
+    imgURL: 'http://lorempixel.com/600/800/',
+    id:"Auth001"
 }
 
