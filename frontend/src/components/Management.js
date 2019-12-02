@@ -7,7 +7,7 @@ import Teammember from "./AdminTeammember"
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-
+import EditDialog from './Dialog'
 
 
 const styles = theme => ({
@@ -22,10 +22,10 @@ const styles = theme => ({
     },
 
     box: {
-        marginBottom: "0", 
-        width: "40%", 
+        marginBottom: "0",
+        width: "40%",
         minWidth: "250px",
-        
+
     }
 
 });
@@ -39,7 +39,14 @@ class Management extends Component {
             last_name: '',
             role: '',
             access: '',
-            members:[],
+            members: [],
+            dialog_gmail: '',
+            dialog_first_name: '',
+            dialog_last_name: '',
+            dialog_role: '',
+            dialog_access: '',
+            dialog_open:false,
+            stateNotSet:true,
         }
     }
 
@@ -60,34 +67,34 @@ class Management extends Component {
         })
     }
 
-    handleCreate = () => { 
-        if(this.isGmail() & this.allFilled()){
+    handleCreate = () => {
+        if (this.isGmail() & this.allFilled()) {
             alert("ADD DAT DUDE")
         }
-        else{
+        else {
             alert("Please provide correct information!")
         }
-        
+
     }
 
     //helper functions 
 
-    isGmail = () => { 
+    isGmail = () => {
         //const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
-        if (this.state.gmail.includes('@gmail.com') ){
-            return true 
+        if (this.state.gmail.includes('@gmail.com')) {
+            return true
         }
-        else{
-            return false 
+        else {
+            return false
         }
     }
 
-    allFilled = () => { 
-        if (this.state.first_name === "" || this.state.last_name === "" || this.state.role === '' || this.state.access === ""){
+    allFilled = () => {
+        if (this.state.first_name === "" || this.state.last_name === "" || this.state.role === '' || this.state.access === "") {
             return false
         }
         else {
-            return true 
+            return true
         }
 
     }
@@ -107,13 +114,29 @@ class Management extends Component {
 
     showTeam = () => {
         return <Grid container spacing={0}>
-        {this.state.members.map((member) => { return <Grid item xs={6} sm={3}><Teammember email={member.email} firstName={member.authorFirstName} lastName={member.authorLastName} role={member.authorRole} id={member._id} /> </Grid> })}
+            {this.state.members.map((member) => { return <Grid item xs={6} sm={3}><Teammember email={member.email} firstName={member.authorFirstName} lastName={member.authorLastName} role={member.authorRole} id={member._id} pressEdit={this.pressEdit} /> </Grid> })}
         </Grid>
     }
 
-    pressEdit = () => { 
-        //opent the editing option 
+    pressEdit = (email, first, last, role, access) => {
+        if (this.state.stateNotSet) {
+            console.log("Came to parent to open dialog")
+            this.setState({
+                dialog_gmail: email,
+                dialog_first_name: first,
+                dialog_last_name: last,
+                dialog_role: role,
+                dialog_access: access,
+                dialog_open:true,
+                stateNotSet: false
+            })
+        }
+    }
 
+    pressClose = () =>{
+        this.setState({
+            dialog_open:false
+        })
     }
 
     render() {
@@ -188,12 +211,11 @@ class Management extends Component {
 
                 <Button className={classes.create} onClick={this.handleCreate}> Create new Teammember </Button>
 
-                <br></br>
-                <Button className={classes.create} onClick={this.pressEdit}> Dummy edit </Button>
-
                 <Grid container spacing={2}>
                     {this.showTeam()}
                 </Grid>
+
+                <EditDialog open={this.state.dialog_open} close={this.pressClose}></EditDialog>
 
 
 
