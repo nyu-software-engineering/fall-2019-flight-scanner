@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
 
+
 const styles = theme => ({
     card: {
         maxWidth: 345,
@@ -47,7 +48,8 @@ class Teammember extends Component {
     }
 
     handleEditClick = () =>{ 
-        this.props.pressEdit((this.props.email, this.props.firstName, this.props.lastName, this.props.role, this.props.access))
+        console.log(this.props.firstName)
+        this.props.pressEdit(this.props.email, this.props.firstName, this.props.lastName, this.props.role, this.props.access)
     }
 
     render() {

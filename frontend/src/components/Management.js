@@ -46,7 +46,6 @@ class Management extends Component {
             dialog_role: '',
             dialog_access: '',
             dialog_open:false,
-            stateNotSet:true,
         }
     }
 
@@ -119,8 +118,6 @@ class Management extends Component {
     }
 
     pressEdit = (email, first, last, role, access) => {
-        if (this.state.stateNotSet) {
-            console.log("Came to parent to open dialog")
             this.setState({
                 dialog_gmail: email,
                 dialog_first_name: first,
@@ -128,9 +125,7 @@ class Management extends Component {
                 dialog_role: role,
                 dialog_access: access,
                 dialog_open:true,
-                stateNotSet: false
             })
-        }
     }
 
     pressClose = () =>{
@@ -210,12 +205,11 @@ class Management extends Component {
                 </ThemeProvider>
 
                 <Button className={classes.create} onClick={this.handleCreate}> Create new Teammember </Button>
-
                 <Grid container spacing={2}>
                     {this.showTeam()}
                 </Grid>
 
-                <EditDialog open={this.state.dialog_open} close={this.pressClose}></EditDialog>
+                <EditDialog open={this.state.dialog_open} close={this.pressClose} gmail={this.state.dialog_gmail} firstName={this.state.dialog_first_name} lastName={this.state.dialog_last_name} role={this.state.dialog_role} access={this.state.dialog_role}></EditDialog>
 
 
 
