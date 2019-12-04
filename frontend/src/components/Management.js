@@ -122,7 +122,7 @@ class Management extends Component {
 
     showTeam = () => {
         return <Grid container spacing={0}>
-            {this.state.members.map((member) => { return <Grid item xs={6} sm={3}><Teammember info={member} pressEdit={this.pressEdit} /> </Grid> })}
+            {this.state.members.map((member) => { return <Grid item xs={12} sm={6} md={4} lg={3} ><Teammember info={member} pressEdit={this.pressEdit} /> </Grid> })}
         </Grid>
     }
 
