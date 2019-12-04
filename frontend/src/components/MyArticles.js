@@ -68,7 +68,6 @@ class MyArticles extends Component {
         return <Grid container spacing={3}>
             {this.state.waitingArticles.map( (article) => { return <Grid item xs={6} sm={3}><Miniarticle banner={article.articleImg} teaser={article.articleTeaser} title={article.articleTitle} /> </Grid> })}
             </Grid>
-
     }
 
     showSaved = () => {
