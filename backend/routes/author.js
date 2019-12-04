@@ -8,14 +8,15 @@ router.route('/').get((req, res) => {
   });
   
   router.route('/add').post((req, res) => {
-    const authorId = req.body.authorId;
+    console.log(req.body)
+    const authorId = "DELETE LATER15"
     const authorFirstName = req.body.authorFirstName;
     const authorLastName = req.body.authorLastName; 
     const authorEmail = req.body.authorEmail;
-    const authorProfileUrl = req.body.authorProfileUrl;
+    const authorProfileUrl = "";
     const authorRole = req.body.authorRole; 
-    const authorBio = req.body.authorBio; 
-  
+    const authorBio = "";
+   
     const newAuthor = new Author({
         authorId,
         authorFirstName,
