@@ -24,7 +24,6 @@ const styles = theme => ({
 
 class Landing extends Component{
 
-
     
 
     render(){
@@ -35,22 +34,7 @@ class Landing extends Component{
 
 
                 <Container className={classes.container}>
-                    <Grid container spacing={3}>
-                        <Grid item xs={6} sm={3}>
-                            <Miniarticle ></Miniarticle>
-                        </Grid>
-                        <Grid item xs={6} sm={6}>
-                            <Miniarticle></Miniarticle>
-
-                        </Grid>
-                        <Grid item xs={6} sm={3}>
-                            <Miniarticle></Miniarticle>
-
-                        </Grid>
-                        <Grid item xs={6} sm={6}>
-                            <Miniarticle  ></Miniarticle>
-
-                        </Grid>
+                    <Grid container spacing={6}>
                         <Grid item xs={6} sm={3}>
                             <Miniarticle ></Miniarticle>
                         </Grid>
@@ -59,13 +43,69 @@ class Landing extends Component{
 
                         </Grid>
                         <Grid item xs={6} sm={3}>
+                            <Miniarticle></Miniarticle>
+
+                        </Grid>
+                        <Grid item xs={6} sm={3}>
+                            <Miniarticle  ></Miniarticle>
+
+                        </Grid>
+                        <Grid item xs={6} sm={9}>
+                            <Miniarticle ></Miniarticle>
+                        </Grid>
+                        <Grid item xs={6} sm={3}>
+                            <Miniarticle></Miniarticle>
+                            <Miniarticle></Miniarticle>
+                        </Grid>
+
+                        <Grid item xs={6} sm={3}>
                             <Miniarticle  ></Miniarticle>
 
                         </Grid>
                         <Grid item xs={6} sm={3}>
                             <Miniarticle  ></Miniarticle>
                         </Grid>
-                        <Grid item xs={6} sm={6}>
+                        <Grid item xs={6} sm={3}>
+                            <Miniarticle></Miniarticle>
+                        </Grid>
+                        <Grid item xs={6} sm={3}>
+                            <Miniarticle></Miniarticle>
+                        </Grid>
+                        <Grid item xs={6} sm={2}>
+                            <Miniarticle></Miniarticle>
+                        </Grid>
+                        <Grid item xs={6} sm={2}>
+                            <Miniarticle></Miniarticle>
+                        </Grid>
+
+                        <Grid item xs={6} sm={2}>
+                            <Miniarticle></Miniarticle>
+                        </Grid>
+
+                        <Grid item xs={6} sm={3}>
+                            <Miniarticle></Miniarticle>
+                        </Grid>
+
+                        <Grid item xs={6} sm={3}>
+                            <Miniarticle></Miniarticle>
+                        </Grid>
+
+                        <Grid item xs={6} sm={2}>
+                            <Miniarticle></Miniarticle>
+                        </Grid>
+                        <Grid item xs={6} sm={2}>
+                            <Miniarticle></Miniarticle>
+                        </Grid>
+
+                        <Grid item xs={6} sm={2}>
+                            <Miniarticle></Miniarticle>
+                        </Grid>
+
+                        <Grid item xs={6} sm={3}>
+                            <Miniarticle></Miniarticle>
+                        </Grid>
+
+                        <Grid item xs={6} sm={3}>
                             <Miniarticle></Miniarticle>
                         </Grid>
 
@@ -78,5 +118,5 @@ class Landing extends Component{
 
 
 
-export default withStyles(styles)(Landing) ; 
+export default withStyles(styles)(Landing); 
 
