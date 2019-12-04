@@ -12,7 +12,7 @@ import { Container } from '@material-ui/core';
 // import Chip from '@material-ui/core/Chip';
 import axios from 'axios';
 
-//const authorName = "Abdullah Zameek" //temp author name added for the sake of it 
+// const authorName = "Abdullah Zameek" //temp author name added for the sake of it 
 
 const styles = theme => ({
 
@@ -59,13 +59,14 @@ class Create extends Component {
             img_alt_text: '',
             img_caption: '',
             teaser: '',
-            keywords: [],
+            keywords: '',
             category: '',
             text: '',
             slug: '',
             preview: false,
             categories: ["None"],
             gottenCatagories: false,
+            authorName : 'Abdullah Zameek' //temp author here for now
         }
     }
 
@@ -141,7 +142,8 @@ class Create extends Component {
             "articleText": this.state.text,
             "articleCategory": this.state.category,
             "articleDate": month.toString()+'/'+dayDate.toString()+'/'+year.toString(),
-            "articleStatus": "unpublished"
+            "articleStatus": "unpublished",
+            "articleKeywords": this.state.keywords
         };
 
         axios.post(`http://localhost:5000/article/add`, articleJSON)
@@ -211,7 +213,8 @@ class Create extends Component {
                 "articleText": this.state.text,
                 "articleCategory": this.state.category,
                 "articleDate": month.toString()+'/'+dayDate.toString()+'/'+year.toString(),
-                "articleStatus": "published"
+                "articleStatus": "published",
+                "articleKeywords": this.state.keywords
             };
             console.log(this.state.slug);
             axios.post(`http://localhost:5000/article/add`, articleJSON)

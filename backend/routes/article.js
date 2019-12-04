@@ -10,6 +10,9 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
+
+    // console.log(req.body);
+
     // const body = req.body; 
     const articleId = req.body.articleId;
     const articleAuthor = req.body.articleAuthor //assumes that the articleAuthors would be in this format {"articleAuthor":["dummy1", "dummy2"]}
@@ -22,7 +25,8 @@ router.route('/add').post((req, res) => {
     const articleCategory = req.body.articleCategory;
     const articleDate = Date.parse(req.body.articleDate);
     const articleStatus = req.body.articleStatus; //will be sent as string, not bool
-
+    const articleKeywords = req.body.articleKeywords;
+    
     // const newArticle = new Article(body); 
     const newArticle = new Article({
         articleId,
@@ -35,11 +39,13 @@ router.route('/add').post((req, res) => {
         articleCategory,
         articleDate,
         articleStatus,
+        articleKeywords
     });
 
     newArticle.save()
         .then(() => res.json('Added Article!'))
         .catch(err => res.status(400).json('Error: ' + err));
+
 });
 
 router.route('/getByID/:id').get((req, res) => {
@@ -56,6 +62,7 @@ router.route('/:id').delete((req, res) => {
 });
 
 router.route('/update/:id').post((req, res) => {
+    console.log(req.body);
     Article.find({'articleId':req.params.slug})
         .then(article => {
             article.articleId = req.body.articleId;
@@ -68,6 +75,7 @@ router.route('/update/:id').post((req, res) => {
             article.articleCategory = req.body.articleCategory;
             article.articleDate = Date.parse(req.body.articleDate);
             article.articleStatus = 'published'; //will be sent as string, not bool
+            article.articleKeywords = req.body.articleKeywords;
 
             article.save()
                 .then(() => res.json('Article Updated'))
