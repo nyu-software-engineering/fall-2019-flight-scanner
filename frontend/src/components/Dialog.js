@@ -69,6 +69,7 @@ class EditDialog extends Component {
           console.log(res);
           console.log(res.data);
           this.handleClose()
+          window.location.reload()
       })
   }
 
