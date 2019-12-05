@@ -11,6 +11,7 @@ import Profile from './components/Teammember-profile';
 import MiniArticle from './components/Mini-article';
 import Management from './components/Management';
 import MyArticles from './components/MyArticles';
+import LandingWrapper from './components/LandingWrapper'; 
 import Login from './components/Login';
 
 
@@ -46,6 +47,7 @@ class App extends Component {
 					<NavRoute exact path="/article/:id" component={Article} />
 					<NavRoute exact path="/admin/team-management" component={Management} />
 					<Route exact path="/login" component={Login} />
+					<NavRoute exact path="/landing" component={LandingWrapper}/>
 				</Router>
 			</div>
 		);
