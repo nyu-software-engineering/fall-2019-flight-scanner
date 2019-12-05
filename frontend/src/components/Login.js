@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
+import axios from 'axios';
+import BrowserHistory from 'react';
 
 
 class Login extends Component {
@@ -9,23 +11,26 @@ class Login extends Component {
 
     responseGoogle(res) {
         console.log(res.profileObj.email)
+        console.log(res)
+        // send a request to get JWT
+
+        if (sessionStorage.getItem("authToken") !== null) {
+            axios.post('https://localhost:5000/author/validate', { email: res.profileObj.email, token: res.tokenObj.id_token })
+                .then(response => {
+                    sessionStorage.setItem("authToken", res.authToken)
+                })
+            localStorage.setItem("authToken", res.authToken);
+        }
     }
 
     render() {
         return (
-            // <div>
-            //     <h2>Login</h2>
-            //     <input type="text" name="Email" />
-            //     <input type="password" name="Password" />
-            //     <button onClick={validateItems()}>Login</button>
-            // </div>
             <div>
                 <GoogleLogin
                     clientId="841597979703-ujo0ol992t85ug1ngfu5p6c5j017l00l.apps.googleusercontent.com"
                     buttonText="Login"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
-
                 />
             </div>
         );
