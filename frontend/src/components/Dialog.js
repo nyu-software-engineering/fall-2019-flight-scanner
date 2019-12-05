@@ -8,6 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { TextField } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/styles';
+import axios from 'axios';
 
 
 const styles = theme => ({
@@ -24,26 +25,58 @@ const styles = theme => ({
         background: '#2E3B55',
         color: 'white'
     }
-}
+  },
+  cancel: {
+    color: 'red',
+    '&:hover': {
+        background: 'red',
+        color: 'white'
+    }
+  }
 
 });
 
 class EditDialog extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-     
-  //   }
-  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+      gmail: '',
+      first_name:'',
+      last_name: '',
+      role:  '',
+      access: ''
+    }
+  }
 
   handleClose = () => {
-    this.setState({
-      open: false
-    })
     this.props.close()
+  }
+
+  handleSaveClick = () => {
+    const authorJSON = {
+      "authorBio":this.props.info.authorBio,
+      "authorEmail": this.props.info.authorEmail,
+      "authorFirstName": this.props.info.authorFirstName,
+      "authorId": "DELETE LATER",
+      "authorProfileUrl": 'http://lorempixel.com/200/400/sports/',
+      "authorLastName": this.props.info.authorLastName,
+      "authorRole": this.props.info.authorRole,
+          
   };
 
+  axios.post(`http://localhost:5000/author/update/${this.props.info._id}`, authorJSON)
+      .then(res => {
+          console.log(res);
+          console.log(res.data);
+          this.handleClose()
+      })
+  }
 
+  handleChange = (event) => {
+    this.setState({
+        [event.target.id]: event.target.value
+    })
+}
 
   render() {
     const { classes } = this.props
@@ -65,7 +98,7 @@ class EditDialog extends Component {
                     variant="outlined"
                     onChange={this.handleChange}
                     className={classes.box}
-                    defaultValue={this.props.gmail}
+                    defaultValue={this.props.info.authorEmail}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} xl={12}>
@@ -76,7 +109,7 @@ class EditDialog extends Component {
                     variant="outlined"
                     className={classes.box}
                     onChange={this.handleChange}
-                    defaultValue={this.props.firstName}
+                    defaultValue={this.props.info.authorFirstName}
 
                   />
                 </Grid>
@@ -90,7 +123,7 @@ class EditDialog extends Component {
                     variant="outlined"
                     className={classes.box}
                     onChange={this.handleChange}
-                    defaultValue={this.props.lastName}
+                    defaultValue={this.props.info.authorLastName}
                   />
                 </Grid>
 
@@ -103,7 +136,7 @@ class EditDialog extends Component {
                     variant="outlined"
                     className={classes.box}
                     onChange={this.handleChange}
-                    defaultValue={this.props.role}
+                    defaultValue={this.props.info.authorRole}
 
                   />
                 </Grid>
@@ -117,16 +150,16 @@ class EditDialog extends Component {
                     variant="outlined"
                     onChange={this.handleChange}
                     className={classes.box}
-                    defaultValue={this.props.access}
+                    defaultValue={this.props.info.authorRole}
                   />
                 </Grid>
 
           </DialogContent>
           <DialogActions style={{justifyContent:'center'}}>
-            <Button onClick={this.handleClose} className={classes.button}>
+            <Button onClick={this.handleClose} className={classes.cancel}>
               Cancel
           </Button>
-            <Button onClick={this.handleClose} className={classes.button}>
+            <Button onClick={this.handleSaveClick} className={classes.button}>
               Save changes
           </Button>
           </DialogActions>

@@ -12,7 +12,7 @@ import { Container } from '@material-ui/core';
 // import Chip from '@material-ui/core/Chip';
 import axios from 'axios';
 
-//const authorName = "Abdullah Zameek" //temp author name added for the sake of it 
+// const authorName = "Abdullah Zameek" //temp author name added for the sake of it 
 
 const styles = theme => ({
 
@@ -59,13 +59,14 @@ class Create extends Component {
             img_alt_text: '',
             img_caption: '',
             teaser: '',
-            keywords: [],
+            keywords: '',
             category: '',
             text: '',
             slug: '',
             preview: false,
             categories: ["None"],
             gottenCatagories: false,
+            authorName : 'Abdullah Zameek' //temp author here for now
         }
     }
 
@@ -128,6 +129,9 @@ class Create extends Component {
 
     handleSave = () => {
         alert("Attempting to save");
+        let dayDate = new Date().getDate(); //Current Date
+        let month = new Date().getMonth() + 1; //Current Month
+        let year = new Date().getFullYear(); //Current Year
         const articleJSON = {
             "articleId": this.state.slug,
             "articleAuthor": this.state.authorName,
@@ -137,8 +141,9 @@ class Create extends Component {
             "articleTeaser": this.state.teaser,
             "articleText": this.state.text,
             "articleCategory": this.state.category,
-            "articleDate": "11/17/2019",
-            "articleStatus": "published"
+            "articleDate": month.toString()+'/'+dayDate.toString()+'/'+year.toString(),
+            "articleStatus": "unpublished",
+            "articleKeywords": this.state.keywords
         };
 
         axios.post(`http://localhost:5000/article/add`, articleJSON)
@@ -195,24 +200,28 @@ class Create extends Component {
     handleSendToPublish = () => {
         if (this.allProvided()) {
             alert("Attempting to send to publish");
-            // const articleJSON = {
-            //     "articleId": this.state.slug,
-            //     "articleAuthor": this.state.authorName,
-            //     "articleTitle": this.state.title,
-            //     "articleImg": this.state.URL,
-            //     "articleImgDesc": this.state.img_caption,
-            //     "articleTeaser": this.state.teaser,
-            //     "articleText": this.state.text,
-            //     "articleCategory": this.state.category,
-            //     "articleDate": "11/17/2019",
-            //     "articleStatus": "published"
-            // };
-            // console.log(this.state.slug);
-            // axios.post(`http://localhost:5000/article/update/${this.state.slug}`, articleJSON)
-            // .then(res => {
-            //     console.log(res);
-            //     console.log(res.data);
-            // })
+            let dayDate = new Date().getDate(); //Current Date
+            let month = new Date().getMonth() + 1; //Current Month
+            let year = new Date().getFullYear(); //Current Year
+            const articleJSON = {
+                "articleId": this.state.slug,
+                "articleAuthor": this.state.authorName,
+                "articleTitle": this.state.title,
+                "articleImg": this.state.URL,
+                "articleImgDesc": this.state.img_caption,
+                "articleTeaser": this.state.teaser,
+                "articleText": this.state.text,
+                "articleCategory": this.state.category,
+                "articleDate": month.toString()+'/'+dayDate.toString()+'/'+year.toString(),
+                "articleStatus": "published",
+                "articleKeywords": this.state.keywords
+            };
+            console.log(this.state.slug);
+            axios.post(`http://localhost:5000/article/add`, articleJSON)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
         }
     }
 

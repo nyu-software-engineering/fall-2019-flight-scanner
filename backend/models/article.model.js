@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const Article = new Schema(
     {
         articleId: {type: String, required: true, unique: true},
-        articleAuthors: {type: [String], required: true}, //Couldn't get String Array to show
+        articleAuthor: {type: String, required: true}, //changed to single author
         articleTitle: {type: String, required: true}, 
         articleImg: {type: String, required: true},
         articleImgDesc: {type: String, required: true},
@@ -12,8 +12,8 @@ const Article = new Schema(
         articleText: {type: String, required: true}, 
         articleCategory: {type: String, required: true, index: true}, // still need to figure out indexing. Indexing sorted - Abdullah 
         articleDate: {type: Date, required: true}, 
-        articleStatus: {type: String, required: true} //controlled vocabulary? 
-
+        articleStatus: {type: String, required: true}, //controlled vocabulary? 
+        articleKeywords : {type: String, required: true}
     },
     {timestamps: true},
 )

@@ -12,6 +12,7 @@ import MiniArticle from './components/Mini-article';
 import Management from './components/Management';
 import MyArticles from './components/MyArticles';
 import LandingWrapper from './components/LandingWrapper'; 
+import Login from './components/Login';
 
 
 const NavRoute = ({ exact, path, component: Component }) => (
@@ -44,8 +45,9 @@ class App extends Component {
 					<Route exact path="/admin" component={Admin} />
 					<Route exact path="/sampleArticle" component={Article} /> */}
 					<NavRoute exact path="/article/:id" component={Article} />
-					<NavRoute exact path="/admin/team-management" component = {Management} />
-					<NavRoute exact path="/landing" component = {LandingWrapper}/>
+					<NavRoute exact path="/admin/team-management" component={Management} />
+					<Route exact path="/login" component={Login} />
+					<NavRoute exact path="/landing" component={LandingWrapper}/>
 				</Router>
 			</div>
 		);
