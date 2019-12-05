@@ -73,7 +73,7 @@ class Landing extends Component{
                 <Container className={classes.container}>
                     <Grid container spacing={6}>
                     {/* First row. Three in a row */}
-                    {this.state.articles.slice(0, 3).map(article =>
+                    {this.state.articles.slice(2, 5).map(article =>
                         // <p>{article.articleText}</p>
                         <Grid item xs={12} sm={12} md={4} key={article.articleId}>
                             <Miniarticle banner={article.articleImg}
@@ -98,7 +98,7 @@ class Landing extends Component{
                     )}
 
                     
-                    {this.state.articles.slice(0,1).map(article =>
+                    {this.state.articles.slice(1,2).map(article =>
                         // row 2 right, one
                         <Grid item xs={12} sm={12} md={3} className={classes.displayRight}>
                             <Miniarticle banner={article.articleImg}
@@ -114,7 +114,7 @@ class Landing extends Component{
                     
 
 
-                    {this.state.articles.slice(0,3).map(article =>
+                    {this.state.articles.slice(5,8).map(article =>
                         // row three, 3 mini articles
                         <Grid item xs={12} sm={12} md={4} key={article.articleId}>
                             <Miniarticle banner={article.articleImg}
@@ -126,7 +126,7 @@ class Landing extends Component{
                         </Grid>
                     )}
 
-                    {this.state.articles.slice(0,1).map(article =>
+                    {this.state.articles.slice(9,10).map(article =>
                     // row 4 left, one 
                         <Grid item xs={12} sm={12} md={3} key={article.articleId} >
                             <Miniarticle banner={article.articleImg}
@@ -139,7 +139,7 @@ class Landing extends Component{
                     )}
 
                     
-                    {this.state.articles.slice(0,1).map(article =>
+                    {this.state.articles.slice(8,9).map(article =>
                         // row 4 right, one
                         <Grid item xs={12} sm={12} md={9} className={classes.displayRight}>
                             <Miniarticle banner={article.articleImg}
@@ -153,8 +153,47 @@ class Landing extends Component{
                         
                     )}
 
-                    {this.state.articles.slice(0,3).map(article =>
+                    {this.state.articles.slice(10,13).map(article =>
                         // row 5, 3 mini articles
+                        <Grid item xs={12} sm={12} md={4} key={article.articleId}>
+                            <Miniarticle banner={article.articleImg}
+                                teaser={article.articleTeaser}
+                                title={article.articleTitle}
+                                author={article.articleAuthor}
+                                slug={article.articleId}
+                            />
+                        </Grid>
+                    )}
+
+                    {this.state.articles.slice(13,14).map(article =>
+                    // row 6 left, one 
+                        <Grid item xs={12} sm={12} md={9} key={article.articleId} >
+                            <Miniarticle banner={article.articleImg}
+                                teaser={article.articleTeaser}
+                                title={article.articleTitle}
+                                author={article.articleAuthor}
+                                slug={article.articleId}
+                            />
+                        </Grid>
+                    )}
+
+                    
+                    {this.state.articles.slice(14,15).map(article =>
+                        // row 6 right, one
+                        <Grid item xs={12} sm={12} md={3} className={classes.displayRight}>
+                            <Miniarticle banner={article.articleImg}
+                                teaser={article.articleTeaser}
+                                title={article.articleTitle}
+                                author={article.articleAuthor}
+                                slug={article.articleId}
+                                
+                            />
+                        </Grid>
+                        
+                    )}
+
+                    {this.state.articles.slice(15,18).map(article =>
+                        // row 7, 3 mini articles
                         <Grid item xs={12} sm={12} md={4} key={article.articleId}>
                             <Miniarticle banner={article.articleImg}
                                 teaser={article.articleTeaser}
