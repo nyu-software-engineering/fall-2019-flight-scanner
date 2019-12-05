@@ -149,7 +149,7 @@ class EditDialog extends Component {
                     variant="outlined"
                     onChange={this.handleChange}
                     className={classes.box}
-                    defaultValue={this.props.info.authorRole}
+                    defaultValue={this.props.info.authorAccess}
                   />
                 </Grid>
 
