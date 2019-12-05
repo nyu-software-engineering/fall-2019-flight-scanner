@@ -193,7 +193,7 @@ class Landing extends Component{
                     )}
 
                     {this.state.articles.slice(15,18).map(article =>
-                        // row 7, 3 mini articles
+                        // row , 3 mini articles
                         <Grid item xs={12} sm={12} md={4} key={article.articleId}>
                             <Miniarticle banner={article.articleImg}
                                 teaser={article.articleTeaser}

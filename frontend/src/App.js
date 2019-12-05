@@ -13,6 +13,7 @@ import Management from './components/Management';
 import MyArticles from './components/MyArticles';
 import LandingWrapper from './components/LandingWrapper'; 
 import Login from './components/Login';
+import Team from './components/TeamPage'; 
 
 
 const NavRoute = ({ exact, path, component: Component }) => (
@@ -48,6 +49,7 @@ class App extends Component {
 					<NavRoute exact path="/admin/team-management" component={Management} />
 					<Route exact path="/login" component={Login} />
 					<NavRoute exact path="/landing" component={LandingWrapper}/>
+					<NavRoute exact path="/team" component={Team}/>
 				</Router>
 			</div>
 		);
