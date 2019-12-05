@@ -69,6 +69,7 @@ class Management extends Component {
                 "authorFirstName": this.state.first_name,
                 "authorLastName": this.state.last_name,
                 "authorRole": this.state.role,
+                "authorAccess" : this.state.access
             }
             axios.post(`http://localhost:5000/author/add/`, authorJSON)
                 .then(res => {

@@ -9,22 +9,22 @@ router.route('/').get((req, res) => {
   
   router.route('/add').post((req, res) => {
     console.log(req.body)
-    const authorId = "DELETE LATER15"
     const authorFirstName = req.body.authorFirstName;
     const authorLastName = req.body.authorLastName; 
     const authorEmail = req.body.authorEmail;
     const authorProfileUrl = "";
     const authorRole = req.body.authorRole; 
     const authorBio = "";
+    const authorAccess = req.body.authorAccess;
    
     const newAuthor = new Author({
-        authorId,
         authorFirstName,
         authorLastName,
         authorEmail,
         authorProfileUrl,
         authorRole,
-        authorBio
+        authorBio,
+        authorAccess
     });
   
     newAuthor.save()
@@ -37,22 +37,25 @@ router.route('/').get((req, res) => {
         .then(author => res.json(author))
         .catch(err => res.status(400).json('Error: ' + err));
     });
+
     router.route('/:id').delete((req, res) => {
       Author.findByIdAndDelete(req.params.id)
         .then(() => res.json('Author deleted.'))
         .catch(err => res.status(400).json('Error: ' + err));
     });
+    
     router.route('/update/:id').post((req, res) => {
+      console.log(req.body);
       Author.findById(req.params.id)
         .then(author => {
-          author.authorId = req.body.authorId;
           author.authorFirstName = req.body.authorFirstName;
           author.authorLastName = req.body.authorLastName;
           author.auhtorEmail = req.body.authorEmail;
           author.authorProfileUrl = req.body.authorProfileUrl; 
           author.authorRole = req.body.authorRole; 
           author.authorBio = req.body.authorBio; 
-    
+          author.authorAccess = req.body.authorAccess;
+
           author.save()
             .then(() => res.json('Author updated!'))
             .catch(err => res.status(400).json('Error: ' + err));
