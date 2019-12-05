@@ -11,6 +11,7 @@ class Admin extends Component {
         return (
             <div>
                 <ProgressBar></ProgressBar>
+
             </div>
         );
     }
