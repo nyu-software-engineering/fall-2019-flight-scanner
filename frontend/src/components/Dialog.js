@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { TextField } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/styles';
-import axios from 'axios';
+  import axios from 'axios';
 
 
 const styles = theme => ({
@@ -56,12 +56,11 @@ class EditDialog extends Component {
     const authorJSON = {
       "authorBio":this.props.info.authorBio,
       "authorEmail": this.props.info.authorEmail,
-      "authorFirstName": this.props.info.authorFirstName,
-      "authorId": "DELETE LATER",
+      "authorFirstName": ((this.state.first_name === '') ? this.props.info.authorFirstName : this.state.first_name) ,
       "authorProfileUrl": 'http://lorempixel.com/200/400/sports/',
-      "authorLastName": this.props.info.authorLastName,
-      "authorRole": this.props.info.authorRole,
-          
+      "authorLastName": ((this.state.last_name === '') ? this.props.info.authorLastName : this.state.last_name),
+      "authorRole": ((this.state.role === '') ? this.props.info.authorRole : this.state.role),
+      "authorAccess": ((this.state.access === '') ? this.props.info.authorAccess : this.state.access)          
   };
 
   axios.post(`http://localhost:5000/author/update/${this.props.info._id}`, authorJSON)

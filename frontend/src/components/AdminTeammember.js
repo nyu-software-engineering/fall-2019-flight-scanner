@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-
+import axios from 'axios';
 
 
 const styles = theme => ({
@@ -51,6 +51,16 @@ class Teammember extends Component {
         this.props.pressEdit(this.props.info)
     }
 
+    handleDelete = () => {
+        console.log(this.props.firstName)
+        axios.delete(`http://localhost:5000/author/${this.props.info._id}`)
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+        })
+    }
+    
+
     render() {
         const { classes } = this.props
         return (
@@ -75,7 +85,7 @@ class Teammember extends Component {
                         <Button size="small" className={classes.button}  >
                             See Profile
 				</Button>
-                        <Button size="small" className={classes.delete} >
+                        <Button size="small" className={classes.delete} onClick={this.handleDelete} >
                             Delete
                 </Button>
                         <Button size="small" className={classes.button} onClick={this.handleEditClick}>
