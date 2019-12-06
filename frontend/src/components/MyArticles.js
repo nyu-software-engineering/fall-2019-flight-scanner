@@ -32,7 +32,7 @@ class MyArticles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            savedArticles: [], //dummy for now, will be a list of json objects
+            savedArticles: [], 
             waitingArticles: []
         }
     }
@@ -73,7 +73,7 @@ class MyArticles extends Component {
     showSaved = () => {
 
         return <Grid container spacing={3}>
-            {this.state.savedArticles.map((article) => { return <Grid item xs={6} sm={3}><AdminMiniArticle info={article} redirection="/edit" /> </Grid> })}
+            {this.state.waitingArticles.map((article) => { return <Grid item xs={6} sm={3}><AdminMiniArticle info={article} redirection="/edit" /> </Grid> })}
             </Grid>
     }
 

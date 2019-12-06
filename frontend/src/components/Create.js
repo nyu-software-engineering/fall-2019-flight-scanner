@@ -16,7 +16,7 @@ import axios from 'axios';
 
 const styles = theme => ({
 
-    inputbox: {
+    inputbox: { 
         width: "100%",
         maxWidth: "80vw",
     },
@@ -50,6 +50,7 @@ const styles = theme => ({
     },
 })
 
+
 class Create extends Component {
     constructor(props) {
         super(props);
@@ -66,7 +67,8 @@ class Create extends Component {
             preview: false,
             categories: ["None"],
             gottenCatagories: false,
-            authorName : 'Abdullah Zameek' //temp author here for now
+            authorName : 'Abdullah Zameek', //temp author here for now, 
+            is_edit_window: (window.location.href.slice(-4)==='edit')
         }
     }
 
@@ -120,10 +122,10 @@ class Create extends Component {
     }
 
     showPreview = () => {
-        return <Article title={this.state.title}
-            banner={this.state.URL}
-            teaser={this.state.teaser}
-            body={this.state.text}
+        return <Article title={this.state.is_edit_window? this.props.location.state.id.info.articleTitle:this.state.title}
+            banner={this.state.is_edit_window? this.props.location.state.id.info.articleImg:this.state.URL}
+            teaser={this.state.is_edit_window? this.props.location.state.id.info.articleTeaser:this.state.teaser}
+            body={this.state.is_edit_window? this.props.location.state.id.info.articleText:this.state.text}
         />
     }
 
@@ -270,6 +272,8 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
+                                    //defaultValue={this.props.location.state.id.info.articleTitle}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleTitle :''}
                                 />
 
                                 <TextField
@@ -279,6 +283,7 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleImg :''}
 
                                 />
                                 <TextField
@@ -288,6 +293,8 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleId :''}
+
                                 />
 
 
@@ -299,6 +306,8 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleText :''}
+
 
                                 />
 
@@ -309,6 +318,8 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleImgDesc :''}
+
 
                                 />
 
@@ -320,6 +331,8 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     multiline
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleTeaser :''}
+
 
                                 />
 
@@ -331,6 +344,8 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
                                     onKeyPress={this.handleKeywords}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleKeywords :''}
+
 
                                 > </TextField>
 
@@ -343,6 +358,8 @@ class Create extends Component {
                                     onChange={this.handleCategory}
                                     value={this.state.category}
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleCategory :''}
+
                                 >
                                     {this.getMenu()}
                                 </TextField>
@@ -355,6 +372,8 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     multiline
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleText :''}
+
                                 />
                             </ThemeProvider>
                         </Grid>
