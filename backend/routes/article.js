@@ -74,7 +74,7 @@ router.route('/update/:id').post((req, res) => {
             article.articleText = req.body.articleText;
             article.articleCategory = req.body.articleCategory;
             article.articleDate = Date.parse(req.body.articleDate);
-            article.articleStatus = 'published'; //will be sent as string, not bool
+            article.articleStatus = 'unpublished'; //will be sent as string, not bool
             article.articleKeywords = req.body.articleKeywords;
 
             article.save()
