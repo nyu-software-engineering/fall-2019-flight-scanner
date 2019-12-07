@@ -50,6 +50,7 @@ class App extends Component {
 					<Route exact path="/login" component={Login} />
 					<NavRoute exact path="/landing" component={LandingWrapper}/>
 					<NavRoute exact path="/team" component={Team}/>
+					<Route exact path='/edit' component={Create}/>
 				</Router>
 			</div>
 		);

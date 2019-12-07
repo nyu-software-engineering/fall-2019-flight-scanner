@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button'
 import Article from './AdminArticle';
 import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core';
+import {Redirect} from 'react-router-dom';
 
 // import Chip from '@material-ui/core/Chip';
 import axios from 'axios';
@@ -31,24 +32,25 @@ const styles = theme => ({
             background: '#586481',
         },
     },
-    deleteB: {
-        marginTop: theme.spacing(5),
-        marginBottom: theme.spacing(2),
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        background: '#93160d',
-        color: 'white',
-        '&:hover': {
-            background: '#ca4b35',
-        }
+    // deleteB: {
+    //     marginTop: theme.spacing(3),
+    //     marginBottom: theme.spacing(2),
+    //     marginLeft: theme.spacing(1),
+    //     marginRight: theme.spacing(1),
+    //     background: '#93160d',
+    //     color: 'white',
+    //     '&:hover': {
+    //         background: '#ca4b35',
+    //     }
 
 
-    },
+    // },
     container: {
         margin: 'auto',
         maxWidth: '1400px'
     },
 })
+
 
 class Create extends Component {
     constructor(props) {
@@ -66,7 +68,9 @@ class Create extends Component {
             preview: false,
             categories: ["None"],
             gottenCatagories: false,
-            authorName : 'Abdullah Zameek' //temp author here for now
+            authorName: 'Abdullah Zameek', //temp author here for now, 
+            is_edit_window: (window.location.href.slice(-4) === 'edit'),
+            redirect: false
         }
     }
 
@@ -78,15 +82,13 @@ class Create extends Component {
     }
 
     handleKeywords = (event) => {
-        console.log('new enter', event.target.value)
-        //getting the list of inputs 
-        const list = event.target.value.split(" ")
-        //filtering out the spaces from the list
-        const processed = list.filter((value) => {
-            return value !== ""
-        })
-        console.log(processed)
-
+        //NOT IN USE UNTIL BACKEND SUPPORTS IT
+        // //getting the list of inputs 
+        // const list = event.target.value.split(" ")
+        // //filtering out the spaces from the list
+        // const processed = list.filter((value) => {
+        //     return value !== ""
+        // })
     }
 
     handleCategory = (event) => {
@@ -120,67 +122,112 @@ class Create extends Component {
     }
 
     showPreview = () => {
-        return <Article title={this.state.title}
+        if(this.state.is_edit_window){
+            return <Article title={this.state.title === "" ? this.props.location.state.id.info.articleTitle : this.state.title}
+            banner={this.state.URL === "" ? this.props.location.state.id.info.articleImg : this.state.URL}
+            teaser={this.state.teaser === "" ? this.props.location.state.id.info.articleTeaser : this.state.teaser}
+            body={this.state.text === "" ? this.props.location.state.id.info.articleText : this.state.text}
+        />
+        }
+        else{
+            return <Article title={this.state.title}
             banner={this.state.URL}
             teaser={this.state.teaser}
             body={this.state.text}
         />
+        }
     }
 
     handleSave = () => {
-        alert("Attempting to save");
         let dayDate = new Date().getDate(); //Current Date
         let month = new Date().getMonth() + 1; //Current Month
         let year = new Date().getFullYear(); //Current Year
-        const articleJSON = {
-            "articleId": this.state.slug,
-            "articleAuthor": this.state.authorName,
-            "articleTitle": this.state.title,
-            "articleImg": this.state.URL,
-            "articleImgDesc": this.state.img_caption,
-            "articleTeaser": this.state.teaser,
-            "articleText": this.state.text,
-            "articleCategory": this.state.category,
-            "articleDate": month.toString()+'/'+dayDate.toString()+'/'+year.toString(),
-            "articleStatus": "unpublished",
-            "articleKeywords": this.state.keywords
-        };
 
-        axios.post(`http://localhost:5000/article/add`, articleJSON)
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
+        //if edit update 
+        if (this.state.is_edit_window) {
+
+            const articleJSON = {
+                "articleId": (this.state.slug === "" ? this.props.location.state.id.info.articleId : this.state.slug),
+                "articleTitle": (this.state.title === "" ? this.props.location.state.id.info.articleTitle : this.state.title),
+                "articleAuthor": "AFTER LOGIN",
+                "articleImg": (this.state.URL === "" ? this.props.location.state.id.info.articleImg : this.state.URL),
+                "articleImgDesc": (this.state.img_caption === "" ? this.props.location.state.id.info.articleImgDesc : this.state.img_caption),
+                "articleTeaser": (this.state.teaser === "" ? this.props.location.state.id.info.articleTeaser : this.state.teaser),
+                "articleText": (this.state.text === "" ? this.props.location.state.id.info.articleText : this.state.text),
+                "articleCategory": (this.state.category === "" ? this.props.location.state.id.info.articleCategory : this.state.category),
+                "articleDate": month.toString() + '/' + dayDate.toString() + '/' + year.toString(),
+                "articleStatus": "unpublished",
+                "articleKeywords": (this.state.keywords === "" ? this.props.location.state.id.info.articleKeywords : this.state.keywords)
+            };
+
+
+            axios.post(`http://localhost:5000/article/update/${this.props.location.state.id.info._id}`, articleJSON)
+                // .then(res => {
+                //     console.log(res);
+                //     console.log(res.data);
+
+                // })
+
+        }
+
+        //if create add
+        else {
+            const articleJSON = {
+                "articleId": this.state.slug,
+                "articleAuthor": this.state.authorName,
+                "articleTitle": this.state.title,
+                "articleImg": this.state.URL,
+                "articleImgDesc": this.state.img_caption,
+                "articleTeaser": this.state.teaser,
+                "articleText": this.state.text,
+                "articleCategory": this.state.category,
+                "articleDate": month.toString() + '/' + dayDate.toString() + '/' + year.toString(),
+                "articleStatus": "unpublished",
+                "articleKeywords": this.state.keywords
+            };
+
+
+            axios.post(`http://localhost:5000/article/add`, articleJSON)
+                // .then(res => {
+                //     console.log(res);
+                //     console.log(res.data);
+                // })
+        }
+
+        this.setState({
+            redirect:true
+        })
+
     }
 
 
     allProvided = () => {
         const missing = []
-        if (this.state.title === '') {
+        if (this.state.title === '' && this.props.location.state.id.info.articleTitle === "")  {
             missing.push('Title')
         }
-        if (this.state.URL === '') {
+        if (this.state.URL === '' && this.props.location.state.id.info.articleImg === "") {
             missing.push('URL')
         }
-        if (this.state.img_alt_text === '') {
+        if (this.state.img_alt_text === ''&& this.props.location.state.id.info.articleImgDesc === "") {
             missing.push('Image alternative text')
         }
-        if (this.state.slug === '') {
+        if (this.state.slug === ''&& this.props.location.state.id.info.articleId === "") {
             missing.push('Slug')
         }
-        if (this.state.img_caption === '') {
+        if (this.state.img_caption === ''&& this.props.location.state.id.info.articleImgDesc === "") {
             missing.push('Image caption')
         }
-        if (this.state.teaser === '') {
+        if (this.state.teaser === ''&& this.props.location.state.id.info.articleTeaser === "") {
             missing.push('Teaser')
         }
-        if (this.state.category === '') {
+        if (this.state.category === ''&& this.props.location.state.id.info.articleCategory === "") {
             missing.push('Category')
         }
-        if (this.state.text === '') {
+        if (this.state.text === ''&& this.props.location.state.id.info.articleText === "") {
             missing.push('Text')
         }
-        if ((this.state.keywords).length === 0) {
+        if (this.state.keywords === '' && this.props.location.state.id.info.keywords === "") {
             missing.push("Keywords")
         }
         if (missing.length !== 0) {
@@ -199,29 +246,43 @@ class Create extends Component {
 
     handleSendToPublish = () => {
         if (this.allProvided()) {
-            alert("Attempting to send to publish");
             let dayDate = new Date().getDate(); //Current Date
             let month = new Date().getMonth() + 1; //Current Month
             let year = new Date().getFullYear(); //Current Year
+
             const articleJSON = {
-                "articleId": this.state.slug,
-                "articleAuthor": this.state.authorName,
-                "articleTitle": this.state.title,
-                "articleImg": this.state.URL,
-                "articleImgDesc": this.state.img_caption,
-                "articleTeaser": this.state.teaser,
-                "articleText": this.state.text,
-                "articleCategory": this.state.category,
-                "articleDate": month.toString()+'/'+dayDate.toString()+'/'+year.toString(),
-                "articleStatus": "published",
-                "articleKeywords": this.state.keywords
+                "articleId": (this.state.slug === "" ? this.props.location.state.id.info.articleId : this.state.slug),
+                "articleTitle": (this.state.title === "" ? this.props.location.state.id.info.articleTitle : this.state.title),
+                "articleAuthor": "AFTER LOGIN",
+                "articleImg": (this.state.URL === "" ? this.props.location.state.id.info.articleImg : this.state.URL),
+                "articleImgDesc": (this.state.img_caption === "" ? this.props.location.state.id.info.articleImgDesc : this.state.img_caption),
+                "articleTeaser": (this.state.teaser === "" ? this.props.location.state.id.info.articleTeaser : this.state.teaser),
+                "articleText": (this.state.text === "" ? this.props.location.state.id.info.articleText : this.state.text),
+                "articleCategory": (this.state.category === "" ? this.props.location.state.id.info.articleCategory : this.state.category),
+                "articleDate": month.toString() + '/' + dayDate.toString() + '/' + year.toString(),
+                "articleStatus": "pendingreview",
+                "articleKeywords": (this.state.keywords === "" ? this.props.location.state.id.info.articleKeywords : this.state.keywords)
             };
-            console.log(this.state.slug);
-            axios.post(`http://localhost:5000/article/add`, articleJSON)
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
+
+            if (this.state.is_edit_window){
+                axios.post(`http://localhost:5000/article/update/${this.props.location.state.id.info._id}`, articleJSON)
+                // .then(res => {
+                //     console.log(res);
+                //     console.log(res.data);
+                // })
+            }
+            else{
+                axios.post(`http://localhost:5000/article/add`, articleJSON)
+                // .then(res => {
+                //     console.log(res);
+                //     console.log(res.data);
+                // })
+            }
+
+            this.setState({
+                redirect:true
             })
+            
         }
     }
 
@@ -229,7 +290,14 @@ class Create extends Component {
         const answer = prompt("Are you sure you want to delete your article?\nTypes yes to confirm or cancel ")
         if (answer) {
             if (answer.toUpperCase() === 'YES') {
-                alert("DELETE THE RECORD FROM DB")
+                axios.delete(`http://localhost:5000/article/${this.props.location.state.id.info._id}`)
+                .then(
+                    this.setState({
+                        redirect: true
+                    })
+                )
+
+            
             }
         }
     }
@@ -254,8 +322,18 @@ class Create extends Component {
         return (this.state.categories.map((cat) => { return <MenuItem key={cat} value={cat}>{cat}</MenuItem> }))
     }
 
+    showDelete = () =>{
+        return(<div><Button disabled = {!(this.state.is_edit_window)} onClick={this.handleDelete} style = {{background: '#93160d',color: 'white','hover': {background: '#ca4b35',
+            }}}> DELETE</Button></div>)
+    }
+
     render() {
         const { classes } = this.props
+        if (this.state.redirect) {
+            window.location.reload()
+            return (<Redirect  to={`/my-articles`} />)
+            
+		}
         return (
             <div >
                 <h1>CREATE A NEW ARTICLE</h1>
@@ -270,6 +348,7 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleTitle : ''}
                                 />
 
                                 <TextField
@@ -279,6 +358,7 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleImg : ''}
 
                                 />
                                 <TextField
@@ -288,6 +368,8 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleId : ''}
+
                                 />
 
 
@@ -299,6 +381,8 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleText : ''}
+
 
                                 />
 
@@ -309,6 +393,8 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleImgDesc : ''}
+
 
                                 />
 
@@ -320,6 +406,8 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     multiline
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleTeaser : ''}
+
 
                                 />
 
@@ -331,6 +419,8 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
                                     onKeyPress={this.handleKeywords}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleKeywords : ''}
+
 
                                 > </TextField>
 
@@ -343,6 +433,8 @@ class Create extends Component {
                                     onChange={this.handleCategory}
                                     value={this.state.category}
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleCategory : ''}
+
                                 >
                                     {this.getMenu()}
                                 </TextField>
@@ -355,6 +447,8 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     multiline
                                     className={classes.inputbox}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleText : ''}
+
                                 />
                             </ThemeProvider>
                         </Grid>
@@ -376,7 +470,9 @@ class Create extends Component {
                         SEND TO PUBLISHING
                         </Button>
                 </div>
-                <div><Button onClick={this.handleDelete} className={classes.deleteB}> DELETE</Button></div>
+
+                {this.showDelete()}
+                
 
 
             </div >

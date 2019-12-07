@@ -32,7 +32,7 @@ class MyArticles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            savedArticles: [], //dummy for now, will be a list of json objects
+            savedArticles: [], 
             waitingArticles: []
         }
     }
@@ -42,7 +42,7 @@ class MyArticles extends Component {
             .then(response => {
                 console.log("didmount", response.data)
                 this.setState({
-                    savedArticles: response.data
+                    waitingArticles: response.data
                 })
             })
             .catch(error => {
@@ -53,7 +53,7 @@ class MyArticles extends Component {
             .then(response => {
                 console.log("didmount", response.data)
                 this.setState({
-                    waitingArticles: response.data
+                    savedArticles: response.data
                 })
             })
             .catch(error => {
