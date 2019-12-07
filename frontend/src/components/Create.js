@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button'
 import Article from './AdminArticle';
 import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core';
+import {Redirect} from 'react-router-dom';
 
 // import Chip from '@material-ui/core/Chip';
 import axios from 'axios';
@@ -68,7 +69,8 @@ class Create extends Component {
             categories: ["None"],
             gottenCatagories: false,
             authorName: 'Abdullah Zameek', //temp author here for now, 
-            is_edit_window: (window.location.href.slice(-4) === 'edit')
+            is_edit_window: (window.location.href.slice(-4) === 'edit'),
+            redirect: false
         }
     }
 
@@ -80,13 +82,13 @@ class Create extends Component {
     }
 
     handleKeywords = (event) => {
-        console.log('new enter', event.target.value)
-        //getting the list of inputs 
-        const list = event.target.value.split(" ")
-        //filtering out the spaces from the list
-        const processed = list.filter((value) => {
-            return value !== ""
-        })
+        //NOT IN USE UNTIL BACKEND SUPPORTS IT
+        // //getting the list of inputs 
+        // const list = event.target.value.split(" ")
+        // //filtering out the spaces from the list
+        // const processed = list.filter((value) => {
+        //     return value !== ""
+        // })
     }
 
     handleCategory = (event) => {
@@ -120,11 +122,20 @@ class Create extends Component {
     }
 
     showPreview = () => {
-        return <Article title={this.state.is_edit_window ? this.props.location.state.id.info.articleTitle : this.state.title}
-            banner={this.state.is_edit_window ? this.props.location.state.id.info.articleImg : this.state.URL}
-            teaser={this.state.is_edit_window ? this.props.location.state.id.info.articleTeaser : this.state.teaser}
-            body={this.state.is_edit_window ? this.props.location.state.id.info.articleText : this.state.text}
+        if(this.state.is_edit_window){
+            return <Article title={this.state.title === "" ? this.props.location.state.id.info.articleTitle : this.state.title}
+            banner={this.state.URL === "" ? this.props.location.state.id.info.articleImg : this.state.URL}
+            teaser={this.state.teaser === "" ? this.props.location.state.id.info.articleTeaser : this.state.teaser}
+            body={this.state.text === "" ? this.props.location.state.id.info.articleText : this.state.text}
         />
+        }
+        else{
+            return <Article title={this.state.title}
+            banner={this.state.URL}
+            teaser={this.state.teaser}
+            body={this.state.text}
+        />
+        }
     }
 
     handleSave = () => {
@@ -155,6 +166,7 @@ class Create extends Component {
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
+
                 })
 
         }
@@ -183,36 +195,40 @@ class Create extends Component {
                 })
         }
 
+        this.setState({
+            redirect:true
+        })
+
     }
 
 
     allProvided = () => {
         const missing = []
-        if (this.state.title === '' && this.location.state.id.info.articleTitle === "")  {
+        if (this.state.title === '' && this.props.location.state.id.info.articleTitle === "")  {
             missing.push('Title')
         }
-        if (this.state.URL === '' && this.location.state.id.info.articleImg === "") {
+        if (this.state.URL === '' && this.props.location.state.id.info.articleImg === "") {
             missing.push('URL')
         }
-        if (this.state.img_alt_text === ''&& this.location.state.id.info.articleImgDesc === "") {
+        if (this.state.img_alt_text === ''&& this.props.location.state.id.info.articleImgDesc === "") {
             missing.push('Image alternative text')
         }
-        if (this.state.slug === ''&& this.location.state.id.info.articleId === "") {
+        if (this.state.slug === ''&& this.props.location.state.id.info.articleId === "") {
             missing.push('Slug')
         }
-        if (this.state.img_caption === ''&& this.location.state.id.info.articleImgDesc === "") {
+        if (this.state.img_caption === ''&& this.props.location.state.id.info.articleImgDesc === "") {
             missing.push('Image caption')
         }
-        if (this.state.teaser === ''&& this.location.state.id.info.articleTeaser === "") {
+        if (this.state.teaser === ''&& this.props.location.state.id.info.articleTeaser === "") {
             missing.push('Teaser')
         }
-        if (this.state.category === ''&& this.location.state.id.info.articleCategory === "") {
+        if (this.state.category === ''&& this.props.location.state.id.info.articleCategory === "") {
             missing.push('Category')
         }
-        if (this.state.text === ''&& this.location.state.id.info.articleText === "") {
+        if (this.state.text === ''&& this.props.location.state.id.info.articleText === "") {
             missing.push('Text')
         }
-        if (this.state.keywords === '' && this.location.state.id.info.keywords === "") {
+        if (this.state.keywords === '' && this.props.location.state.id.info.keywords === "") {
             missing.push("Keywords")
         }
         if (missing.length !== 0) {
@@ -250,12 +266,25 @@ class Create extends Component {
                 "articleKeywords": (this.state.keywords === "" ? this.props.location.state.id.info.articleKeywords : this.state.keywords)
             };
 
-            console.log(this.state.slug);
-            axios.post(`http://localhost:5000/article/add`, articleJSON)
+            if (this.state.is_edit_window){
+                axios.post(`http://localhost:5000/article/update/${this.props.location.state.id.info._id}`, articleJSON)
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
                 })
+            }
+            else{
+                axios.post(`http://localhost:5000/article/add`, articleJSON)
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                })
+            }
+
+            this.setState({
+                redirect:true
+            })
+            
         }
     }
 
@@ -267,8 +296,12 @@ class Create extends Component {
                 axios.delete(`http://localhost:5000/article/${this.props.location.state.id.info._id}`)
                 .then(
                     console.log("deleted"),
-                    // <Redirect to ='/admin/my-articles'/>
+                    this.setState({
+                        redirect: true
+                    })
                 )
+
+            
             }
         }
     }
@@ -300,6 +333,10 @@ class Create extends Component {
 
     render() {
         const { classes } = this.props
+        if (this.state.redirect) {
+            window.location.reload()
+			return (<Redirect to={`/my-articles`} />)
+		}
         return (
             <div >
                 <h1>CREATE A NEW ARTICLE</h1>
