@@ -16,7 +16,7 @@ import axios from 'axios';
 
 const styles = theme => ({
 
-    inputbox: { 
+    inputbox: {
         width: "100%",
         maxWidth: "80vw",
     },
@@ -67,8 +67,8 @@ class Create extends Component {
             preview: false,
             categories: ["None"],
             gottenCatagories: false,
-            authorName : 'Abdullah Zameek', //temp author here for now, 
-            is_edit_window: (window.location.href.slice(-4)==='edit')
+            authorName: 'Abdullah Zameek', //temp author here for now, 
+            is_edit_window: (window.location.href.slice(-4) === 'edit')
         }
     }
 
@@ -122,10 +122,10 @@ class Create extends Component {
     }
 
     showPreview = () => {
-        return <Article title={this.state.is_edit_window? this.props.location.state.id.info.articleTitle:this.state.title}
-            banner={this.state.is_edit_window? this.props.location.state.id.info.articleImg:this.state.URL}
-            teaser={this.state.is_edit_window? this.props.location.state.id.info.articleTeaser:this.state.teaser}
-            body={this.state.is_edit_window? this.props.location.state.id.info.articleText:this.state.text}
+        return <Article title={this.state.is_edit_window ? this.props.location.state.id.info.articleTitle : this.state.title}
+            banner={this.state.is_edit_window ? this.props.location.state.id.info.articleImg : this.state.URL}
+            teaser={this.state.is_edit_window ? this.props.location.state.id.info.articleTeaser : this.state.teaser}
+            body={this.state.is_edit_window ? this.props.location.state.id.info.articleText : this.state.text}
         />
     }
 
@@ -134,25 +134,57 @@ class Create extends Component {
         let dayDate = new Date().getDate(); //Current Date
         let month = new Date().getMonth() + 1; //Current Month
         let year = new Date().getFullYear(); //Current Year
-        const articleJSON = {
-            "articleId": this.state.slug,
-            "articleAuthor": this.state.authorName,
-            "articleTitle": this.state.title,
-            "articleImg": this.state.URL,
-            "articleImgDesc": this.state.img_caption,
-            "articleTeaser": this.state.teaser,
-            "articleText": this.state.text,
-            "articleCategory": this.state.category,
-            "articleDate": month.toString()+'/'+dayDate.toString()+'/'+year.toString(),
-            "articleStatus": "unpublished",
-            "articleKeywords": this.state.keywords
-        };
 
-        axios.post(`http://localhost:5000/article/add`, articleJSON)
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
+        //if edit update 
+        if (this.state.is_edit_window) {
+
+            const articleJSON = {
+                "articleId": (this.state.slug === "" ? this.props.location.state.id.info.articleId : this.state.slug),
+                "articleTitle": (this.state.title === "" ? this.props.location.state.id.info.articleTitle : this.state.title),
+                "articleAuthor": "AFTER LOGIN",
+                "articleImg": (this.state.URL === "" ? this.props.location.state.id.info.articleImg : this.state.URL),
+                "articleImgDesc": (this.state.img_caption === "" ? this.props.location.state.id.info.articleImgDesc : this.state.img_caption),
+                "articleTeaser": (this.state.teaser === "" ? this.props.location.state.id.info.articleTeaser : this.state.teaser),
+                "articleText": (this.state.text === "" ? this.props.location.state.id.info.articleText : this.state.text),
+                "articleCategory": (this.state.category === "" ? this.props.location.state.id.info.articleCategory : this.state.category),
+                "articleDate": month.toString() + '/' + dayDate.toString() + '/' + year.toString(),
+                "articleStatus": "unpublished",
+                "articleKeywords": (this.state.keywords === "" ? this.props.location.state.id.info.articleKeywords : this.state.keywords)
+            };
+
+
+            axios.post(`http://localhost:5000/article/update/${this.props.location.state.id.info._id}`, articleJSON)
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                })
+
+        }
+
+        //if create add
+        else {
+            const articleJSON = {
+                "articleId": this.state.slug,
+                "articleAuthor": this.state.authorName,
+                "articleTitle": this.state.title,
+                "articleImg": this.state.URL,
+                "articleImgDesc": this.state.img_caption,
+                "articleTeaser": this.state.teaser,
+                "articleText": this.state.text,
+                "articleCategory": this.state.category,
+                "articleDate": month.toString() + '/' + dayDate.toString() + '/' + year.toString(),
+                "articleStatus": "unpublished",
+                "articleKeywords": this.state.keywords
+            };
+
+
+            axios.post(`http://localhost:5000/article/add`, articleJSON)
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                })
+        }
+
     }
 
 
@@ -214,16 +246,16 @@ class Create extends Component {
                 "articleTeaser": this.state.teaser,
                 "articleText": this.state.text,
                 "articleCategory": this.state.category,
-                "articleDate": month.toString()+'/'+dayDate.toString()+'/'+year.toString(),
-                "articleStatus": "published",
+                "articleDate": month.toString() + '/' + dayDate.toString() + '/' + year.toString(),
+                "articleStatus": "pending",
                 "articleKeywords": this.state.keywords
             };
             console.log(this.state.slug);
             axios.post(`http://localhost:5000/article/add`, articleJSON)
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                })
         }
     }
 
@@ -273,7 +305,7 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
                                     //defaultValue={this.props.location.state.id.info.articleTitle}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleTitle :''}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleTitle : ''}
                                 />
 
                                 <TextField
@@ -283,7 +315,7 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleImg :''}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleImg : ''}
 
                                 />
                                 <TextField
@@ -293,7 +325,7 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleId :''}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleId : ''}
 
                                 />
 
@@ -306,7 +338,7 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleText :''}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleText : ''}
 
 
                                 />
@@ -318,7 +350,7 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleImgDesc :''}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleImgDesc : ''}
 
 
                                 />
@@ -331,7 +363,7 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     multiline
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleTeaser :''}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleTeaser : ''}
 
 
                                 />
@@ -344,7 +376,7 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
                                     onKeyPress={this.handleKeywords}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleKeywords :''}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleKeywords : ''}
 
 
                                 > </TextField>
@@ -358,7 +390,7 @@ class Create extends Component {
                                     onChange={this.handleCategory}
                                     value={this.state.category}
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleCategory :''}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleCategory : ''}
 
                                 >
                                     {this.getMenu()}
@@ -372,7 +404,7 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     multiline
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleText :''}
+                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleText : ''}
 
                                 />
                             </ThemeProvider>

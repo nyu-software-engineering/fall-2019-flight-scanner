@@ -42,7 +42,7 @@ class MyArticles extends Component {
             .then(response => {
                 console.log("didmount", response.data)
                 this.setState({
-                    savedArticles: response.data
+                    waitingArticles: response.data
                 })
             })
             .catch(error => {
@@ -53,7 +53,7 @@ class MyArticles extends Component {
             .then(response => {
                 console.log("didmount", response.data)
                 this.setState({
-                    waitingArticles: response.data
+                    savedArticles: response.data
                 })
             })
             .catch(error => {
@@ -73,7 +73,7 @@ class MyArticles extends Component {
     showSaved = () => {
 
         return <Grid container spacing={3}>
-            {this.state.waitingArticles.map((article) => { return <Grid item xs={6} sm={3}><AdminMiniArticle info={article} redirection="/edit" /> </Grid> })}
+            {this.state.savedArticles.map((article) => { return <Grid item xs={6} sm={3}><AdminMiniArticle info={article} redirection="/edit" /> </Grid> })}
             </Grid>
     }
 
