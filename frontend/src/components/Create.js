@@ -139,7 +139,6 @@ class Create extends Component {
     }
 
     handleSave = () => {
-        alert("Attempting to save");
         let dayDate = new Date().getDate(); //Current Date
         let month = new Date().getMonth() + 1; //Current Month
         let year = new Date().getFullYear(); //Current Year
@@ -163,11 +162,11 @@ class Create extends Component {
 
 
             axios.post(`http://localhost:5000/article/update/${this.props.location.state.id.info._id}`, articleJSON)
-                .then(res => {
-                    console.log(res);
-                    console.log(res.data);
+                // .then(res => {
+                //     console.log(res);
+                //     console.log(res.data);
 
-                })
+                // })
 
         }
 
@@ -189,10 +188,10 @@ class Create extends Component {
 
 
             axios.post(`http://localhost:5000/article/add`, articleJSON)
-                .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                })
+                // .then(res => {
+                //     console.log(res);
+                //     console.log(res.data);
+                // })
         }
 
         this.setState({
@@ -247,7 +246,6 @@ class Create extends Component {
 
     handleSendToPublish = () => {
         if (this.allProvided()) {
-            alert("Attempting to send to publish");
             let dayDate = new Date().getDate(); //Current Date
             let month = new Date().getMonth() + 1; //Current Month
             let year = new Date().getFullYear(); //Current Year
@@ -268,17 +266,17 @@ class Create extends Component {
 
             if (this.state.is_edit_window){
                 axios.post(`http://localhost:5000/article/update/${this.props.location.state.id.info._id}`, articleJSON)
-                .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                })
+                // .then(res => {
+                //     console.log(res);
+                //     console.log(res.data);
+                // })
             }
             else{
                 axios.post(`http://localhost:5000/article/add`, articleJSON)
-                .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                })
+                // .then(res => {
+                //     console.log(res);
+                //     console.log(res.data);
+                // })
             }
 
             this.setState({
@@ -292,10 +290,8 @@ class Create extends Component {
         const answer = prompt("Are you sure you want to delete your article?\nTypes yes to confirm or cancel ")
         if (answer) {
             if (answer.toUpperCase() === 'YES') {
-                alert("DELETED THE RECORD FROM DB")
                 axios.delete(`http://localhost:5000/article/${this.props.location.state.id.info._id}`)
                 .then(
-                    console.log("deleted"),
                     this.setState({
                         redirect: true
                     })
@@ -335,7 +331,8 @@ class Create extends Component {
         const { classes } = this.props
         if (this.state.redirect) {
             window.location.reload()
-			return (<Redirect to={`/my-articles`} />)
+            return (<Redirect  to={`/my-articles`} />)
+            
 		}
         return (
             <div >
