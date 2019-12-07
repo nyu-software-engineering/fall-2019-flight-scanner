@@ -87,8 +87,6 @@ class Create extends Component {
         const processed = list.filter((value) => {
             return value !== ""
         })
-        console.log(processed)
-
     }
 
     handleCategory = (event) => {
@@ -268,7 +266,8 @@ class Create extends Component {
                 alert("DELETED THE RECORD FROM DB")
                 axios.delete(`http://localhost:5000/article/${this.props.location.state.id.info._id}`)
                 .then(
-                    console.log("deleted")
+                    console.log("deleted"),
+                    // <Redirect to ='/admin/my-articles'/>
                 )
             }
         }
