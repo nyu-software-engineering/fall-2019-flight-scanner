@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Miniarticle from './Mini-article';
+import AdminMiniArticle from './AdminMiniArticle';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -32,7 +32,7 @@ class MyArticles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            savedArticles: [], //dummy for now, will be a list of json objects
+            savedArticles: [], 
             waitingArticles: []
         }
     }
@@ -42,7 +42,7 @@ class MyArticles extends Component {
             .then(response => {
                 console.log("didmount", response.data)
                 this.setState({
-                    savedArticles: response.data
+                    waitingArticles: response.data
                 })
             })
             .catch(error => {
@@ -53,7 +53,7 @@ class MyArticles extends Component {
             .then(response => {
                 console.log("didmount", response.data)
                 this.setState({
-                    waitingArticles: response.data
+                    savedArticles: response.data
                 })
             })
             .catch(error => {
@@ -66,14 +66,14 @@ class MyArticles extends Component {
 
 
         return <Grid container spacing={3}>
-            {this.state.waitingArticles.map( (article) => { return <Grid item xs={6} sm={3}><Miniarticle banner={article.articleImg} teaser={article.articleTeaser} title={article.articleTitle} /> </Grid> })}
+            {this.state.waitingArticles.map( (article) => { return <Grid item xs={6} sm={3}><AdminMiniArticle info={article} redirection="/admin"/> </Grid> })}
             </Grid>
     }
 
     showSaved = () => {
 
         return <Grid container spacing={3}>
-            {this.state.savedArticles.map((article) => { return <Grid item xs={6} sm={3}><Miniarticle banner={article.articleImg} teaser={article.articleTeaser} title={article.articleTitle} /> </Grid> })}
+            {this.state.savedArticles.map((article) => { return <Grid item xs={6} sm={3}><AdminMiniArticle info={article} redirection="/edit" /> </Grid> })}
             </Grid>
     }
 

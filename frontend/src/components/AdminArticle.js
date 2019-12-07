@@ -49,8 +49,8 @@ const ArticleComponent = (props) => {
 
                 <img className={classes.bannerImage} alt="banner for article" src={props.banner} />
 
-                <Typography variant="subtitle1" className={classes.teaser}>{
-                    props.teaser}
+                <Typography variant="subtitle1" className={classes.teaser}>
+                    {props.teaser}
                 </Typography>
                 <br />
                 <Typography variant="h4" className={classes.title}>
