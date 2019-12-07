@@ -31,19 +31,19 @@ const styles = theme => ({
             background: '#586481',
         },
     },
-    deleteB: {
-        marginTop: theme.spacing(5),
-        marginBottom: theme.spacing(2),
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        background: '#93160d',
-        color: 'white',
-        '&:hover': {
-            background: '#ca4b35',
-        }
+    // deleteB: {
+    //     marginTop: theme.spacing(3),
+    //     marginBottom: theme.spacing(2),
+    //     marginLeft: theme.spacing(1),
+    //     marginRight: theme.spacing(1),
+    //     background: '#93160d',
+    //     color: 'white',
+    //     '&:hover': {
+    //         background: '#ca4b35',
+    //     }
 
 
-    },
+    // },
     container: {
         margin: 'auto',
         maxWidth: '1400px'
@@ -237,19 +237,21 @@ class Create extends Component {
             let dayDate = new Date().getDate(); //Current Date
             let month = new Date().getMonth() + 1; //Current Month
             let year = new Date().getFullYear(); //Current Year
+
             const articleJSON = {
-                "articleId": this.state.slug,
-                "articleAuthor": this.state.authorName,
-                "articleTitle": this.state.title,
-                "articleImg": this.state.URL,
-                "articleImgDesc": this.state.img_caption,
-                "articleTeaser": this.state.teaser,
-                "articleText": this.state.text,
-                "articleCategory": this.state.category,
+                "articleId": (this.state.slug === "" ? this.props.location.state.id.info.articleId : this.state.slug),
+                "articleTitle": (this.state.title === "" ? this.props.location.state.id.info.articleTitle : this.state.title),
+                "articleAuthor": "AFTER LOGIN",
+                "articleImg": (this.state.URL === "" ? this.props.location.state.id.info.articleImg : this.state.URL),
+                "articleImgDesc": (this.state.img_caption === "" ? this.props.location.state.id.info.articleImgDesc : this.state.img_caption),
+                "articleTeaser": (this.state.teaser === "" ? this.props.location.state.id.info.articleTeaser : this.state.teaser),
+                "articleText": (this.state.text === "" ? this.props.location.state.id.info.articleText : this.state.text),
+                "articleCategory": (this.state.category === "" ? this.props.location.state.id.info.articleCategory : this.state.category),
                 "articleDate": month.toString() + '/' + dayDate.toString() + '/' + year.toString(),
-                "articleStatus": "pending",
-                "articleKeywords": this.state.keywords
+                "articleStatus": "pendingreview",
+                "articleKeywords": (this.state.keywords === "" ? this.props.location.state.id.info.articleKeywords : this.state.keywords)
             };
+
             console.log(this.state.slug);
             axios.post(`http://localhost:5000/article/add`, articleJSON)
                 .then(res => {
@@ -263,7 +265,11 @@ class Create extends Component {
         const answer = prompt("Are you sure you want to delete your article?\nTypes yes to confirm or cancel ")
         if (answer) {
             if (answer.toUpperCase() === 'YES') {
-                alert("DELETE THE RECORD FROM DB")
+                alert("DELETED THE RECORD FROM DB")
+                axios.delete(`http://localhost:5000/article/${this.props.location.state.id.info._id}`)
+                .then(
+                    console.log("deleted")
+                )
             }
         }
     }
@@ -286,6 +292,11 @@ class Create extends Component {
                 })
         }
         return (this.state.categories.map((cat) => { return <MenuItem key={cat} value={cat}>{cat}</MenuItem> }))
+    }
+
+    showDelete = () =>{
+        return(<div><Button disabled = {!(this.state.is_edit_window)} onClick={this.handleDelete} style = {{background: '#93160d',color: 'white','hover': {background: '#ca4b35',
+            }}}> DELETE</Button></div>)
     }
 
     render() {
@@ -426,7 +437,9 @@ class Create extends Component {
                         SEND TO PUBLISHING
                         </Button>
                 </div>
-                <div><Button onClick={this.handleDelete} className={classes.deleteB}> DELETE</Button></div>
+
+                {this.showDelete()}
+                
 
 
             </div >
