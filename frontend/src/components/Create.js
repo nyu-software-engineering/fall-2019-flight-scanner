@@ -190,31 +190,31 @@ class Create extends Component {
 
     allProvided = () => {
         const missing = []
-        if (this.state.title === '') {
+        if (this.state.title === '' && this.location.state.id.info.articleTitle === "")  {
             missing.push('Title')
         }
-        if (this.state.URL === '') {
+        if (this.state.URL === '' && this.location.state.id.info.articleImg === "") {
             missing.push('URL')
         }
-        if (this.state.img_alt_text === '') {
+        if (this.state.img_alt_text === ''&& this.location.state.id.info.articleImgDesc === "") {
             missing.push('Image alternative text')
         }
-        if (this.state.slug === '') {
+        if (this.state.slug === ''&& this.location.state.id.info.articleId === "") {
             missing.push('Slug')
         }
-        if (this.state.img_caption === '') {
+        if (this.state.img_caption === ''&& this.location.state.id.info.articleImgDesc === "") {
             missing.push('Image caption')
         }
-        if (this.state.teaser === '') {
+        if (this.state.teaser === ''&& this.location.state.id.info.articleTeaser === "") {
             missing.push('Teaser')
         }
-        if (this.state.category === '') {
+        if (this.state.category === ''&& this.location.state.id.info.articleCategory === "") {
             missing.push('Category')
         }
-        if (this.state.text === '') {
+        if (this.state.text === ''&& this.location.state.id.info.articleText === "") {
             missing.push('Text')
         }
-        if ((this.state.keywords).length === 0) {
+        if (this.state.keywords === '' && this.location.state.id.info.keywords === "") {
             missing.push("Keywords")
         }
         if (missing.length !== 0) {
@@ -304,7 +304,6 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    //defaultValue={this.props.location.state.id.info.articleTitle}
                                     defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleTitle : ''}
                                 />
 
