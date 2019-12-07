@@ -63,7 +63,7 @@ router.route('/:id').delete((req, res) => {
 
 router.route('/update/:id').post((req, res) => {
     console.log(req.body);
-    Article.find({'articleId':req.params.slug})
+    Article.findById(req.params.id)
         .then(article => {
             article.articleId = req.body.articleId;
             article.articleTitle = req.body.articleTitle;
