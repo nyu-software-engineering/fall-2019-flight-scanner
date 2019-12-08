@@ -14,6 +14,7 @@ import MyArticles from './components/MyArticles';
 import LandingWrapper from './components/LandingWrapper'; 
 import Login from './components/Login';
 import Team from './components/TeamPage'; 
+import ErrorPage from './components/404';
 
 
 const NavRoute = ({ exact, path, component: Component }) => (
@@ -51,6 +52,7 @@ class App extends Component {
 					<NavRoute exact path="/landing" component={LandingWrapper}/>
 					<NavRoute exact path="/team" component={Team}/>
 					<Route exact path='/edit' component={Create}/>
+					<Route exact path='/404' component={ErrorPage}/>
 				</Router>
 			</div>
 		);
