@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import './App.css';
 import Article from './components/Article';
@@ -32,6 +32,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Router>
+					<Switch>
 					<NavRoute exact path="/" component={MiniArticle} />
 					<NavRoute exact path="/category/:id" component={Category} />
 					<Route exact path="/admin" component={Admin} />
@@ -52,7 +53,8 @@ class App extends Component {
 					<NavRoute exact path="/landing" component={LandingWrapper}/>
 					<NavRoute exact path="/team" component={Team}/>
 					<Route exact path='/edit' component={Create}/>
-					<Route exact path='/404' component={ErrorPage}/>
+					<Route component={ErrorPage}/>
+					</Switch>
 				</Router>
 			</div>
 		);
