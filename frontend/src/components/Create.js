@@ -70,6 +70,7 @@ class Create extends Component {
             gottenCatagories: false,
             authorName: 'Abdullah Zameek', //temp author here for now, 
             is_edit_window: (window.location.href.slice(-4) === 'edit'),
+            is_admin_window: (window.location.href.slice(-5) === 'admin'),
             redirect: false
         }
     }
@@ -122,11 +123,11 @@ class Create extends Component {
     }
 
     showPreview = () => {
-        if(this.state.is_edit_window){
-            return <Article title={this.state.title === "" ? this.props.location.state.id.info.articleTitle : this.state.title}
-            banner={this.state.URL === "" ? this.props.location.state.id.info.articleImg : this.state.URL}
-            teaser={this.state.teaser === "" ? this.props.location.state.id.info.articleTeaser : this.state.teaser}
-            body={this.state.text === "" ? this.props.location.state.id.info.articleText : this.state.text}
+        if(this.state.is_edit_window || this.state.is_admin_window){
+            return <Article title={this.state.title === "" ? this.showDefault().articleTitle : this.state.title}
+            banner={this.state.URL === "" ? this.showDefault().articleImg : this.state.URL}
+            teaser={this.state.teaser === "" ? this.showDefault().articleTeaser : this.state.teaser}
+            body={this.state.text === "" ? this.showDefault().articleText : this.state.text}
         />
         }
         else{
@@ -168,6 +169,25 @@ class Create extends Component {
 
                 // })
 
+        }
+        else if(this.state.is_admin_window){
+            const articleJSON = {
+                "articleId": (this.state.slug === "" ? this.props.info.articleId : this.state.slug),
+                "articleTitle": (this.state.title === "" ? this.props.info.articleTitle : this.state.title),
+                "articleAuthor": "AFTER LOGIN",
+                "articleImg": (this.state.URL === "" ? this.props.info.articleImg : this.state.URL),
+                "articleImgDesc": (this.state.img_caption === "" ? this.props.info.articleImgDesc : this.state.img_caption),
+                "articleTeaser": (this.state.teaser === "" ? this.props.info.articleTeaser : this.state.teaser),
+                "articleText": (this.state.text === "" ? this.props.info.articleText : this.state.text),
+                "articleCategory": (this.state.category === "" ? this.props.info.articleCategory : this.state.category),
+                "articleDate": month.toString() + '/' + dayDate.toString() + '/' + year.toString(),
+                "articleStatus": "pendingreview",
+                "articleKeywords": (this.state.keywords === "" ? this.props.info.articleKeywords : this.state.keywords)
+            };
+
+
+            axios.post(`http://localhost:5000/article/update/${this.props.info._id}`, articleJSON)
+            alert("Changes saved! "); 
         }
 
         //if create add
@@ -323,21 +343,62 @@ class Create extends Component {
     }
 
     showDelete = () =>{
-        return(<div><Button disabled = {!(this.state.is_edit_window)} onClick={this.handleDelete} style = {{background: '#93160d',color: 'white','hover': {background: '#ca4b35',
-            }}}> DELETE</Button></div>)
+        if(!this.state.is_admin_window){
+            return(<div><Button disabled = {!(this.state.is_edit_window) } onClick={this.handleDelete} style = {{background: '#93160d',color: 'white','hover': {background: '#ca4b35',
+        }}}> DELETE</Button></div>)
+        }
+        
+    }
+
+    showSaveAndPublish = (classes) => {
+        if(!this.state.is_admin_window){
+            return(
+                <div>
+                <Button onClick={this.handleSave} className={classes.preview}>
+                        SAVE
+                </Button>
+                <Button onClick={this.handleSendToPublish} className={classes.preview}>
+                        SEND TO PUBLISHING
+                </Button>
+                </div>
+
+            ); 
+        }
+        else{
+            return(
+                <div>
+                    <Button onClick={this.handleSave} className={classes.preview}>
+                            SAVE
+                    </Button>
+                </div>
+            )
+
+        }
+    }
+
+    showDefault = () => {
+        if(this.state.is_edit_window){
+            return this.props.location.state.id.info; 
+        }
+        else if(this.state.is_admin_window){
+            return this.props.info; 
+        }
+
     }
 
     render() {
         const { classes } = this.props
-        if (this.state.redirect) {
-            window.location.reload()
+        if (this.state.redirect && (!this.state.is_admin_window)) {
+            // window.location.reload()
             return (<Redirect  to={`/my-articles`} />)
+            
             
 		}
         return (
             <div >
                 <h1>CREATE A NEW ARTICLE</h1>
                 <Container className={classes.container}>
+
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={5}>
                             <ThemeProvider theme={this.returnTheme()}>
@@ -348,7 +409,7 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleTitle : ''}
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleTitle : ''}
                                 />
 
                                 <TextField
@@ -358,7 +419,8 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleImg : ''}
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleImg : ''}
+                                    
 
                                 />
                                 <TextField
@@ -368,7 +430,8 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleId : ''}
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleId : ''}
+                                    
 
                                 />
 
@@ -381,7 +444,8 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleText : ''}
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleText : ''}
+
 
 
                                 />
@@ -393,7 +457,8 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleImgDesc : ''}
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleImgDesc : ''}
+                                   
 
 
                                 />
@@ -406,7 +471,8 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     multiline
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleTeaser : ''}
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleTeaser : ''}
+                                    
 
 
                                 />
@@ -419,7 +485,8 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
                                     onKeyPress={this.handleKeywords}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleKeywords : ''}
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleKeywords : ''}
+                                    
 
 
                                 > </TextField>
@@ -430,10 +497,12 @@ class Create extends Component {
                                     select
                                     margin="normal"
                                     variant="outlined"
+                                    drp_selectedValue = ''
                                     onChange={this.handleCategory}
                                     value={this.state.category}
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleCategory : ''}
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleCategory : ''}
+                                    
 
                                 >
                                     {this.getMenu()}
@@ -447,7 +516,8 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     multiline
                                     className={classes.inputbox}
-                                    defaultValue={this.state.is_edit_window ? this.props.location.state.id.info.articleText : ''}
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleText : ''}
+                                    
 
                                 />
                             </ThemeProvider>
@@ -462,17 +532,9 @@ class Create extends Component {
                     </Grid>
                 </Container>
 
-                <div>
-                    <Button onClick={this.handleSave} className={classes.preview}>
-                        SAVE
-                        </Button>
-                    <Button onClick={this.handleSendToPublish} className={classes.preview}>
-                        SEND TO PUBLISHING
-                        </Button>
-                </div>
+                {this.showSaveAndPublish(classes)}
 
                 {this.showDelete()}
-                
 
 
             </div >
