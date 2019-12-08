@@ -101,9 +101,6 @@ class Account extends Component{
         return(
 
             <Container className={classes.container}>
-                <Typography gutterBottom variant="h5" component="h2">
-                    Customize your profile visible to readers!
-                </Typography>
                 <Grid container spacing={6}>
                     <Grid item xs={12} sm={4}>
                     <img alt={this.props.name} className={classes.pic} src={this.state.imgURL}></img>
