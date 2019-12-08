@@ -66,6 +66,6 @@ class AdminApp extends Component {
 	}
 }
 
-export default ReaderApp;
+export default AdminApp;
 
 // export { NavRoute };

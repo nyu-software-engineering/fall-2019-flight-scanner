@@ -52,7 +52,7 @@ class ReaderApp extends Component {
 				<Router>
 					<Switch>
 					<NavRoute exact path="/" component={MiniArticle} />
-					<NavRoute exact path="/category/f" component={Category} />
+					<NavRoute exact path="/category/:id" component={Category} />
 					<Route exact path="/admin" component={Admin} />
 					<Route exact path="/admin/create" component={Create} />
 					<NavRoute exact path="/sampleArticle" component={Article} />
