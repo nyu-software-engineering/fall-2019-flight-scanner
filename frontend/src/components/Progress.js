@@ -38,36 +38,7 @@ const styles = theme => ({
 });
 
 
-// function getSteps() {
-// 	return ['Article information and text', 'Confirm the preview', 'Publish'];
-// }
 
-// function getStepContent(stepIndex, props) {
-	
-// 	switch (stepIndex) {
-// 		case 0:
-			
-// 	return (<div><Create info={props.info}></Create> </div>);
-// 		case 1:
-
-// 			// getArticle(props); 
-// 			// 	console.log('here', article); 
-			
-// 			return (<AdminArticle banner={props.info.articleImg} 
-// 				title={props.info.articleTitle} 
-// 				teaser={props.info.articleTeaser} 
-// 				author={props.info.articleAuthor}
-// 				body={props.info.articleText}
-// 				></AdminArticle>)
-// 				;
-// 		case 2:
-// 			return (<MiniArticle></MiniArticle>);
-// 		default:
-// 			return
-// 	}
-// }
-
-// REFACTORING!
 
 class ProgressBar extends Component {
 
@@ -126,22 +97,7 @@ class ProgressBar extends Component {
 		}
 	}
 
-	// getArticle(props){
-	// axios.get(`http://localhost:5000/article/getByID/${props.info._id}`)
-    //         .then(response => {
 
-	// 			console.log("didmount", response.data)
-	// 			this.setState({
-	// 				article: response.data
-	// 			}); 
-
-                
-    //         })
-    //         .catch(error => {
-    //             console.log("ERROR in Category loading ", error)
-	// 		})
-	
-	// }
 
 	getStepContent() {
 	
@@ -151,9 +107,7 @@ class ProgressBar extends Component {
 		return (<div><Create info={this.props.info}></Create> </div>);
 			case 1:
 	
-				// this.getArticle(this.props); 
-				// 	console.log('here', article); 
-				// console.log("HERE: ", this.state.article[0].articleAuthor); 
+
 				return (<AdminArticle banner={this.state.article.articleImg} 
 					title={this.state.article.articleTitle} 
 					teaser={this.state.article.articleTeaser} 
@@ -254,7 +208,7 @@ class ProgressBar extends Component {
 	}
 
 
-	// const [activeStep, setActiveStep] = React.useState(0);
+
 
 
 
