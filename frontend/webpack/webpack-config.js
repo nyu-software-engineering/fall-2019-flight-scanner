@@ -5,10 +5,13 @@ module.exports = [
     {
         "mode": "development",
         "entry": "./src/index.js",
-        "target": "node",
+        // "target": "node",
         "output": {
             "path": __dirname + '/build',
             "filename": "reader-build.js"
+        },
+        "devServer": {
+            // "historyApiFallback": true,
         },
         "module": {
             "rules": [
@@ -27,30 +30,30 @@ module.exports = [
                             "presets": ["@babel/preset-env", "@babel/preset-react"]
                         }
                     }
-                }, 
+                },
                 {
                     "test": /\.css$/,
                     "use": [
                         "style-loader",
                         "css-loader"
                     ]
-                }, 
+                },
                 {
                     "test": /\.html$/,
                     "use": [
-                      {
-                        "loader": "html-loader"
-                      }
+                        {
+                            "loader": "html-loader"
+                        }
                     ]
-                  }
-            ], 
-        }, 
+                }
+            ],
+        },
         "plugins": [
             new HtmlWebPackPlugin({
-              "template": "./src/index.html",
-              "filename": "./index.html"
+                "template": "./src/index.html",
+                "filename": "./index.html"
             })
-          ]
+        ]
     }
 
 ]

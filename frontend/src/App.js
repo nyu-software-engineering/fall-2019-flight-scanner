@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import Header from './components/Header';
 // import './App.css';
 // import Article from './components/Article';
@@ -30,6 +30,8 @@ import LandingWrapper from './components/reader/LandingWrapper';
 // import Login from './components/admin/Login';
 import Team from './components/reader/TeamPage';
 
+import ErrorPage from './components/404';
+
 // import Header from './components/reader/Header';
 
 
@@ -48,6 +50,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Router>
+					<Switch>
 					<NavRoute exact path="/" component={MiniArticle} />
 					<NavRoute exact path="/category/:id" component={Category} />
 					<Route exact path="/admin" component={Admin} />
@@ -65,9 +68,11 @@ class App extends Component {
 					<NavRoute exact path="/article/:id" component={Article} />
 					<NavRoute exact path="/admin/team-management" component={Management} />
 					{/* <Route exact path="/login" component={Login} /> */}
-					<NavRoute exact path="/landing" component={LandingWrapper} />
-					<NavRoute exact path="/team" component={Team} />
-					<Route exact path='/edit' component={Create} />
+					<NavRoute exact path="/landing" component={LandingWrapper}/>
+					<NavRoute exact path="/team" component={Team}/>
+					<Route exact path='/edit' component={Create}/>
+					<Route component={ErrorPage}/>
+					</Switch>
 				</Router>
 			</div>
 		);

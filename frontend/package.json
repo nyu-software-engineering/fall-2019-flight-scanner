@@ -25,10 +25,12 @@
     "react-test-renderer": "^16.12.0",
     "showdown": "^1.9.1",
     "typescript": "^3.7.3",
-    "webpack": "^4.41.2"
+    "webpack": "^4.41.2",
+    "webpack-dev-server": "^3.9.0"
   },
   "scripts": {
-    "start": "node ./webpack/build/reader-build.js",
+    "start": "webpack-dev-server --config webpack/webpack-config.js --history-api-fallback --progress",
+    
     "build": "webpack --config webpack/webpack-config.js --progress",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
