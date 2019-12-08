@@ -170,6 +170,25 @@ class Create extends Component {
                 // })
 
         }
+        else if(this.state.is_admin_window){
+            const articleJSON = {
+                "articleId": (this.state.slug === "" ? this.props.info.articleId : this.state.slug),
+                "articleTitle": (this.state.title === "" ? this.props.info.articleTitle : this.state.title),
+                "articleAuthor": "AFTER LOGIN",
+                "articleImg": (this.state.URL === "" ? this.props.info.articleImg : this.state.URL),
+                "articleImgDesc": (this.state.img_caption === "" ? this.props.info.articleImgDesc : this.state.img_caption),
+                "articleTeaser": (this.state.teaser === "" ? this.props.info.articleTeaser : this.state.teaser),
+                "articleText": (this.state.text === "" ? this.props.info.articleText : this.state.text),
+                "articleCategory": (this.state.category === "" ? this.props.info.articleCategory : this.state.category),
+                "articleDate": month.toString() + '/' + dayDate.toString() + '/' + year.toString(),
+                "articleStatus": "pendingreview",
+                "articleKeywords": (this.state.keywords === "" ? this.props.info.articleKeywords : this.state.keywords)
+            };
+
+
+            axios.post(`http://localhost:5000/article/update/${this.props.info._id}`, articleJSON)
+            alert("Changes saved! "); 
+        }
 
         //if create add
         else {
@@ -337,13 +356,23 @@ class Create extends Component {
                 <div>
                 <Button onClick={this.handleSave} className={classes.preview}>
                         SAVE
-                        </Button>
-                    <Button onClick={this.handleSendToPublish} className={classes.preview}>
+                </Button>
+                <Button onClick={this.handleSendToPublish} className={classes.preview}>
                         SEND TO PUBLISHING
                 </Button>
                 </div>
 
             ); 
+        }
+        else{
+            return(
+                <div>
+                    <Button onClick={this.handleSave} className={classes.preview}>
+                            SAVE
+                    </Button>
+                </div>
+            )
+
         }
     }
 
@@ -359,7 +388,7 @@ class Create extends Component {
 
     render() {
         const { classes } = this.props
-        if (this.state.redirect) {
+        if (this.state.redirect && (!this.state.is_admin_window)) {
             // window.location.reload()
             return (<Redirect  to={`/my-articles`} />)
             
@@ -369,6 +398,7 @@ class Create extends Component {
             <div >
                 <h1>CREATE A NEW ARTICLE</h1>
                 <Container className={classes.container}>
+
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={5}>
                             <ThemeProvider theme={this.returnTheme()}>
