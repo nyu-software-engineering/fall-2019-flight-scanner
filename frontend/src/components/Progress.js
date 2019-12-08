@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Article from './AdminArticle';
 import MiniArticle from './Mini-article';
+import Create from './Create'; 
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -49,7 +50,7 @@ function getStepContent(stepIndex) {
 	}
 }
 
-export default function ProgressBar() {
+export default function ProgressBar(props) {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = React.useState(0);
 	const steps = getSteps();
@@ -75,6 +76,7 @@ export default function ProgressBar() {
 					</Step>
 				))}
 			</Stepper>
+			<Create info={props.info}></Create>
 			<div>
 				<div>
 					<Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
