@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
-import Profile from './Teammember-profile'; 
+import Profile from '../reader/Teammember-profile'; 
 
 
 
