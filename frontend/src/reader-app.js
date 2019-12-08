@@ -45,14 +45,14 @@ const NavRoute = ({ exact, path, component: Component }) => (
 	)} />
 )
 
-class App extends Component {
+class ReaderApp extends Component {
 	render() {
 		return (
 			<div className="App">
 				<Router>
 					<Switch>
 					<NavRoute exact path="/" component={MiniArticle} />
-					<NavRoute exact path="/category/:id" component={Category} />
+					<NavRoute exact path="/category/f" component={Category} />
 					<Route exact path="/admin" component={Admin} />
 					<Route exact path="/admin/create" component={Create} />
 					<NavRoute exact path="/sampleArticle" component={Article} />
@@ -79,6 +79,6 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default ReaderApp;
 
 // export { NavRoute };

@@ -4,14 +4,14 @@ module.exports = [
 
     {
         "mode": "development",
-        "entry": "./src/index.js",
+        "entry": "./src/reader-index.js",
         // "target": "node",
         "output": {
             "path": __dirname + '/build',
             "filename": "reader-build.js"
         },
         "devServer": {
-            // "historyApiFallback": true,
+            "historyApiFallback": true,
         },
         "module": {
             "rules": [
