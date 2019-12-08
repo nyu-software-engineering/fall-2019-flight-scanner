@@ -140,7 +140,7 @@ class Account extends Component{
 export default withStyles(styles)(Account); 
 
 Account.defaultProps = {
-    picture: 'http://lorempixel.com/300/300/',
+    picture: 'https://icon-library.net/images/free-account-icon/free-account-icon-0.jpg',
     name: 'Author Author',
     role: 'Chief Editor',
     bio: "Welcome to your complete guide to the best Chow Chow names, giving you plenty of ideas for what to call your beautiful and powerful Chow Chow. Chow Chow dog names should highlight this ancient Chinese breed’s best qualities. Be that their gorgeous mane of red, white, blue, cream, blue, or tawny fur; their legendary “tough dog” presence; or perhaps their Chinese roots! No matter what inspires your potential dog names for Chow Chow, there are some things to keep in mind to ensure that your pooch both knows and answers to their name.",

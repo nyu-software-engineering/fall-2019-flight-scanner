@@ -175,7 +175,6 @@ class ProgressBar extends Component {
 
 		return (
 			<div className={classes.root}>
-	<p>{this.state.article.articleTitle}</p>
 				<Stepper activeStep={this.state.activeStep} alternativeLabel>
 					{this.state.steps.map(label => (
 						<Step key={label}>

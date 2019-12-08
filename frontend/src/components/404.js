@@ -10,7 +10,7 @@ class ErrorPage extends Component {
         return (
             <div>
             <img style = {{marginTop: '10%', marginBottom: '10px'}} src={'https://coverager.com/wp-content/uploads/2017/02/oh-no.jpg'} alt={'Man in shock'}></img>
-            <Typography variant='h5'> Are you sure you are looking for the right page? </Typography>
+            <Typography variant='h5'> #2E3B55 Are you sure you are looking for the right page? </Typography>
             <Typography variant='h1'>h1 Are you sure you are looking for the right page</Typography>
             <Typography variant='h2'>h2 Are you sure you are looking for the right page</Typography>
             <Typography variant='h3'>h3 Are you sure you are looking for the right page</Typography>

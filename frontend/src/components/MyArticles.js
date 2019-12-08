@@ -5,12 +5,13 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles'
 import axios from 'axios';
+import { Typography } from '@material-ui/core';
 
 const styles = theme => ({
 
     container: {
         margin: 'auto',
-        maxWidth: '1000px',
+        maxWidth: '1100px',
     },
 
     section: {
@@ -66,14 +67,14 @@ class MyArticles extends Component {
 
 
         return <Grid container spacing={3}>
-            {this.state.waitingArticles.map( (article) => { return <Grid item xs={6} sm={3}><AdminMiniArticle info={article} redirection="/admin"/> </Grid> })}
+            {this.state.waitingArticles.map( (article) => { return <Grid item xs={6} sm={4}><AdminMiniArticle info={article} redirection="/admin"/> </Grid> })}
             </Grid>
     }
 
     showSaved = () => {
 
         return <Grid container spacing={3}>
-            {this.state.savedArticles.map((article) => { return <Grid item xs={6} sm={3}><AdminMiniArticle info={article} redirection="/edit" /> </Grid> })}
+            {this.state.savedArticles.map((article) => { return <Grid item xs={6} sm={4}><AdminMiniArticle info={article} redirection="/edit" /> </Grid> })}
             </Grid>
     }
 
@@ -82,12 +83,12 @@ class MyArticles extends Component {
         return (
             <div>
                 <Container className={classes.container}>
-                    <p className={classes.section}>Waiting Final Review ({this.state.waitingArticles.length})</p>
+                    <Typography variant='body1' className={classes.section}>Waiting Final Review ({this.state.waitingArticles.length})</Typography>
                     <Divider className={classes.divider} variant="middle" />
 
                     {this.showWaiting()}
 
-                    <p className={classes.section}>My Saved Articles ({this.state.savedArticles.length})</p>
+                    <Typography variant='body1' className={classes.section}>Saved Drafts ({this.state.savedArticles.length})</Typography>
                     <Divider className={classes.divider} variant="middle" />
 
                     {this.showSaved()}
