@@ -12,6 +12,7 @@ import AdminArticle from './AdminArticle';
 import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles'
 import {Redirect} from 'react-router-dom';
+import { Container, Grid } from '@material-ui/core';
 
 
 const styles = theme => ({
@@ -33,6 +34,10 @@ const styles = theme => ({
 	},
 	stepIcon: {
 		color: '#2E3B55',
+	},
+	container:{
+		margin: 'auto',
+        maxWidth: '1100px',
 	}
 
 });
@@ -85,8 +90,6 @@ class ProgressBar extends Component {
 				console.log("didmount", response.data)
 				this.setState({
 					article: response.data,
-
-
 				}); 
 
                 
@@ -116,7 +119,10 @@ class ProgressBar extends Component {
 					></AdminArticle>)
 					;
 			case 2:
-				return (<MiniArticle info={this.state.article}></MiniArticle>);
+				return (<Grid>
+					<Grid xl={3} sm={4}></Grid>
+					<Grid xl={3} sm={4}><MiniArticle info={this.state.article}></MiniArticle></Grid>
+					</Grid>);
 			default:
 				return
 		}
@@ -170,10 +176,10 @@ class ProgressBar extends Component {
             // window.location.reload()
             return (<Redirect  to={`/my-articles`} />)
             
-            
 		}
 
 		return (
+			<Container className={classes.container}>
 			<div className={classes.root}>
 				<Stepper activeStep={this.state.activeStep} alternativeLabel>
 					{this.state.steps.map(label => (
@@ -203,6 +209,7 @@ class ProgressBar extends Component {
 					</div>
 				</div>
 			</div>
+			</Container>
 		);
 	}
 
