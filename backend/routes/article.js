@@ -114,6 +114,11 @@ router.route("/getByState/:state").get((req, res) => {
     .then(article => res.json(article))
     .catch(err => res.status(400).json('Error: ' + err));
 })
-
+router.route("/searchBar/:searchQuery").get((req, res) => {
+    Article.find({
+    $text: { $search: req.params.searchQuery },})
+    .then(article => res.json(article))
+    .catch(err => res.status(400).json('Error: ' + err));
+})
 
 module.exports = router;
