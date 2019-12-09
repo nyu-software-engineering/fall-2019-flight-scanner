@@ -1,22 +1,17 @@
-const WebpackDevServer = require("webpack-dev-server")
-const webpack = require("webpack")
-const config = require("./webpack-config.js")
 
-const compiler = webpack(config)
+const express = require('express')
+const path = require('path')
 
-const server1 = new WebpackDevServer(compiler.compilers[0], {
-    contentBase: __dirname,
-    hot: true,
-    historyApiFallback: true,
-    compress: true,
+const app1 = express().get("*", (req, res) => {
+    res.sendFile(path.join(__dirname+'/build/index.html'));
+})
+const app2 = express().get("*", (req, res) => {
+    res.sendFile(path.join(__dirname+'/build/index2.html'));
 })
 
-const server2 = new WebpackDevServer(compiler.compilers[1], {
-    contentBase: __dirname,
-    hot: true,
-    historyApiFallback: true,
-    compress: true,
-})
 
-server1.listen(3000, "localhost", function() {})
-server2.listen(3001, "localhost", function() {})
+app1.listen(3000);
+app2.listen(3001);
+
+console.log("Reader on port 3000")
+console.log("Admin on port 3001")

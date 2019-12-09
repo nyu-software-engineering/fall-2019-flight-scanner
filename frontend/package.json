@@ -9,7 +9,6 @@
     "@material-ui/core": "^4.7.2",
     "@material-ui/icons": "^4.5.1",
     "axios": "^0.19.0",
-    "babel-preset-env": "^1.7.0",
     "bootstrap": "^4.4.1",
     "jest": "^24.9.0",
     "jquery": "^3.4.1",
@@ -29,9 +28,8 @@
     "webpack-dev-server": "^3.9.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --config webpack/webpack-config.js --history-api-fallback --progress",
-    
-    "build": "webpack --config webpack/webpack-config.js --progress",
+    "start": "webpack-dev-server --config webpack/webpack-config.js --progress && webpack-dev-server --config-name='admin' --config webpack/webpack-config.js --progress",
+    "build": "webpack --config webpack/config/admin.js --progress && webpack --config webpack/config/reader.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -51,11 +49,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.7.5",
     "@babel/cli": "^7.0.0-beta.40",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-loader": "^7.1.5",
+    "babel-loader": "^8.0.1",
     "babel-plugin-lodash": "^3.3.2",
     "babel-plugin-react-transform": "^3.0.0",
     "babel-preset-react": "^6.24.1",
