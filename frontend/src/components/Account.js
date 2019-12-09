@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
@@ -82,9 +81,7 @@ class Account extends Component{
     updateBio= () =>{
         alert("Bio Updated"); 
         this.setState({bio: this.state.tempBio}) 
-
-        
-        
+    
     }
 
     handleChange = (event) => {

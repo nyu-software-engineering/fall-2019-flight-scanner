@@ -32,19 +32,19 @@ const styles = theme => ({
             background: '#586481',
         },
     },
-    // deleteB: {
-    //     marginTop: theme.spacing(3),
-    //     marginBottom: theme.spacing(2),
-    //     marginLeft: theme.spacing(1),
-    //     marginRight: theme.spacing(1),
-    //     background: '#93160d',
-    //     color: 'white',
-    //     '&:hover': {
-    //         background: '#ca4b35',
-    //     }
+    deleteB: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(2),
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        background: '#93160d',
+        color: 'white',
+        '&:hover': {
+            background: '#ca4b35',
+        }
 
 
-    // },
+    },
     container: {
         margin: 'auto',
         maxWidth: '1400px'
@@ -333,39 +333,49 @@ class Create extends Component {
         return (this.state.categories.map((cat) => { return <MenuItem key={cat} value={cat}>{cat}</MenuItem> }))
     }
 
-    showDelete = () => {
-        if (!this.state.is_admin_window) {
-            return (<div><Button disabled={!(this.state.is_edit_window)} onClick={this.handleDelete} style={{
-                background: '#93160d', color: 'white', 'hover': {
-                    background: '#ca4b35',
-                }
-            }}> DELETE</Button></div>)
-        }
+    getDeleteButton = (classes) => {
+        return <Button className={classes.deleteB} onClick={this.handleDelete}> DELETE</Button>
 
     }
 
-    showSaveAndPublish = (classes) => {
-        if (!this.state.is_admin_window) {
-            return (
-                <div>
-                    <Button onClick={this.handleSave} className={classes.preview}>
-                        SAVE
-                </Button>
-                    <Button onClick={this.handleSendToPublish} className={classes.preview}>
-                        SEND TO PUBLISHING
-                </Button>
-                </div>
+    getSaveButton = (classes) => {
+        return <Button onClick={this.handleSave} className={classes.preview}> SAVE </Button>
 
-            );
-        }
-        else {
-            return (
-                <div>
-                    <Button onClick={this.handleSave} className={classes.preview}>
-                        SAVE
-                    </Button>
+    }
+
+    getPublishButton = (classes) => {
+        return <Button onClick={this.handleSendToPublish} className={classes.preview}> SEND TO PUBLISHING </Button>
+    }
+
+
+    showButtons = (classes) => {
+
+        //accessing from progressbar -> only need save button 
+        if (this.state.is_admin_window) {
+            return <div>
+                {this.getSaveButton(classes)}
                 </div>
-            )
+            
+
+        }
+        //accessing from edit -> need all the three buttons 
+        else if (this.state.is_edit_window) {
+
+            return <div>
+                {this.getSaveButton(classes)}
+                {this.getPublishButton(classes)}
+                <br />
+                {this.getDeleteButton(classes)}
+            </div>
+
+        }
+
+        //accessing from create -> everything apart from delete 
+        else {
+            return <div>
+                {this.getSaveButton(classes)}
+                {this.getPublishButton(classes)}
+            </div>
 
         }
     }
@@ -381,11 +391,11 @@ class Create extends Component {
     }
 
     showTitle = () => {
-        if (this.state.is_edit_window || this.state.is_admin_window){
+        if (this.state.is_edit_window || this.state.is_admin_window) {
             return ""
         }
-        else{
-            return <Typography variant='h5' style={{textTransform:'uppercase', marginBottom: '3%',marginTop:'4%'}}> Create new article </Typography>
+        else {
+            return <Typography variant='h5' style={{ textTransform: 'uppercase', marginBottom: '3%', marginTop: '4%' }}> Create new article </Typography>
         }
     }
 
@@ -535,10 +545,7 @@ class Create extends Component {
                     </Grid>
                 </Container>
 
-                {this.showSaveAndPublish(classes)}
-
-                {this.showDelete()}
-
+                {this.showButtons(classes)}
 
             </div >
         );
