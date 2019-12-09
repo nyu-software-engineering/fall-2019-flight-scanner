@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
 import { Converter } from 'showdown';
 import axios from 'axios';
-import { Builder } from './Builder'
 
 
 function markdown2html(markdown) {
