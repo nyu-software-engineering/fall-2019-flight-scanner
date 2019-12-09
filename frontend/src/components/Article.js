@@ -119,3 +119,5 @@ Integer laoreet, felis vitae tempor ultricies, quam metus condimentum massa, sed
 }
 
 export default withStyles(styles)(Article)
+
+export { markdown2html }

@@ -1,6 +1,5 @@
 // Inspired by React Component builder as described in the following article https://medium.com/@jagardner2113/react-component-builder-pattern-5cb864ce5fc0 
 import { Component } from 'react';
-import { withStyles } from '@material-ui/core';
 
 export const Builder = (displayName = 'Component') => {
     let _render, _componentDidMount, _styles
@@ -14,10 +13,10 @@ export const Builder = (displayName = 'Component') => {
             _componentDidMount = didMountFn
             return builder
         },
-        mapStyles: styles => {
-            _styles = styles
-            return builder
-        },
+        // mapStyles: styles => {
+        //     _styles = styles
+        //     return builder
+        // },
         build: () => {
             if (!_render) {
                 throw new Error('Component render method required')
@@ -33,7 +32,7 @@ export const Builder = (displayName = 'Component') => {
             }
 
             Comp.displayName = displayName
-            return withStyles(_styles)(Comp)
+            return Comp
         },
     }
 
