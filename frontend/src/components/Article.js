@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
 import { Converter } from 'showdown';
 import axios from 'axios';
+import { Builder } from './Builder'
 
 
 function markdown2html(markdown) {
@@ -43,39 +44,38 @@ const styles = theme => ({
 
 class Article extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             article: {
-                articleImg: "", 
-                articleText: "", 
-                articleTeaser: "", 
-                articleAuthor: "", 
+                articleImg: "",
+                articleText: "",
+                articleTeaser: "",
+                articleAuthor: "",
                 articleTitle: ""
             }
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
 
         const slug = this.props.match.params.id
         axios.get(`http://localhost:5000/article/getBySlug/${slug}`)
-                .then(response => {
-                    console.log("response ", response.data)
-                    console.log("the id is", response.data[0]._id)
-                    this.setState({
-                        article: response.data[0]
-                    })
+            .then(response => {
+                console.log("response ", response.data)
+                console.log("the id is", response.data[0]._id)
+                this.setState({
+                    article: response.data[0]
                 })
-                .catch(error => {
-                    console.log("ERROR in Category loading ", error)
-                })
+            })
+            .catch(error => {
+                console.log("ERROR in Category loading ", error)
+            })
 
     }
 
     render() {
         const { classes } = this.props
-
         return (
             <div className={classes.root}>
                 <div className={classes.page}>
@@ -120,5 +120,3 @@ Integer laoreet, felis vitae tempor ultricies, quam metus condimentum massa, sed
 }
 
 export default withStyles(styles)(Article)
-
-export { markdown2html }
