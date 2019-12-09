@@ -3,6 +3,7 @@ import Miniarticle from './Mini-article';
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import { Typography } from '@material-ui/core';
 
 
 const styles = theme => ({
@@ -18,7 +19,7 @@ const styles = theme => ({
     },
     container: {
         margin: 'auto',
-        maxWidth: '1000px'
+        maxWidth: '1200px'
     },
     bio: {
         textAlign: "left",
@@ -30,11 +31,13 @@ const styles = theme => ({
         marginBottom: "1%",
         marginTop: '0%',
         paddingTop: '0%',
+        textTransform: "uppercase"
     },
     name: {
         marginBottom: "0%",
         marginTop: '0%',
         paddingTop: '0%',
+        fontWeight: 'bold'
 
     }
 })
@@ -44,7 +47,7 @@ class Profile extends Component {
     //     super(props)
     // }
 
-    getArticles = (classes) => {
+    getArticles = () => {
         //call to get all the articles 
         //what format will it come in? 
         //articles = []
@@ -95,12 +98,12 @@ class Profile extends Component {
                         </Grid>
                         <Grid item xs={12} sm={8} className={classes.bio}>
                             <div>
-                                <h2 className={classes.name}>{this.props.name}</h2>
-                                <h4 className={classes.role}>{this.props.role}</h4>
-                                <p>{this.props.bio}</p>
+                                <Typography variant='h4' className={classes.name}>{this.props.name}</Typography>
+                                <Typography variant='h6'  className={classes.role}>{this.props.role}</Typography>
+                                <Typography variant='body1'>{this.props.bio}</Typography>
                             </div>
                         </Grid>
-                        {this.getArticles(classes)}
+                        {this.getArticles()}
 
                     </Grid>
                 </Container>

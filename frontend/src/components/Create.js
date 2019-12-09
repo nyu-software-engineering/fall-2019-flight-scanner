@@ -7,8 +7,8 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Article from './AdminArticle';
 import Grid from '@material-ui/core/Grid';
-import { Container } from '@material-ui/core';
-import {Redirect} from 'react-router-dom';
+import { Container, Typography } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 
 // import Chip from '@material-ui/core/Chip';
 import axios from 'axios';
@@ -32,19 +32,19 @@ const styles = theme => ({
             background: '#586481',
         },
     },
-    // deleteB: {
-    //     marginTop: theme.spacing(3),
-    //     marginBottom: theme.spacing(2),
-    //     marginLeft: theme.spacing(1),
-    //     marginRight: theme.spacing(1),
-    //     background: '#93160d',
-    //     color: 'white',
-    //     '&:hover': {
-    //         background: '#ca4b35',
-    //     }
+    deleteB: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(2),
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        background: '#93160d',
+        color: 'white',
+        '&:hover': {
+            background: '#ca4b35',
+        }
 
 
-    // },
+    },
     container: {
         margin: 'auto',
         maxWidth: '1400px'
@@ -82,15 +82,6 @@ class Create extends Component {
         })
     }
 
-    handleKeywords = (event) => {
-        //NOT IN USE UNTIL BACKEND SUPPORTS IT
-        // //getting the list of inputs 
-        // const list = event.target.value.split(" ")
-        // //filtering out the spaces from the list
-        // const processed = list.filter((value) => {
-        //     return value !== ""
-        // })
-    }
 
     handleCategory = (event) => {
         this.setState({
@@ -123,19 +114,19 @@ class Create extends Component {
     }
 
     showPreview = () => {
-        if(this.state.is_edit_window || this.state.is_admin_window){
+        if (this.state.is_edit_window || this.state.is_admin_window) {
             return <Article title={this.state.title === "" ? this.showDefault().articleTitle : this.state.title}
-            banner={this.state.URL === "" ? this.showDefault().articleImg : this.state.URL}
-            teaser={this.state.teaser === "" ? this.showDefault().articleTeaser : this.state.teaser}
-            body={this.state.text === "" ? this.showDefault().articleText : this.state.text}
-        />
+                banner={this.state.URL === "" ? this.showDefault().articleImg : this.state.URL}
+                teaser={this.state.teaser === "" ? this.showDefault().articleTeaser : this.state.teaser}
+                body={this.state.text === "" ? this.showDefault().articleText : this.state.text}
+            />
         }
-        else{
+        else {
             return <Article title={this.state.title}
-            banner={this.state.URL}
-            teaser={this.state.teaser}
-            body={this.state.text}
-        />
+                banner={this.state.URL}
+                teaser={this.state.teaser}
+                body={this.state.text}
+            />
         }
     }
 
@@ -163,14 +154,14 @@ class Create extends Component {
 
 
             axios.post(`http://localhost:5000/article/update/${this.props.location.state.id.info._id}`, articleJSON)
-                // .then(res => {
-                //     console.log(res);
-                //     console.log(res.data);
+            // .then(res => {
+            //     console.log(res);
+            //     console.log(res.data);
 
-                // })
+            // })
 
         }
-        else if(this.state.is_admin_window){
+        else if (this.state.is_admin_window) {
             const articleJSON = {
                 "articleId": (this.state.slug === "" ? this.props.info.articleId : this.state.slug),
                 "articleTitle": (this.state.title === "" ? this.props.info.articleTitle : this.state.title),
@@ -187,7 +178,7 @@ class Create extends Component {
 
 
             axios.post(`http://localhost:5000/article/update/${this.props.info._id}`, articleJSON)
-            alert("Changes saved! "); 
+            alert("Changes saved! ");
         }
 
         //if create add
@@ -208,14 +199,14 @@ class Create extends Component {
 
 
             axios.post(`http://localhost:5000/article/add`, articleJSON)
-                // .then(res => {
-                //     console.log(res);
-                //     console.log(res.data);
-                // })
+            // .then(res => {
+            //     console.log(res);
+            //     console.log(res.data);
+            // })
         }
 
         this.setState({
-            redirect:true
+            redirect: true
         })
 
     }
@@ -223,28 +214,28 @@ class Create extends Component {
 
     allProvided = () => {
         const missing = []
-        if (this.state.title === '' && this.props.location.state.id.info.articleTitle === "")  {
+        if (this.state.title === '' && this.props.location.state.id.info.articleTitle === "") {
             missing.push('Title')
         }
         if (this.state.URL === '' && this.props.location.state.id.info.articleImg === "") {
             missing.push('URL')
         }
-        if (this.state.img_alt_text === ''&& this.props.location.state.id.info.articleImgDesc === "") {
+        if (this.state.img_alt_text === '' && this.props.location.state.id.info.articleImgDesc === "") {
             missing.push('Image alternative text')
         }
-        if (this.state.slug === ''&& this.props.location.state.id.info.articleId === "") {
+        if (this.state.slug === '' && this.props.location.state.id.info.articleId === "") {
             missing.push('Slug')
         }
-        if (this.state.img_caption === ''&& this.props.location.state.id.info.articleImgDesc === "") {
+        if (this.state.img_caption === '' && this.props.location.state.id.info.articleImgDesc === "") {
             missing.push('Image caption')
         }
-        if (this.state.teaser === ''&& this.props.location.state.id.info.articleTeaser === "") {
+        if (this.state.teaser === '' && this.props.location.state.id.info.articleTeaser === "") {
             missing.push('Teaser')
         }
-        if (this.state.category === ''&& this.props.location.state.id.info.articleCategory === "") {
+        if (this.state.category === '' && this.props.location.state.id.info.articleCategory === "") {
             missing.push('Category')
         }
-        if (this.state.text === ''&& this.props.location.state.id.info.articleText === "") {
+        if (this.state.text === '' && this.props.location.state.id.info.articleText === "") {
             missing.push('Text')
         }
         if (this.state.keywords === '' && this.props.location.state.id.info.keywords === "") {
@@ -284,14 +275,14 @@ class Create extends Component {
                 "articleKeywords": (this.state.keywords === "" ? this.props.location.state.id.info.articleKeywords : this.state.keywords)
             };
 
-            if (this.state.is_edit_window){
+            if (this.state.is_edit_window) {
                 axios.post(`http://localhost:5000/article/update/${this.props.location.state.id.info._id}`, articleJSON)
                 // .then(res => {
                 //     console.log(res);
                 //     console.log(res.data);
                 // })
             }
-            else{
+            else {
                 axios.post(`http://localhost:5000/article/add`, articleJSON)
                 // .then(res => {
                 //     console.log(res);
@@ -300,9 +291,9 @@ class Create extends Component {
             }
 
             this.setState({
-                redirect:true
+                redirect: true
             })
-            
+
         }
     }
 
@@ -311,13 +302,13 @@ class Create extends Component {
         if (answer) {
             if (answer.toUpperCase() === 'YES') {
                 axios.delete(`http://localhost:5000/article/${this.props.location.state.id.info._id}`)
-                .then(
-                    this.setState({
-                        redirect: true
-                    })
-                )
+                    .then(
+                        this.setState({
+                            redirect: true
+                        })
+                    )
 
-            
+
             }
         }
     }
@@ -342,61 +333,83 @@ class Create extends Component {
         return (this.state.categories.map((cat) => { return <MenuItem key={cat} value={cat}>{cat}</MenuItem> }))
     }
 
-    showDelete = () =>{
-        if(!this.state.is_admin_window){
-            return(<div><Button disabled = {!(this.state.is_edit_window) } onClick={this.handleDelete} style = {{background: '#93160d',color: 'white','hover': {background: '#ca4b35',
-        }}}> DELETE</Button></div>)
-        }
-        
+    getDeleteButton = (classes) => {
+        return <Button className={classes.deleteB} onClick={this.handleDelete}> DELETE</Button>
+
     }
 
-    showSaveAndPublish = (classes) => {
-        if(!this.state.is_admin_window){
-            return(
-                <div>
-                <Button onClick={this.handleSave} className={classes.preview}>
-                        SAVE
-                </Button>
-                <Button onClick={this.handleSendToPublish} className={classes.preview}>
-                        SEND TO PUBLISHING
-                </Button>
-                </div>
+    getSaveButton = (classes) => {
+        return <Button onClick={this.handleSave} className={classes.preview}> SAVE </Button>
 
-            ); 
+    }
+
+    getPublishButton = (classes) => {
+        return <Button onClick={this.handleSendToPublish} className={classes.preview}> SEND TO PUBLISHING </Button>
+    }
+
+
+    showButtons = (classes) => {
+
+        //accessing from progressbar -> only need save button 
+        if (this.state.is_admin_window) {
+            return <div>
+                {this.getSaveButton(classes)}
+            </div>
+
+
         }
-        else{
-            return(
-                <div>
-                    <Button onClick={this.handleSave} className={classes.preview}>
-                            SAVE
-                    </Button>
-                </div>
-            )
+        //accessing from edit -> need all the three buttons 
+        else if (this.state.is_edit_window) {
+
+            return <div>
+                {this.getSaveButton(classes)}
+                {this.getPublishButton(classes)}
+                <br />
+                {this.getDeleteButton(classes)}
+            </div>
+
+        }
+
+        //accessing from create -> everything apart from delete 
+        else {
+            return <div>
+                {this.getSaveButton(classes)}
+                {this.getPublishButton(classes)}
+            </div>
 
         }
     }
 
     showDefault = () => {
-        if(this.state.is_edit_window){
-            return this.props.location.state.id.info; 
+        if (this.state.is_edit_window) {
+            return this.props.location.state.id.info;
         }
-        else if(this.state.is_admin_window){
-            return this.props.info; 
+        else if (this.state.is_admin_window) {
+            return this.props.info;
         }
 
+    }
+
+    showTitle = () => {
+        if (this.state.is_edit_window || this.state.is_admin_window) {
+            return ""
+        }
+        else {
+            return <Typography variant='h5' style={{ textTransform: 'uppercase', marginBottom: '3%', marginTop: '4%' }}> Create a new article </Typography>
+        }
     }
 
     render() {
         const { classes } = this.props
         if (this.state.redirect && (!this.state.is_admin_window)) {
             // window.location.reload()
-            return (<Redirect  to={`/my-articles`} />)
-            
-            
-		}
+            return (<Redirect to={`/my-articles`} />)
+
+
+        }
         return (
             <div >
-                <h1>CREATE A NEW ARTICLE</h1>
+                {this.showTitle()}
                 <Container className={classes.container}>
 
                     <Grid container spacing={3}>
@@ -409,7 +422,7 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleTitle : ''}
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleTitle : ''}
                                 />
 
                                 <TextField
@@ -419,9 +432,7 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleImg : ''}
-                                    
-
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleImg : ''}
                                 />
                                 <TextField
                                     id="slug"
@@ -430,13 +441,8 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleId : ''}
-                                    
-
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleId : ''}
                                 />
-
-
-
                                 <TextField
                                     id="img_alt_text"
                                     label="Image alternative text"
@@ -444,10 +450,7 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleText : ''}
-
-
-
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleText : ''}
                                 />
 
                                 <TextField
@@ -457,10 +460,7 @@ class Create extends Component {
                                     variant="outlined"
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
-                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleImgDesc : ''}
-                                   
-
-
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleImgDesc : ''}
                                 />
 
                                 <TextField
@@ -471,10 +471,7 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     multiline
                                     className={classes.inputbox}
-                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleTeaser : ''}
-                                    
-
-
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleTeaser : ''}
                                 />
 
                                 <TextField
@@ -485,10 +482,7 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
                                     onKeyPress={this.handleKeywords}
-                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleKeywords : ''}
-                                    
-
-
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleKeywords : ''}
                                 > </TextField>
 
                                 <TextField
@@ -497,13 +491,11 @@ class Create extends Component {
                                     select
                                     margin="normal"
                                     variant="outlined"
-                                    drp_selectedValue = ''
+                                    drp_selectedValue=''
                                     onChange={this.handleCategory}
                                     value={this.state.category}
                                     className={classes.inputbox}
-                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleCategory : ''}
-                                    
-
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleCategory : ''}
                                 >
                                     {this.getMenu()}
                                 </TextField>
@@ -516,26 +508,20 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     multiline
                                     className={classes.inputbox}
-                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window )? this.showDefault().articleText : ''}
-                                    
-
+                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleText : ''}
                                 />
                             </ThemeProvider>
                         </Grid>
 
                         <Grid item xs={12} sm={7}>
                             <div>
-                                {/* <Button className={classes.preview} onClick={this.handlePreviewLoad}>{this.handleload()}</Button> */}
                                 {this.showPreview()}
                             </div>
                         </Grid>
                     </Grid>
                 </Container>
 
-                {this.showSaveAndPublish(classes)}
-
-                {this.showDelete()}
-
+                {this.showButtons(classes)}
 
             </div >
         );
