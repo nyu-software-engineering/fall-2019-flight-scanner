@@ -354,8 +354,8 @@ class Create extends Component {
         if (this.state.is_admin_window) {
             return <div>
                 {this.getSaveButton(classes)}
-                </div>
-            
+            </div>
+
 
         }
         //accessing from edit -> need all the three buttons 
@@ -395,7 +395,7 @@ class Create extends Component {
             return ""
         }
         else {
-            return <Typography variant='h5' style={{ textTransform: 'uppercase', marginBottom: '3%', marginTop: '4%' }}> Create new article </Typography>
+            return <Typography variant='h5' style={{ textTransform: 'uppercase', marginBottom: '3%', marginTop: '4%' }}> Create a new article </Typography>
         }
     }
 
@@ -433,8 +433,6 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
                                     defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleImg : ''}
-
-
                                 />
                                 <TextField
                                     id="slug"
@@ -444,12 +442,7 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
                                     defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleId : ''}
-
-
                                 />
-
-
-
                                 <TextField
                                     id="img_alt_text"
                                     label="Image alternative text"
@@ -458,9 +451,6 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
                                     defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleText : ''}
-
-
-
                                 />
 
                                 <TextField
@@ -471,9 +461,6 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
                                     defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleImgDesc : ''}
-
-
-
                                 />
 
                                 <TextField
@@ -485,9 +472,6 @@ class Create extends Component {
                                     multiline
                                     className={classes.inputbox}
                                     defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleTeaser : ''}
-
-
-
                                 />
 
                                 <TextField
@@ -499,9 +483,6 @@ class Create extends Component {
                                     className={classes.inputbox}
                                     onKeyPress={this.handleKeywords}
                                     defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleKeywords : ''}
-
-
-
                                 > </TextField>
 
                                 <TextField
@@ -515,8 +496,6 @@ class Create extends Component {
                                     value={this.state.category}
                                     className={classes.inputbox}
                                     defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleCategory : ''}
-
-
                                 >
                                     {this.getMenu()}
                                 </TextField>
@@ -530,15 +509,12 @@ class Create extends Component {
                                     multiline
                                     className={classes.inputbox}
                                     defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleText : ''}
-
-
                                 />
                             </ThemeProvider>
                         </Grid>
 
                         <Grid item xs={12} sm={7}>
                             <div>
-                                {/* <Button className={classes.preview} onClick={this.handlePreviewLoad}>{this.handleload()}</Button> */}
                                 {this.showPreview()}
                             </div>
                         </Grid>
