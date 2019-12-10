@@ -2,7 +2,7 @@
 import { Component } from 'react';
 
 export const Builder = (displayName = 'Component') => {
-    let _render, _componentDidMount, _styles
+    let _render, _componentDidMount
 
     const builder = {
         render: renderFn => {
