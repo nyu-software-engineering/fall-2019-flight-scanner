@@ -28,6 +28,19 @@ const NavRoute = ({ exact, path, component: Component }) => (
 	)} />
 )
 
+const Refresh = ({ path = '/' }) => (
+    <Route
+        path={path}
+        component={({ history, location, match }) => {
+            history.replace({
+                ...location,
+                pathname:location.pathname.substring(match.path.length)
+            });
+            return null;
+        }}
+    />
+);
+
 class App extends Component {
 	render() {
 		return (
@@ -55,6 +68,7 @@ class App extends Component {
 					<NavRoute exact path="/team" component={Team}/>
 					<Route exact path='/edit' component={Create}/>
 					<NavRoute exact path='/search-results' component={Landing}></NavRoute>
+					<Refresh path="/refresh"/>
 					<Route component={ErrorPage}/>
 					</Switch>
 				</Router>

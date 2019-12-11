@@ -86,7 +86,7 @@ class Header extends Component {
                             this.state.categories ?
                                 this.loadCategories(this.state.categories, classes) : null
                         } 
-                        <li className={classes.nav_item} key={'team'}><Link className={classes.nav_link} to={`team`}>Team</Link> </li>
+                        <li className={classes.nav_item} key={'team'}><Link className={classes.nav_link} to={`/team`}>Team</Link> </li>
                         </ul>
                     </div>
                 </AppBar>

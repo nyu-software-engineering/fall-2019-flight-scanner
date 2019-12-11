@@ -6,7 +6,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 // MaterialUI styles 
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 	link: {
 		textDecoration: "none",
 		color: "white"
-	}, 
+	},
 	inputInput: {
 		padding: theme.spacing(1, 1, 1, 7),
 		transition: theme.transitions.create('width'),
@@ -76,7 +76,7 @@ const SearchAppBar = (props) => {
 				<Toolbar>
 					<Typography className={classes.title} variant="h6" noWrap>
 						<Link to="/landing" className={classes.link}>The LightShare News</Link>
-          			</Typography>
+					</Typography>
 					<div className={classes.search}>
 						<div className={classes.searchIcon}>
 							<SearchIcon />
@@ -112,17 +112,18 @@ class Search extends Component {
 	handleSubmitSearch = (event) => {
 		if (event.key === 'Enter') {
 			// console.log('enter press here!')
+			const { history } = this.props;
 			this.setState({
 				currentinput: event.target.value,
 				searchPressed: true
-			})
+			}, () => { history.push(`/refresh/search-results?q=${this.state.currentinput}`) })
 		}
 	}
 
 	render() {
-		if (this.state.searchPressed){
-			return (<Redirect to={{pathname: '/search-results', state: this.state.currentinput}}/>)
-		}
+		// if (this.state.searchPressed){
+		// 	return (<Redirect to={{pathname: '/search-results', state: this.state.currentinput}}/>)
+		// }
 		return (
 			<div>
 				<SearchAppBar submit_search={this.handleSubmitSearch}>
@@ -186,6 +187,6 @@ function popularity(input, history) {
 
 export { searchvalidity, lenval, useStyles, split, match, popularity, SearchAppBar }
 
-export default Search;
+export default withRouter(Search);
 
 
