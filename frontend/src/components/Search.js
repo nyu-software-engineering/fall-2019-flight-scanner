@@ -6,6 +6,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 // MaterialUI styles 
@@ -103,6 +104,7 @@ class Search extends Component {
 		super(props);
 		this.state = {
 			currentinput: "",
+			searchPressed: false,
 		}
 	}
 
@@ -111,13 +113,16 @@ class Search extends Component {
 		if (event.key === 'Enter') {
 			// console.log('enter press here!')
 			this.setState({
-				currentinput: event.target.value
+				currentinput: event.target.value,
+				searchPressed: true
 			})
-			alert("Sorry, we cannot find any matches to your search")
 		}
 	}
 
 	render() {
+		if (this.state.searchPressed){
+			return (<Redirect to={{pathname: '/search-results', state: this.state.currentinput}}/>)
+		}
 		return (
 			<div>
 				<SearchAppBar submit_search={this.handleSubmitSearch}>

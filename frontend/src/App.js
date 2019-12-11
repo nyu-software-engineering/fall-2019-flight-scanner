@@ -15,6 +15,7 @@ import LandingWrapper from './components/LandingWrapper';
 import Login from './components/Login';
 import Team from './components/TeamPage'; 
 import ErrorPage from './components/404';
+import Landing from './components/Landing';
 
 
 const NavRoute = ({ exact, path, component: Component }) => (
@@ -53,6 +54,7 @@ class App extends Component {
 					<NavRoute exact path="/landing" component={LandingWrapper}/>
 					<NavRoute exact path="/team" component={Team}/>
 					<Route exact path='/edit' component={Create}/>
+					<NavRoute exact path='/search-results' component={Landing}></NavRoute>
 					<Route component={ErrorPage}/>
 					</Switch>
 				</Router>

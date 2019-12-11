@@ -35,6 +35,7 @@ class Landing extends Component{
         // To add in some default articles for when DB does not provide any, add them to the Array Below
         this.state = {
             articles: [],
+            is_search_results:(window.location.href.slice(-7) === 'results')
 
 
         }
@@ -42,10 +43,25 @@ class Landing extends Component{
 
 
     componentDidMount() {
+        if (this.state.is_search_results){
+            axios.get(`http://localhost:5000/searchBar/${this.props.location.state}`)
+            .then(
+                response => {
+                    this.setState({
+                        asrticles:response.data
+                    })
+                }
+            )
+            .catch(error => {
+                console.log("ERROR in Category loading ", error)
+            })
+
+
+        }
+        else{
         axios.get(`http://localhost:5000/article`)
             .then(response => {
 
-                console.log("didmount", response.data)
                 this.setState({
                     articles: response.data,
 
@@ -54,6 +70,7 @@ class Landing extends Component{
             .catch(error => {
                 console.log("ERROR in Category loading ", error)
             })
+        }
 
 
     }
