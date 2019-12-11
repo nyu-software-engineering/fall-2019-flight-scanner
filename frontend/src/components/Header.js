@@ -57,7 +57,7 @@ class Header extends Component {
         axios.get("http://localhost:5000/category/getAllCategories")
             .then(response => {
                 this.setState({
-                    categories: response.data
+                    categories: response.data,
                 })
             })
             .catch(error => {
@@ -85,7 +85,9 @@ class Header extends Component {
                         <ul className={classes.wrapperUL}> {
                             this.state.categories ?
                                 this.loadCategories(this.state.categories, classes) : null
-                        } </ul>
+                        } 
+                        <li className={classes.nav_item} key={'team'}><Link className={classes.nav_link} to={`team`}>Team</Link> </li>
+                        </ul>
                     </div>
                 </AppBar>
             </div>
