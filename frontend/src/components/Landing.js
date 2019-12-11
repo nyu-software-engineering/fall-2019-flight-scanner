@@ -44,11 +44,11 @@ class Landing extends Component{
 
     componentDidMount() {
         if (this.state.is_search_results){
-            axios.get(`http://localhost:5000/searchBar/${this.props.location.state}`)
+            axios.get(`http://localhost:5000/article/searchBar/${this.props.location.state}`)
             .then(
                 response => {
                     this.setState({
-                        asrticles:response.data
+                        articles:response.data
                     })
                 }
             )
@@ -90,7 +90,7 @@ class Landing extends Component{
                 <Container className={classes.container}>
                     <Grid container spacing={6}>
                     {/* First row. Three in a row */}
-                    {this.state.articles.slice(2, 5).map(article =>
+                    {this.state.articles.slice(0, 3).map(article =>
                         // <p>{article.articleText}</p>
                         <Grid item xs={12} sm={12} md={4} key={article.articleId}>
                             <Miniarticle banner={article.articleImg}
@@ -102,7 +102,7 @@ class Landing extends Component{
                         </Grid>
                     )}
 
-                    {this.state.articles.slice(0,1).map(article =>
+                    {this.state.articles.slice(3,4).map(article =>
                     // row 2 left, one 
                         <Grid item xs={12} sm={12} md={9} key={article.articleId} >
                             <Miniarticle banner={article.articleImg}
@@ -115,7 +115,7 @@ class Landing extends Component{
                     )}
 
                     
-                    {this.state.articles.slice(1,2).map(article =>
+                    {this.state.articles.slice(4,5).map(article =>
                         // row 2 right, one
                         <Grid item xs={12} sm={12} md={3} className={classes.displayRight}>
                             <Miniarticle banner={article.articleImg}
