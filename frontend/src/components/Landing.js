@@ -4,6 +4,10 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
+
 
 const styles = theme => ({
     root: {
@@ -21,6 +25,15 @@ const styles = theme => ({
     displayRight: {
         // marginTop: "10%",
         // marginBottom: "10%"
+    },
+    divider: {
+        marginBottom: '1%',
+        marginTop: "1%"
+    },
+    dividerBottom:{
+        marginBottom: '4%',
+        marginTop: "1%"
+
     }
 
 
@@ -34,7 +47,8 @@ class Landing extends Component {
         // To add in some default articles for when DB does not provide any, add them to the Array Below
         this.state = {
             articles: [],
-            is_search_results: !(window.location.href.slice(-7) === 'landing')
+            is_search_results: !(window.location.href.slice(-7) === 'landing'),
+            found: 0 
 
 
         }
@@ -48,7 +62,8 @@ class Landing extends Component {
                 .then(
                     response => {
                         this.setState({
-                            articles: response.data
+                            articles: response.data,
+                            found: response.data.length
                         })
                     }
                 )
@@ -68,11 +83,31 @@ class Landing extends Component {
                     })
                 })
                 .catch(error => {
-                    console.log("ERROR in Category loading ", error)
+                    console.log("ERROR in Article loading ", error)
                 })
         }
 
 
+    }
+
+    showSorry = (classes) => { 
+        if(this.state.is_search_results & this.state.found === 0){
+            if (this.state.articles.length === 0 ){
+            axios.get(`http://localhost:5000/article`)
+                .then(response => {
+
+                    this.setState({
+                        articles: response.data,
+
+                    })
+                })
+                .catch(error => {
+                    console.log("ERROR in Article loading ", error)
+                })
+            }
+            return (<div><Divider className={classes.divider}/><WarningRoundedIcon/><Typography variant='h6' style={{textAlign: 'center'}}>Sorry, we could not find any matches to "{this.props.location.search.slice(3)}" </Typography>
+            <Divider className={classes.dividerBottom}/>
+              </div>)}
     }
 
 
@@ -86,8 +121,11 @@ class Landing extends Component {
 
             <div className={classes.paper}>
 
+                
 
                 <Container className={classes.container}>
+                    {this.showSorry(classes)}
+
                     <Grid container spacing={6}>
                         {/* First row. Three in a row */}
                         {this.state.articles.slice(0, 3).map(article =>
