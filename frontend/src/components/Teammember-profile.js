@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { Typography } from '@material-ui/core';
+import axios from 'axios';
 
 
 const styles = theme => ({
@@ -43,9 +44,30 @@ const styles = theme => ({
 })
 
 class Profile extends Component {
-    // constructor(props) {
-    //     super(props)
-    // }
+    constructor(props) {
+        super(props)
+        this.state = {
+            articles: [],
+
+        }
+    }
+
+    componentDidMount() {
+        axios.get(`/article/getByAuthorName/${this.props.name}`)
+            .then(response => {
+
+                console.log("didmount", response.data)
+                this.setState({
+                    articles: response.data,
+
+                })
+            })
+            .catch(error => {
+                console.log("ERROR in Category loading ", error)
+            })
+
+
+    }
 
     getArticles = () => {
         //call to get all the articles 
@@ -53,42 +75,23 @@ class Profile extends Component {
         //articles = []
         // return (articles.map( () => { return <Grid item xs={6} sm={3} <Miniarticle key={} value={}></Miniarticle> </Grid> }))
         return <Grid container spacing={3}>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle ></Miniarticle>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle ></Miniarticle>
-
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle  ></Miniarticle>
-
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle  ></Miniarticle>
-
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle ></Miniarticle>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle ></Miniarticle>
-
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle  ></Miniarticle>
-
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle  ></Miniarticle>
-
-            </Grid>
+            {this.state.articles.map(article =>
+                    
+                <Grid item xs={12} sm={12} md={9} key={article.articleId} >
+                    <Miniarticle banner={article.articleImg}
+                        teaser={article.articleTeaser}
+                        title={article.articleTitle}
+                        author={article.articleAuthor}
+                        slug={article.articleId}
+                    />
+                </Grid>
+            )}
         </Grid>
 
     }
 
     render() {
-        const { classes } = this.props
+        const { classes } = this.props;
         return (
             <div className={classes.root}>
                 <Container className={classes.container}>
