@@ -121,8 +121,6 @@ class Landing extends Component {
 
             <div className={classes.paper}>
 
-                
-
                 <Container className={classes.container}>
                     {this.showSorry(classes)}
 
