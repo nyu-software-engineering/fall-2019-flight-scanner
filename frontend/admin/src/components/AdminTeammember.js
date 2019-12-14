@@ -54,12 +54,12 @@ class Teammember extends Component {
     handleDelete = () => {
         console.log(this.props.firstName)
         axios.delete(`http://localhost:5000/author/${this.props.info._id}`)
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
-        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
     }
-    
+
 
     render() {
         const { classes } = this.props
@@ -84,13 +84,13 @@ class Teammember extends Component {
                     <Grid>
                         <Button size="small" className={classes.button}  >
                             See Profile
-				</Button>
+				        </Button>
                         <Button size="small" className={classes.delete} onClick={this.handleDelete} >
                             Delete
-                </Button>
+                        </Button>
                         <Button size="small" className={classes.button} onClick={this.handleEditClick}>
                             Edit
-                </Button>
+                        </Button>
                     </Grid>
                 </CardActions>
             </Card>

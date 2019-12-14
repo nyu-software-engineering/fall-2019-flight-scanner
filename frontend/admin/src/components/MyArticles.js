@@ -67,7 +67,7 @@ class MyArticles extends Component {
 
 
         return <Grid container spacing={3}>
-            {this.state.waitingArticles.map( (article) => { return <Grid item xs={6} sm={4}><AdminMiniArticle info={article} redirection="/admin"/> </Grid> })}
+            {this.state.waitingArticles.map( (article) => { return <Grid item xs={6} sm={4}><AdminMiniArticle info={article} redirection="/approve"/> </Grid> })}
             </Grid>
     }
 

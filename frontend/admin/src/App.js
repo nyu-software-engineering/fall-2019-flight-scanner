@@ -6,6 +6,7 @@ import ErrorPage from './components/404';
 import Create from './components/Create';
 import Account from './components/Account';
 import Management from './components/Management';
+import Progress from './components/Progress';
 
 const Refresh = ({ path = '/' }) => (
     <Route
@@ -25,14 +26,16 @@ class App extends Component {
         return (
             <div className="App">
                 <Router>
-                <Header />
+                    <Header />
                     <Switch>
-                        <Route exact path="/" component={MyArticles}/>
-                        <Route exact path="/team-management" component={Management}/>
-                        <Route exact path="/my-articles" component={MyArticles}/>
-                        <Route exact path="/my-account" component={Account}/>
-                        <Route exact path="/create" component={Create}/>
-                        <Route component={ErrorPage}/>
+                        <Route exact path="/" component={MyArticles} />
+                        <Route exact path="/team-management" component={Management} />
+                        <Route exact path="/my-articles" component={MyArticles} />
+                        <Route exact path="/my-account" component={Account} />
+                        <Route exact path="/create" component={Create} />
+                        <Route exact path="/edit" component={Create} />
+                        <Route exact path="/approve" component={Progress} />
+                        <Route component={ErrorPage} />
                         {/* <Refresh /> */}
                     </Switch>
                 </Router>

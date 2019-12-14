@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Miniarticle from './AdminMiniArticle';
+import Miniarticle from './Mini-article';
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';

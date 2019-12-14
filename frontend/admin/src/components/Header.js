@@ -9,7 +9,8 @@ const styles = theme => ({
         marginBottom: "15px",
     },
     container: {
-        textAlign: "center"
+        textAlign: "center", 
+        background: "#2E3B55",
     },
     nav_item: {
         listStyleType: "none",
