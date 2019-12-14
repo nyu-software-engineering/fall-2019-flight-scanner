@@ -4,8 +4,6 @@ import Header from './components/Header';
 import './App.css';
 import Article from './components/Article';
 import Category from './components/Category';
-import Account from './components/Account';
-import Profile from './components/Teammember-profile';
 import MiniArticle from './components/Mini-article';
 import LandingWrapper from './components/LandingWrapper';
 import Team from './components/TeamPage';
@@ -29,8 +27,8 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<Header />
 				<Router>
+					<Header />
 					<Switch>
 						<Route exact path="/" component={MiniArticle} />
 						<Route exact path="/category/:id" component={Category} />

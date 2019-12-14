@@ -1,4 +1,36 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/styles';
+
+const styles = theme => ({
+    nav: {
+        background: "#2E3B55",
+        boxShadow: "none",
+        marginBottom: "15px",
+    },
+    container: {
+        textAlign: "center"
+    },
+    nav_item: {
+        listStyleType: "none",
+        float: "left",
+        margin: "10px",
+    },
+    nav_link: {
+        textTransform: "uppercase",
+        fontFamily: "sans-serif",
+        textDecoration: "none",
+        color: "white",
+        "&:hover": {
+            color: "grey"
+        }
+    },
+    wrapperUL: {
+        margin: "auto",
+        display: "inline-block",
+        padding: "0px"
+    }
+})
 
 class Header extends Component {
 
@@ -25,3 +57,5 @@ class Header extends Component {
     }
 
 }
+
+export default withStyles(styles)(Header)

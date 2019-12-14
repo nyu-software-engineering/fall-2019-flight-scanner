@@ -6,12 +6,7 @@ import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import Profile from './Teammember-profile'; 
 
-
-
-
-
 const styles = theme => ({
-
 
     pic: {
         width: "100%", 

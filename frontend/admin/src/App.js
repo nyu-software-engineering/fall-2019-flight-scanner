@@ -4,8 +4,8 @@ import Header from './components/Header';
 import MyArticles from './components/MyArticles';
 import ErrorPage from './components/404';
 import Create from './components/Create';
-import Management from './components/Management';
 import Account from './components/Account';
+import Management from './components/Management';
 
 const Refresh = ({ path = '/' }) => (
     <Route
@@ -24,14 +24,14 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Header />
                 <Router>
+                <Header />
                     <Switch>
-                        <Route exact path="/" component={}/>
-                        <Route exact path="/team-management" component={}/>
+                        <Route exact path="/" component={MyArticles}/>
+                        <Route exact path="/team-management" component={Management}/>
                         <Route exact path="/my-articles" component={MyArticles}/>
-                        <Route exact path="/my-account" component={}/>
-                        <Route exact path="/create" component={}/>
+                        <Route exact path="/my-account" component={Account}/>
+                        <Route exact path="/create" component={Create}/>
                         <Route component={ErrorPage}/>
                         {/* <Refresh /> */}
                     </Switch>

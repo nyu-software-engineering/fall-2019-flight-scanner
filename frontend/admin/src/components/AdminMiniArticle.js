@@ -42,7 +42,7 @@ class MiniArticle extends Component {
 		const { classes } = this.props
 
 		if (this.state.redirectToArticle) {
-			return (<Redirect to={{pathname: this.props.redirection, state: {id: this.props}}} />)
+			return (<Redirect to={{ pathname: this.props.redirection, state: { id: this.props } }} />)
 		}
 		else {
 			return (
