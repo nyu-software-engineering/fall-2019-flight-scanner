@@ -3,16 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import './App.css';
 import Article from './components/Article';
-import Admin from './components/Admin'
 import Category from './components/Category';
-import Create from './components/Create';
 import Account from './components/Account';
 import Profile from './components/Teammember-profile';
 import MiniArticle from './components/Mini-article';
-import Management from './components/Management';
-import MyArticles from './components/MyArticles';
 import LandingWrapper from './components/LandingWrapper'; 
-import Login from './components/Login';
 import Team from './components/TeamPage'; 
 import ErrorPage from './components/404';
 import Landing from './components/Landing';
@@ -57,10 +52,6 @@ class App extends Component {
 					<NavRoute exact path="/admin/account" component={Account} />
 					<NavRoute exact path="/account" component={Account} />
 					<NavRoute exact path="/my-articles" component={MyArticles} />
-					{/* <Route exact path="/" component={Article} />
-					<Route exact path="/category/:id" component={Category} />
-					<Route exact path="/admin" component={Admin} />
-					<Route exact path="/sampleArticle" component={Article} /> */}
 					<NavRoute exact path="/article/:id" component={Article} />
 					<NavRoute exact path="/admin/team-management" component={Management} />
 					<Route exact path="/login" component={Login} />
