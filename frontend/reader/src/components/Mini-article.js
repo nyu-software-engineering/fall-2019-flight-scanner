@@ -42,7 +42,7 @@ class MiniArticle extends Component {
 		const { classes } = this.props
 
 		if (this.state.redirectToArticle) {
-			return (<Redirect to={{pathname: this.props.redirection, state: {id: this.props}}} />)
+			return (<Redirect to={`/article/${this.props.slug}`} />)
 		}
 		else {
 			return (
@@ -51,16 +51,16 @@ class MiniArticle extends Component {
 						<CardActionArea onClick={this.handleClick}>
 							<CardMedia
 								className={classes.media}
-								image={this.props.info.articleImg}
-								title={this.props.info.articleTitle}
+								image={this.props.banner}
+								title={this.props.title}
 								component="img"
 							/>
 							<CardContent className={classes.content}>
 								<Typography align="left" variant="h5" component="h2" className={classes.titleStyle}>
-									{this.props.info.articleTitle}
+									{this.props.title}
 								</Typography>
 								<Typography variant="body2" color="textSecondary" component="p" align="left">
-									{this.props.info.articleTeaser}
+									{this.props.teaser}
 								</Typography>
 							</CardContent>
 						</CardActionArea>

@@ -7,11 +7,11 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 import MiniArticle from './AdminMiniArticle';
-import Create from './Create'; 
-import AdminArticle from './AdminArticle'; 
+import Create from './Create';
+import AdminArticle from './AdminArticle';
 import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles'
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Container, Grid } from '@material-ui/core';
 
 
@@ -35,9 +35,9 @@ const styles = theme => ({
 	stepIcon: {
 		color: '#2E3B55',
 	},
-	container:{
+	container: {
 		margin: 'auto',
-        maxWidth: '1100px',
+		maxWidth: '1100px',
 	}
 
 });
@@ -48,105 +48,104 @@ const styles = theme => ({
 class ProgressBar extends Component {
 
 	constructor(props) {
-        super(props)
+		super(props)
 
-        this.state = {
+		this.state = {
 			article: '',
 			steps: ['Article information and text', 'Confirm the preview', 'Publish'],
 			activeStep: 0,
 			redirect: false
 
-			
 
-        }
+
+		}
 	}
 
-	componentDidMount(){
-		console.log("Got here"); 
+	componentDidMount() {
+		console.log("Got here");
+		console.log(this.props.info)
 		axios.get(`http://localhost:5000/article/getByID/${this.props.info._id}`)
-            .then(response => {
+			.then(response => {
 
 				console.log("didmount", response.data)
 				this.setState({
 					article: response.data,
 
+				});
 
-				}); 
-
-                
-            })
-            .catch(error => {
-                console.log("ERROR in Category loading ", error)
+			})
+			.catch(error => {
+				console.log("ERROR in Category loading ", error)
 			})
 	}
 
-	
 
-	componentDidUpdate(prevProps, prevState){
-		if(prevState.activeStep === 0 && this.state.activeStep === 1){
-		axios.get(`http://localhost:5000/article/getByID/${this.props.info._id}`)
-            .then(response => {
 
-				console.log("didmount", response.data)
-				this.setState({
-					article: response.data,
-				}); 
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.activeStep === 0 && this.state.activeStep === 1) {
+			axios.get(`http://localhost:5000/article/getByID/${this.props.info._id}`)
+				.then(response => {
 
-                
-            })
-            .catch(error => {
-                console.log("ERROR in Category loading ", error)
-			})
+					console.log("didmount", response.data)
+					this.setState({
+						article: response.data,
+					});
+
+
+				})
+				.catch(error => {
+					console.log("ERROR in Category loading ", error)
+				})
 		}
 	}
 
 
 
 	getStepContent() {
-	
+
 		switch (this.state.activeStep) {
 			case 0:
-				
-		return (<div><Create info={this.props.info}></Create> </div>);
-			case 1:
-	
 
-				return (<AdminArticle banner={this.state.article.articleImg} 
-					title={this.state.article.articleTitle} 
-					teaser={this.state.article.articleTeaser} 
+				return (<div><Create info={this.props.info}></Create> </div>);
+			case 1:
+
+
+				return (<AdminArticle banner={this.state.article.articleImg}
+					title={this.state.article.articleTitle}
+					teaser={this.state.article.articleTeaser}
 					author={this.state.article.articleAuthor}
 					body={this.state.article.articleText}
-					></AdminArticle>)
+				></AdminArticle>)
 					;
 			case 2:
 				return (<Grid>
 					<Grid xl={3} sm={4}></Grid>
 					<Grid xl={3} sm={4}><MiniArticle info={this.state.article}></MiniArticle></Grid>
-					</Grid>);
+				</Grid>);
 			default:
 				return
 		}
 	}
-	
+
 	handleNext = () => {
 
 		this.setState({
 			activeStep: this.state.activeStep + 1
-		}); 
+		});
 
 	};
 
 	handleBack = () => {
 		this.setState({
 			activeStep: this.state.activeStep - 1
-		}); 
+		});
 	};
 
 	handlePublish = () => {
 		let dayDate = new Date().getDate(); //Current Date
-        let month = new Date().getMonth() + 1; //Current Month
+		let month = new Date().getMonth() + 1; //Current Month
 		let year = new Date().getFullYear(); //Current Year
-		
+
 		const articleJSON = {
 			"articleId": this.state.article.articleId,
 			"articleTitle": this.state.article.articleTitle,
@@ -163,52 +162,52 @@ class ProgressBar extends Component {
 
 
 		axios.post(`http://localhost:5000/article/update/${this.state.article._id}`, articleJSON)
-		alert("Article Published! "); 
+		alert("Article Published! ");
 		this.setState({
 			redirect: true
-		}); 
+		});
 	};
 
 
-	render(){
-		const {classes} = this.props; 
-		if (this.state.redirect ) {
-            // window.location.reload()
-            return (<Redirect  to={`/my-articles`} />)
-            
+	render() {
+		const { classes } = this.props;
+		if (this.state.redirect) {
+			// window.location.reload()
+			return (<Redirect to={`/my-articles`} />)
+
 		}
 
 		return (
 			<Container className={classes.container}>
-			<div className={classes.root}>
-				<Stepper activeStep={this.state.activeStep} alternativeLabel>
-					{this.state.steps.map(label => (
-						<Step key={label}>
-							<StepLabel StepIconProps={{ classes: { root: classes.stepIcon } }}>{label}</StepLabel>
-						</Step>
-					))}
-				</Stepper>
-				
-				<div>
+				<div className={classes.root}>
+					<Stepper activeStep={this.state.activeStep} alternativeLabel>
+						{this.state.steps.map(label => (
+							<Step key={label}>
+								<StepLabel StepIconProps={{ classes: { root: classes.stepIcon } }}>{label}</StepLabel>
+							</Step>
+						))}
+					</Stepper>
+
 					<div>
-						<Typography className={classes.instructions}>{this.getStepContent()}</Typography>
 						<div>
-							<Button
-								disabled={this.state.activeStep === 0 || this.state.activeStep === 1}
-								onClick={this.handleBack}
-								className={classes.backButton}
-							>
-								Back
+							<Typography className={classes.instructions}>{this.getStepContent()}</Typography>
+							<div>
+								<Button
+									disabled={this.state.activeStep === 0 || this.state.activeStep === 1}
+									onClick={this.handleBack}
+									className={classes.backButton}
+								>
+									Back
 								</Button>
-							<Button className={classes.nextButton} variant="contained" onClick={this.handleNext} disabled={this.state.activeStep === 2}> 
-								Next
+								<Button className={classes.nextButton} variant="contained" onClick={this.handleNext} disabled={this.state.activeStep === 2}>
+									Next
 								</Button>
-							<br></br>
-							<Button className={classes.nextButton} variant="contained" onClick={this.handlePublish} disabled={this.state.activeStep !== 2}> Publish </Button>
+								<br></br>
+								<Button className={classes.nextButton} variant="contained" onClick={this.handlePublish} disabled={this.state.activeStep !== 2}> Publish </Button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 			</Container>
 		);
 	}
