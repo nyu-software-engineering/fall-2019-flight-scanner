@@ -95,6 +95,14 @@ router.route("/getByCategory/:category").get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 })
 
+router.route("/getByAuthorName/:articleAuthor").get((req, res) => {
+    console.log(req.params)
+    Article.find({'articleAuthor':req.params.articleAuthor
+                })
+    .then(article => res.json(article))
+    .catch(err => res.status(400).json('Error: ' + err));
+})
+
 router.route("/getBySlug/:slug").get((req, res) => {
     Article.find({'articleId':req.params.slug})
     .then(article => res.json(article))
@@ -106,6 +114,11 @@ router.route("/getByState/:state").get((req, res) => {
     .then(article => res.json(article))
     .catch(err => res.status(400).json('Error: ' + err));
 })
-
+router.route("/searchBar/:searchQuery").get((req, res) => {
+    Article.find({
+    $text: { $search: req.params.searchQuery },})
+    .then(article => res.json(article))
+    .catch(err => res.status(400).json('Error: ' + err));
+})
 
 module.exports = router;
