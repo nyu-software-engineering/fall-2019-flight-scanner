@@ -39,7 +39,10 @@ export const AuthenticatedRoute = ({
             path={path}
             render={props =>
                 isAuthenticated() ? (
-                    <Component {...props} />
+                    <div>
+                        <Header />
+                        <Component {...props} />
+                    </div>
                 ) :
                     <Login />
             }
@@ -51,7 +54,6 @@ class App extends Component {
         return (
             <div className="App">
                 <Router>
-                    <Header />
                     <Switch>
                         <AuthenticatedRoute exact path="/" component={Login} />
                         <AuthenticatedRoute exact path="/team-management" component={Management} />
