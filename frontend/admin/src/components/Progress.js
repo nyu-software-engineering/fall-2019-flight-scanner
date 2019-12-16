@@ -62,9 +62,8 @@ class ProgressBar extends Component {
 	}
 
 	componentDidMount() {
-		console.log("Got here");
-		console.log(this.props.info)
-		axios.get(`http://localhost:5000/article/getByID/${this.props.info._id}`)
+
+		axios.get(`http://localhost:5000/article/getByID/${this.props.location.state.id.info._id}`)
 			.then(response => {
 
 				console.log("didmount", response.data)
@@ -83,7 +82,7 @@ class ProgressBar extends Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.activeStep === 0 && this.state.activeStep === 1) {
-			axios.get(`http://localhost:5000/article/getByID/${this.props.info._id}`)
+			axios.get(`http://localhost:5000/article/getByID/${this.props.location.state.id.info._id}`)
 				.then(response => {
 
 					console.log("didmount", response.data)
@@ -106,7 +105,7 @@ class ProgressBar extends Component {
 		switch (this.state.activeStep) {
 			case 0:
 
-				return (<div><Create info={this.props.info}></Create> </div>);
+				return (<div><Create info={this.props.location.state.id.info}></Create> </div>);
 			case 1:
 
 
