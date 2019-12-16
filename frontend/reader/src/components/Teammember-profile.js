@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { Typography } from '@material-ui/core';
+import axios from 'axios';
 
 
 const styles = theme => ({
@@ -13,6 +14,7 @@ const styles = theme => ({
     },
     pic: {
         width: '80%',
+        height: 'auto',
         padding: '10%',
         borderRadius: '50%'
 
@@ -43,64 +45,58 @@ const styles = theme => ({
 })
 
 class Profile extends Component {
-    // constructor(props) {
-    //     super(props)
-    // }
+    constructor(props) {
+        super(props)
+        this.state = { 
+            articles:[]
+        }
+    }
+
+    componentDidMount() {
+        console.log(this.props.location.state.id)
+        const name = this.props.location.state.id.authorFirstName + ' ' + this.props.location.state.id.authorLastName
+        axios.get(`http://localhost:5000/article/getByAuthorName/${name}`)
+        .then(response => {
+            console.log("didmount", response.data)
+            this.setState({
+                articles: response.data
+            })
+        })
+        .catch(error => {
+            console.log("ERROR in Teammember loading ", error)
+        })
+
+    }
 
     getArticles = () => {
         //call to get all the articles 
         //what format will it come in? 
         //articles = []
-        // return (articles.map( () => { return <Grid item xs={6} sm={3} <Miniarticle key={} value={}></Miniarticle> </Grid> }))
-        return <Grid container spacing={3}>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle ></Miniarticle>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle ></Miniarticle>
-
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle  ></Miniarticle>
-
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle  ></Miniarticle>
-
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle ></Miniarticle>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle ></Miniarticle>
-
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle  ></Miniarticle>
-
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <Miniarticle  ></Miniarticle>
-
-            </Grid>
-        </Grid>
-
+        return (this.state.articles.map( (article) => { return <Grid item xs={6} sm={3}> <Miniarticle 
+        banner={article.articleImg}
+        teaser={article.articleTeaser}
+        title={article.articleTitle}
+        author={article.articleAuthor}
+        slug={article.articleId}></Miniarticle> </Grid> }))
+     
     }
 
     render() {
         const { classes } = this.props
         return (
+            
             <div className={classes.root}>
+                
                 <Container className={classes.container}>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={4}>
-                            <img alt={this.props.name} className={classes.pic} src={this.props.picture}></img>
+                            <img alt={"Handsome "+ this.props.location.state.id.authorLastName} className={classes.pic} src={this.props.location.state.id.authorProfileUrl}></img>
                         </Grid>
                         <Grid item xs={12} sm={8} className={classes.bio}>
                             <div>
-                                <Typography variant='h4' className={classes.name}>{this.props.name}</Typography>
-                                <Typography variant='h6'  className={classes.role}>{this.props.role}</Typography>
-                                <Typography variant='body1'>{this.props.bio}</Typography>
+                                <Typography variant='h4' className={classes.name}>{this.props.location.state.id.authorFirstName + ' ' + this.props.location.state.id.authorLastName}</Typography>
+                                <Typography variant='h6'  className={classes.role}>{this.props.location.state.id.authorRole}</Typography>
+                                <Typography variant='body1'>{this.props.location.state.id.authorBio}</Typography>
                             </div>
                         </Grid>
                         {this.getArticles()}

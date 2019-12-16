@@ -12,7 +12,7 @@ export default Builder('ErrorPage')
                 <Typography variant='h5'> Are you sure you are looking for the right page? </Typography>
 
 
-                <Button><Link style={{ color: 'black', textDecoration: 'none' }} to='/landing'> Travel back to Homepage</Link></Button>
+                <Button><Link style={{ color: 'black', textDecoration: 'none' }} to='/my-articles'> Travel back to Homepage</Link></Button>
             </div>
         );
     })
