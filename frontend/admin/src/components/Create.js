@@ -381,7 +381,6 @@ class Create extends Component {
             return this.props.location.state.id.info;
         }
         else if (this.state.is_admin_window) {
-            console.log(`Got here ${this.props.info.articleTitle}`); 
             return this.props.info;
         }
 

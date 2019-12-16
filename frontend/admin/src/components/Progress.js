@@ -62,9 +62,7 @@ class ProgressBar extends Component {
 	}
 
 	componentDidMount() {
-		console.log("Got here!!!");
-		console.log(this.props.location.state.id.info._id)
-		// console.log(`ID: ${this.props.info._id}`)
+
 		axios.get(`http://localhost:5000/article/getByID/${this.props.location.state.id.info._id}`)
 			.then(response => {
 
