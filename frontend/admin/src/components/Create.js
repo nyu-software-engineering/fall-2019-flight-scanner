@@ -58,7 +58,6 @@ class Create extends Component {
         this.state = {
             title: '',
             URL: '',
-            img_alt_text: '',
             img_caption: '',
             teaser: '',
             keywords: '',
@@ -219,9 +218,6 @@ class Create extends Component {
         }
         if (this.state.URL === '' && this.props.location.state.id.info.articleImg === "") {
             missing.push('URL')
-        }
-        if (this.state.img_alt_text === '' && this.props.location.state.id.info.articleImgDesc === "") {
-            missing.push('Image alternative text')
         }
         if (this.state.slug === '' && this.props.location.state.id.info.articleId === "") {
             missing.push('Slug')
@@ -442,15 +438,6 @@ class Create extends Component {
                                     onChange={this.handleChange}
                                     className={classes.inputbox}
                                     defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleId : ''}
-                                />
-                                <TextField
-                                    id="img_alt_text"
-                                    label="Image alternative text"
-                                    margin="normal"
-                                    variant="outlined"
-                                    onChange={this.handleChange}
-                                    className={classes.inputbox}
-                                    defaultValue={(this.state.is_edit_window || this.state.is_admin_window) ? this.showDefault().articleText : ''}
                                 />
 
                                 <TextField
