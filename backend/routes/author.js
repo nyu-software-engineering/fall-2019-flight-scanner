@@ -1,10 +1,31 @@
 const router = require('express').Router();
-let Author = require('../models/author.model'); 
+const jwt = require('jsonwebtoken');
+let Author = require('../models/author.model');
 
 router.route('/').get((req, res) => {
-    Author.find()
-      .then(author => res.json(author))
-      .catch(err => res.status(400).json('Error: ' + err));
+  Author.find()
+    .then(author => res.json(author))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/add').post((req, res) => {
+  console.log(req.body)
+  const authorId = "DELETE LATER17"
+  const authorFirstName = req.body.authorFirstName;
+  const authorLastName = req.body.authorLastName;
+  const authorEmail = req.body.authorEmail;
+  const authorProfileUrl = "";
+  const authorRole = req.body.authorRole;
+  const authorBio = "";
+
+  const newAuthor = new Author({
+    authorId,
+    authorFirstName,
+    authorLastName,
+    authorEmail,
+    authorProfileUrl,
+    authorRole,
+    authorBio
   });
   
   router.route('/add').post((req, res) => {
@@ -61,11 +82,31 @@ router.route('/').get((req, res) => {
             .catch(err => res.status(400).json('Error: ' + err));
         })
         .catch(err => res.status(400).json('Error: ' + err));
-    });
-  
-  module.exports = router;
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
 
+router.route('/validate').post((req, res) => {
 
+  let payload = {
+    userEmail: req.body.email,
+    authToken: req.body.token
+  }
 
+  Author.findOne({authorEmail: req.body.email})
+  .then(author => {
+    console.log(author)
+    const token = jwt.sign(payload, process.env.JWT_SECRET)
+    res.status(200).json({
+      authToken: token,
+      author: author
+    })
+  })
+  .catch(e => {
+    console.log("error ", e)
+    res.status(404).json("Error "+e)
+  })
 
-module.exports = router; 
+})
+
+module.exports = router;

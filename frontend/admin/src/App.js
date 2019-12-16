@@ -8,6 +8,7 @@ import Account from './components/Account';
 import Management from './components/Management';
 import Progress from './components/Progress';
 import './App.css'
+import Login from './components/Login';
 
 // const Refresh = ({ path = '/' }) => (
 //     <Route
@@ -22,6 +23,29 @@ import './App.css'
 //     />
 // );
 
+export const isAuthenticated = () => {
+    if (sessionStorage.getItem("user") === null)
+        return false;
+    else return true;
+}
+
+export const AuthenticatedRoute = ({
+    component: Component,
+    exact,
+    path,
+}) => (
+        <Route
+            exact={exact}
+            path={path}
+            render={props =>
+                isAuthenticated() ? (
+                    <Component {...props} />
+                ) :
+                    <Login />
+            }
+        />
+    )
+
 class App extends Component {
     render() {
         return (
@@ -29,14 +53,14 @@ class App extends Component {
                 <Router>
                     <Header />
                     <Switch>
-                        <Route exact path="/" component={MyArticles} />
-                        <Route exact path="/team-management" component={Management} />
-                        <Route exact path="/my-articles" component={MyArticles} />
-                        <Route exact path="/my-account" component={Account} />
-                        <Route exact path="/create" component={Create} />
-                        <Route exact path="/edit" component={Create} />
-                        <Route exact path="/approve" component={Progress} />
-                        <Route component={ErrorPage} />
+                        <AuthenticatedRoute exact path="/" component={Login} />
+                        <AuthenticatedRoute exact path="/team-management" component={Management} />
+                        <AuthenticatedRoute exact path="/my-articles" component={MyArticles} />
+                        <AuthenticatedRoute exact path="/my-account" component={Account} />
+                        <AuthenticatedRoute exact path="/create" component={Create} />
+                        <AuthenticatedRoute exact path="/edit" component={Create} />
+                        <AuthenticatedRoute exact path="/approve" component={Progress} />
+                        <AuthenticatedRoute component={ErrorPage} />
                         {/* <Refresh /> */}
                     </Switch>
                 </Router>
