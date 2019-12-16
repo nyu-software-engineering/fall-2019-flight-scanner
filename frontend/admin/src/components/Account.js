@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import Profile from './Teammember-profile'; 
+import axios from 'axios';
 
 const styles = theme => ({
 
@@ -34,24 +35,34 @@ const styles = theme => ({
 
 })
 
-const author = window.sessionStorage.getItem("currentAuthor") === null? {
-    authorBio: "This is the bio being used before session memory becomes available. ",
-    authorProfileUrl: "http://lorempixel.com/300/300/",
-    authorFirstName: "NullFirstName",
-    authorLastName: "NullLastName"
-} : window.sessionStorage.getItem("currentAuthor"); 
 
 class Account extends Component{
     constructor(props){
         super(props); 
         this.state = {
-            authorBio: author.authorBio,
-            authorProfileUrl: author.authorProfileUrl,
-            authorName: author.authorFirstName + " " + author.authorLastName,
-            tempBio: ""
+            sessionVar: JSON.parse(sessionStorage.getItem("user")),
+            author: "",
+            authorProfileUrl: "",
+            tempBio: "",
+            // reloaded: false
         }
     }
 
+    componentDidMount(){
+        axios.get(`http://localhost:5000/author/${this.state.sessionVar._id}`)
+        .then(response => {
+
+            console.log("didmount", response.data)
+            this.setState({
+                author: response.data,
+
+            });
+
+        })
+        .catch(error => {
+            console.log("ERROR in Category loading ", error)
+        })
+    }
 
 
 
@@ -77,6 +88,7 @@ class Account extends Component{
 
 
     updatePicture = () =>{
+
         let newImg = prompt("Please enter image URL: "); 
         if(newImg == null){
             return; 
@@ -85,19 +97,58 @@ class Account extends Component{
             newImg = prompt("Invalid URL, Please enter again: "); 
         }
 
+        let authorJSON = {
+            "authorBio": this.state.author.authorBio,
+            "authorEmail": this.state.author.authorEmail,
+            "authorFirstName": this.state.author.authorFirstName ,
+            "authorProfileUrl": newImg,
+            "authorLastName": this.state.author.authorLastName,
+            "authorRole": this.state.author.authorRole,
+            "authorAccess": this.state.author.authorAccess          
+        };
+
+      
+        axios.post(`http://localhost:5000/author/update/${this.state.sessionVar._id}`, authorJSON)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                // this.handleClose()
+                window.location.reload()
+            })
+        
         this.setState({
-            authorProfileUrl: newImg
-        }); 
-
-
+            author: authorJSON
+        });
         
     }
 
     updateBio= () =>{
         alert("Bio Updated"); 
+
+        let authorJSON = {
+            "authorBio": this.state.tempBio,
+            "authorEmail": this.state.author.authorEmail,
+            "authorFirstName": this.state.author.authorFirstName ,
+            "authorProfileUrl": this.state.author.authorProfileUrl,
+            "authorLastName": this.state.author.authorLastName,
+            "authorRole": this.state.author.authorRole,
+            "authorAccess": this.state.author.authorAccess          
+        };
+
+        axios.post(`http://localhost:5000/author/update/${this.state.sessionVar._id}`, authorJSON)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                // this.handleClose()
+                window.location.reload()
+            })
+        
         this.setState({
-            authorBio: this.state.tempBio
-        }); 
+            author: authorJSON
+        });
+
+
+
 
         
     
@@ -110,16 +161,25 @@ class Account extends Component{
         
     }
 
+    
 
 
     render(){
         const {classes} = this.props; 
+        // if(!this.state.reloaded){
+        //     window.location.reload();
+        //     this.setState({
+        //         reloaded: true
+        //     }); 
+        // }
         return(
+            
 
             <Container className={classes.container}>
+
                 <Grid container spacing={6}>
                     <Grid item xs={12} sm={4}>
-                    <img alt={this.state.authorFirstName+" " + this.state.authorLastName} className={classes.pic} src={this.state.authorProfileUrl}></img>
+                    <img alt={this.state.author.authorFirstName+" " + this.state.author.authorLastName} className={classes.pic} src={this.state.author.authorProfileUrl}></img>
                     <Button  onClick={this.updatePicture} className={classes.updatePictureButton}>
                                 Update Picture
                             </Button>
@@ -135,7 +195,7 @@ class Account extends Component{
                                 multiline
                                 fullWidth
                                 onChange={this.handleChange}
-                                defaultValue={this.state.authorBio}
+                                defaultValue={this.state.author.authorBio}
 
                             />
                             <Button  onClick={this.updateBio} className={classes.updatePictureButton}>
@@ -145,7 +205,7 @@ class Account extends Component{
                     </Grid>
 
                 </Grid>
-                <Profile picture={this.state.authorProfileUrl} bio={this.state.auhtorBio}></Profile>
+                <Profile></Profile>
 
             </Container>
 

@@ -56,7 +56,7 @@ class Login extends Component {
             return (
                 <div className={classes.container}>
                     <div className={classes.subcontainer}>
-                        <img src='translogo.png' />
+                        <img alt='logo' src='translogo.png' />
                         <Typography variant="h3" className={classes.typo}>Welcome to Lightshare's Admin Interface</Typography>
                         <GoogleLogin
                             clientId="841597979703-ujo0ol992t85ug1ngfu5p6c5j017l00l.apps.googleusercontent.com"

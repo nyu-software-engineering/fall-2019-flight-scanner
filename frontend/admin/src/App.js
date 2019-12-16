@@ -49,6 +49,8 @@ export const AuthenticatedRoute = ({
         />
     )
 
+    
+
 class App extends Component {
     render() {
         return (

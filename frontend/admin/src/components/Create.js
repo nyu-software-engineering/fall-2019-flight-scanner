@@ -56,6 +56,7 @@ class Create extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            sessionVar: JSON.parse(sessionStorage.getItem("user")),  
             title: '',
             URL: '',
             img_caption: '',
@@ -67,7 +68,7 @@ class Create extends Component {
             preview: false,
             categories: ["None"],
             gottenCatagories: false,
-            authorName: 'Abdullah Zameek', //temp author here for now, 
+
             is_edit_window: (window.location.href.slice(-4) === 'edit'),
             is_admin_window: (window.location.href.slice(-7) === 'approve'),
             redirect: false
@@ -118,6 +119,7 @@ class Create extends Component {
                 banner={this.state.URL === "" ? this.showDefault().articleImg : this.state.URL}
                 teaser={this.state.teaser === "" ? this.showDefault().articleTeaser : this.state.teaser}
                 body={this.state.text === "" ? this.showDefault().articleText : this.state.text}
+                
             />
         }
         else {
@@ -137,10 +139,10 @@ class Create extends Component {
         //if edit update 
         if (this.state.is_edit_window) {
 
-            const articleJSON = {
+            let articleJSON = {
                 "articleId": (this.state.slug === "" ? this.props.location.state.id.info.articleId : this.state.slug),
                 "articleTitle": (this.state.title === "" ? this.props.location.state.id.info.articleTitle : this.state.title),
-                "articleAuthor": "AFTER LOGIN",
+                "articleAuthor": this.state.sessionVar.authorFirstName + " " + this.state.sessionVar.authorLastName,
                 "articleImg": (this.state.URL === "" ? this.props.location.state.id.info.articleImg : this.state.URL),
                 "articleImgDesc": (this.state.img_caption === "" ? this.props.location.state.id.info.articleImgDesc : this.state.img_caption),
                 "articleTeaser": (this.state.teaser === "" ? this.props.location.state.id.info.articleTeaser : this.state.teaser),
@@ -161,10 +163,10 @@ class Create extends Component {
 
         }
         else if (this.state.is_admin_window) {
-            const articleJSON = {
+            let articleJSON = {
                 "articleId": (this.state.slug === "" ? this.props.info.articleId : this.state.slug),
                 "articleTitle": (this.state.title === "" ? this.props.info.articleTitle : this.state.title),
-                "articleAuthor": "AFTER LOGIN",
+                "articleAuthor": this.state.sessionVar.authorFirstName + " " + this.state.sessionVar.authorLastName,
                 "articleImg": (this.state.URL === "" ? this.props.info.articleImg : this.state.URL),
                 "articleImgDesc": (this.state.img_caption === "" ? this.props.info.articleImgDesc : this.state.img_caption),
                 "articleTeaser": (this.state.teaser === "" ? this.props.info.articleTeaser : this.state.teaser),
@@ -182,9 +184,9 @@ class Create extends Component {
 
         //if create add
         else {
-            const articleJSON = {
+            let articleJSON = {
                 "articleId": this.state.slug,
-                "articleAuthor": this.state.authorName,
+                "articleAuthor": this.state.sessionVar.authorFirstName + " " + this.state.sessionVar.authorLastName,
                 "articleTitle": this.state.title,
                 "articleImg": this.state.URL,
                 "articleImgDesc": this.state.img_caption,
@@ -257,10 +259,10 @@ class Create extends Component {
             let month = new Date().getMonth() + 1; //Current Month
             let year = new Date().getFullYear(); //Current Year
 
-            const articleJSON = {
+            let articleJSON = {
                 "articleId": (this.state.slug === "" ? this.props.location.state.id.info.articleId : this.state.slug),
                 "articleTitle": (this.state.title === "" ? this.props.location.state.id.info.articleTitle : this.state.title),
-                "articleAuthor": "AFTER LOGIN",
+                "articleAuthor": this.state.sessionVar.authorFirstName + " " + this.state.sessionVar.authorLastName,
                 "articleImg": (this.state.URL === "" ? this.props.location.state.id.info.articleImg : this.state.URL),
                 "articleImgDesc": (this.state.img_caption === "" ? this.props.location.state.id.info.articleImgDesc : this.state.img_caption),
                 "articleTeaser": (this.state.teaser === "" ? this.props.location.state.id.info.articleTeaser : this.state.teaser),
