@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { Typography } from '@material-ui/core';
+import axios from 'axios';
 
 
 const styles = theme => ({
@@ -46,6 +47,22 @@ class Profile extends Component {
     // constructor(props) {
     //     super(props)
     // }
+
+    componentDidMount() {
+        console.log(this.props.location.state)
+        //this.props.location.state.id.info.articleImg
+        // axios.get(`http://localhost:5000/${this.props.location.author.info._id}`)
+        // .then(response => {
+        //     console.log("didmount", response.data)
+        //     this.setState({
+        //         members: response.data
+        //     })
+        // })
+        // .catch(error => {
+        //     console.log("ERROR in Teammember loading ", error)
+        // })
+
+    }
 
     getArticles = () => {
         //call to get all the articles 
@@ -90,7 +107,9 @@ class Profile extends Component {
     render() {
         const { classes } = this.props
         return (
+            
             <div className={classes.root}>
+                
                 <Container className={classes.container}>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={4}>

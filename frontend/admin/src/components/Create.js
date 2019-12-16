@@ -69,7 +69,7 @@ class Create extends Component {
             gottenCatagories: false,
             authorName: 'Abdullah Zameek', //temp author here for now, 
             is_edit_window: (window.location.href.slice(-4) === 'edit'),
-            is_admin_window: (window.location.href.slice(-5) === 'admin'),
+            is_admin_window: (window.location.href.slice(-7) === 'approve'),
             redirect: false
         }
     }

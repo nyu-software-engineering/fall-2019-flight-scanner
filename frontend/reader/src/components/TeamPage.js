@@ -53,11 +53,8 @@ class TeamPage extends Component{
                 <Grid container spacing={1}>
                     {this.state.members.map(member =>
                         // <p>{article.articleText}</p>
-                        <Grid item xs={12} sm={12} md={3} key={member.authorId}>
-                            <Teammember name={member.authorFirstName + " " + member.authorLastName}
-                                role={member.authorRole}
-                                bio={member.authorBio}
-                                imgURL={member.authorProfileUrl}
+                        <Grid item xs={12} sm={6} md={3} key={member.authorId}>
+                            <Teammember info={member}
                             />
                         </Grid>
                     )}
