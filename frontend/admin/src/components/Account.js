@@ -17,6 +17,10 @@ const styles = theme => ({
         justifyContent: 'space-between'
     },
 
+    container: {
+        marginTop: "20px"
+    },
+
 
     updatePictureButton:{
         marginTop: "10px",
@@ -30,15 +34,27 @@ const styles = theme => ({
 
 })
 
+const author = window.sessionStorage.getItem("currentAuthor") === null? {
+    authorBio: "This is the bio being used before session memory becomes available. ",
+    authorProfileUrl: "http://lorempixel.com/300/300/",
+    authorFirstName: "NullFirstName",
+    authorLastName: "NullLastName"
+} : window.sessionStorage.getItem("currentAuthor"); 
+
 class Account extends Component{
     constructor(props){
         super(props); 
         this.state = {
-            bio: 'Welcome to your complete guide to the best Chow Chow names, giving you plenty of ideas for what to call your beautiful and powerful Chow Chow. Chow Chow dog names should highlight this ancient Chinese breed’s best qualities. Be that their gorgeous mane of red, white, blue, cream, blue, or tawny fur; their legendary “tough dog” presence; or perhaps their Chinese roots! No matter what inspires your potential dog names for Chow Chow, there are some things to keep in mind to ensure that your pooch both knows and answers to their name.', 
-            imgURL: 'http://lorempixel.com/300/300/',
+            authorBio: author.authorBio,
+            authorProfileUrl: author.authorProfileUrl,
+            authorName: author.authorFirstName + " " + author.authorLastName,
             tempBio: ""
         }
     }
+
+
+
+
 
     //Taken from 
     //http://jsfiddle.net/fMCFB/1/
@@ -68,14 +84,22 @@ class Account extends Component{
         while(!this.isUriImage(newImg)){
             newImg = prompt("Invalid URL, Please enter again: "); 
         }
-        
-        this.setState({imgURL: newImg}); 
+
+        this.setState({
+            authorProfileUrl: newImg
+        }); 
+
+
         
     }
 
     updateBio= () =>{
         alert("Bio Updated"); 
-        this.setState({bio: this.state.tempBio}) 
+        this.setState({
+            authorBio: this.state.tempBio
+        }); 
+
+        
     
     }
 
@@ -95,7 +119,7 @@ class Account extends Component{
             <Container className={classes.container}>
                 <Grid container spacing={6}>
                     <Grid item xs={12} sm={4}>
-                    <img alt={this.props.name} className={classes.pic} src={this.state.imgURL}></img>
+                    <img alt={this.state.authorFirstName+" " + this.state.authorLastName} className={classes.pic} src={this.state.authorProfileUrl}></img>
                     <Button  onClick={this.updatePicture} className={classes.updatePictureButton}>
                                 Update Picture
                             </Button>
@@ -111,6 +135,7 @@ class Account extends Component{
                                 multiline
                                 fullWidth
                                 onChange={this.handleChange}
+                                defaultValue={this.state.authorBio}
 
                             />
                             <Button  onClick={this.updateBio} className={classes.updatePictureButton}>
@@ -120,7 +145,7 @@ class Account extends Component{
                     </Grid>
 
                 </Grid>
-                <Profile picture={this.state.imgURL} bio={this.state.bio}></Profile>
+                <Profile picture={this.state.authorProfileUrl} bio={this.state.auhtorBio}></Profile>
 
             </Container>
 
@@ -131,9 +156,9 @@ class Account extends Component{
 
 export default withStyles(styles)(Account); 
 
-Account.defaultProps = {
-    picture: 'https://icon-library.net/images/free-account-icon/free-account-icon-0.jpg',
-    name: 'Author Author',
-    role: 'Chief Editor',
-    bio: "Welcome to your complete guide to the best Chow Chow names, giving you plenty of ideas for what to call your beautiful and powerful Chow Chow. Chow Chow dog names should highlight this ancient Chinese breed’s best qualities. Be that their gorgeous mane of red, white, blue, cream, blue, or tawny fur; their legendary “tough dog” presence; or perhaps their Chinese roots! No matter what inspires your potential dog names for Chow Chow, there are some things to keep in mind to ensure that your pooch both knows and answers to their name.",
-}
+// Account.defaultProps = {
+//     picture: 'https://icon-library.net/images/free-account-icon/free-account-icon-0.jpg',
+//     name: 'Author Author',
+//     role: 'Chief Editor',
+//     bio: "Welcome to your complete guide to the best Chow Chow names, giving you plenty of ideas for what to call your beautiful and powerful Chow Chow. Chow Chow dog names should highlight this ancient Chinese breed’s best qualities. Be that their gorgeous mane of red, white, blue, cream, blue, or tawny fur; their legendary “tough dog” presence; or perhaps their Chinese roots! No matter what inspires your potential dog names for Chow Chow, there are some things to keep in mind to ensure that your pooch both knows and answers to their name.",
+// }
