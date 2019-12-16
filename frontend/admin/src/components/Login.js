@@ -1,39 +1,54 @@
 import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import axios from 'axios';
-import BrowserHistory from 'react';
+import { Redirect } from 'react-router-dom';
 
 
 class Login extends Component {
-    // constructor(props) {
-    //     super(props)
-    // }
 
-    responseGoogle(res) {
-        console.log(res.profileObj.email)
-        console.log(res)
+    constructor(props) {
+        super(props)
+        this.state = {
+            auth: false
+        }
+    }
+
+    responseGoogle = (res) => {
         // send a request to get JWT
 
-        if (sessionStorage.getItem("authToken") !== null) {
-            axios.post('https://localhost:5000/author/validate', { email: res.profileObj.email, token: res.tokenObj.id_token })
+        if (sessionStorage.getItem("authToken") === null) {
+            axios.post('http://localhost:5000/author/validate', { email: res.profileObj.email, token: res.tokenObj.id_token })
                 .then(response => {
-                    sessionStorage.setItem("authToken", res.authToken)
+                    console.log(response)
+                    sessionStorage.setItem("authToken", response.data.authToken)
+                    sessionStorage.setItem("user", JSON.stringify(response.data.author))
+                    this.setState({
+                        auth: true,
+                    })
                 })
-            localStorage.setItem("authToken", res.authToken);
+                .catch(err => {
+                    console.log(err)
+                })
         }
     }
 
     render() {
-        return (
-            <div>
-                <GoogleLogin
-                    clientId="841597979703-ujo0ol992t85ug1ngfu5p6c5j017l00l.apps.googleusercontent.com"
-                    buttonText="Login"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
-                />
-            </div>
-        );
+
+        if (this.state.auth!==true) {
+            return (
+                <div>
+                    <GoogleLogin
+                        clientId="841597979703-ujo0ol992t85ug1ngfu5p6c5j017l00l.apps.googleusercontent.com"
+                        buttonText="Login"
+                        onSuccess={this.responseGoogle}
+                        onFailure={this.responseGoogle}
+                    />
+                </div>
+            );
+        }
+        else {
+            return (<Redirect to="/my-articles" />)
+        }
     }
 }
 

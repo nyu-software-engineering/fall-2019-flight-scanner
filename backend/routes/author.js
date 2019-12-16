@@ -89,16 +89,17 @@ router.route('/add').post((req, res) => {
 router.route('/validate').post((req, res) => {
 
   let payload = {
-    userEmail: req.email,
-    authToken: req.token
+    userEmail: req.body.email,
+    authToken: req.body.token
   }
 
-  Author.findOne({authorEmail: req.email})
+  Author.findOne({authorEmail: req.body.email})
   .then(author => {
     console.log(author)
     const token = jwt.sign(payload, process.env.JWT_SECRET)
     res.status(200).json({
-      authToken: token
+      authToken: token,
+      author: author
     })
   })
   .catch(e => {
