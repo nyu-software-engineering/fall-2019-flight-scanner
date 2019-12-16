@@ -31,6 +31,7 @@ class App extends Component {
 				<Router>
 					<Header />
 					<Switch>
+						
 						<Route exact path="/" component={MiniArticle} />
 						<Route exact path="/category/:id" component={Category} />
 						<Route exact path="/article/:id" component={Article} />

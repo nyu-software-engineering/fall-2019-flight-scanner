@@ -1,34 +1,76 @@
 import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+import { withStyles, Typography } from '@material-ui/core';
 
+const styles = theme => ({
+    container: {
+        width: "100vw",
+        height: "100vh",
+        background: "#2E3B55", 
+        display: "flex"
+    }, 
+    subcontainer: {
+        margin: "auto",
+    }, 
+    typo: {
+        color: "white", 
+        marginTop: "50px", 
+        marginBottom: "25px"
+    }
+})
 
 class Login extends Component {
-    // constructor(props) {
-    //     super(props)
-    // }
 
-    responseGoogle(res) {
-        console.log(res.profileObj.email)
+    constructor(props) {
+        super(props)
+        this.state = {
+            auth: false
+        }
+    }
+
+    responseGoogle = (res) => {
+        // send a request to get JWT
+
+        if (sessionStorage.getItem("authToken") === null) {
+            axios.post('http://localhost:5000/author/validate', { email: res.profileObj.email, token: res.tokenObj.id_token })
+                .then(response => {
+                    console.log(response)
+                    sessionStorage.setItem("authToken", response.data.authToken)
+                    sessionStorage.setItem("user", JSON.stringify(response.data.author))
+                    this.setState({
+                        auth: true,
+                    })
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
     }
 
     render() {
-        return (
-            // <div>
-            //     <h2>Login</h2>
-            //     <input type="text" name="Email" />
-            //     <input type="password" name="Password" />
-            //     <button onClick={validateItems()}>Login</button>
-            // </div>
-            <div>
-                <GoogleLogin
-                    clientId="841597979703-ujo0ol992t85ug1ngfu5p6c5j017l00l.apps.googleusercontent.com"
-                    buttonText="Login"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
+        const { classes } = this.props
 
-                />
-            </div>
-        );
+        if (this.state.auth !== true && sessionStorage.getItem("authToken")===null) {
+            return (
+                <div className={classes.container}>
+                    <div className={classes.subcontainer}>
+                        <img src='translogo.png' />
+                        <Typography variant="h3" className={classes.typo}>Welcome to Lightshare's Admin Interface</Typography>
+                        <GoogleLogin
+                            clientId="841597979703-ujo0ol992t85ug1ngfu5p6c5j017l00l.apps.googleusercontent.com"
+                            buttonText="Login"
+                            onSuccess={this.responseGoogle}
+                            onFailure={this.responseGoogle}
+                        />
+                    </div>
+                </div>
+            );
+        }
+        else {
+            return (<Redirect to="/my-articles" />)
+        }
     }
 }
 
@@ -71,6 +113,6 @@ function passwordEntered(password) {
     return !(password.length === 0)
 }
 
-export default Login
+export default withStyles(styles)(Login)
 
 export { passwordEntered, conversion, checkEmailExists, checkSignedIn, checkSignInProvider, availableSignInOptions, emailValid, emailRegex, passwordHasSpecialChars, passwordLongEnough }
