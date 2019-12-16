@@ -48,7 +48,8 @@ class Landing extends Component {
         this.state = {
             articles: [],
             is_search_results: !(window.location.href.slice(-7) === 'landing'),
-            found: 0 
+            found: 0, 
+            mounted: false,  
 
 
         }
@@ -63,7 +64,8 @@ class Landing extends Component {
                     response => {
                         this.setState({
                             articles: response.data,
-                            found: response.data.length
+                            found: response.data.length, 
+                            mounted: true 
                         })
                     }
                 )
@@ -79,6 +81,7 @@ class Landing extends Component {
 
                     this.setState({
                         articles: response.data,
+                        mounted: true
 
                     })
                 })
@@ -91,7 +94,7 @@ class Landing extends Component {
     }
 
     showSorry = (classes) => { 
-        if(this.state.is_search_results & this.state.found === 0){
+        if(this.state.is_search_results & this.state.found === 0 & this.state.mounted){
             if (this.state.articles.length === 0 ){
             axios.get(`http://localhost:5000/article`)
                 .then(response => {

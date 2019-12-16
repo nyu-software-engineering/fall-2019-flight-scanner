@@ -9,6 +9,7 @@ import LandingWrapper from './components/LandingWrapper';
 import Team from './components/TeamPage';
 import ErrorPage from './components/404';
 import Landing from './components/Landing';
+import Profile from './components/Teammember-profile';
 
 const Refresh = ({ path = '/' }) => (
 	<Route
@@ -36,6 +37,7 @@ class App extends Component {
 						<Route exact path="/landing" component={LandingWrapper} />
 						<Route exact path="/team" component={Team} />
 						<Route exact path="/search-results" component={Landing} />
+						<Route exact path="/profile" component={Profile} />
 						<Refresh path="/refresh" />
 						<Route component={ErrorPage} />
 					</Switch>
