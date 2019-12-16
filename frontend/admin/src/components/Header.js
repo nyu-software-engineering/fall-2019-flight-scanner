@@ -11,6 +11,7 @@ const styles = theme => ({
     container: {
         textAlign: "center", 
         background: "#2E3B55",
+        marginBottom: "15px"
     },
     nav_item: {
         listStyleType: "none",
