@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import Profile from './Teammember-profile'; 
+import axios from 'axios';
 
 const styles = theme => ({
 
@@ -15,6 +16,10 @@ const styles = theme => ({
 
     box: {
         justifyContent: 'space-between'
+    },
+
+    container: {
+        marginTop: "20px"
     },
 
 
@@ -30,15 +35,37 @@ const styles = theme => ({
 
 })
 
+
 class Account extends Component{
     constructor(props){
         super(props); 
         this.state = {
-            bio: 'Welcome to your complete guide to the best Chow Chow names, giving you plenty of ideas for what to call your beautiful and powerful Chow Chow. Chow Chow dog names should highlight this ancient Chinese breed’s best qualities. Be that their gorgeous mane of red, white, blue, cream, blue, or tawny fur; their legendary “tough dog” presence; or perhaps their Chinese roots! No matter what inspires your potential dog names for Chow Chow, there are some things to keep in mind to ensure that your pooch both knows and answers to their name.', 
-            imgURL: 'http://lorempixel.com/300/300/',
-            tempBio: ""
+            sessionVar: JSON.parse(sessionStorage.getItem("user")),
+            author: "",
+            authorProfileUrl: "",
+            tempBio: "",
+            // reloaded: false
         }
     }
+
+    componentDidMount(){
+        axios.get(`http://localhost:5000/author/${this.state.sessionVar._id}`)
+        .then(response => {
+
+            console.log("didmount", response.data)
+            this.setState({
+                author: response.data,
+
+            });
+
+        })
+        .catch(error => {
+            console.log("ERROR in Category loading ", error)
+        })
+    }
+
+
+
 
     //Taken from 
     //http://jsfiddle.net/fMCFB/1/
@@ -61,6 +88,7 @@ class Account extends Component{
 
 
     updatePicture = () =>{
+
         let newImg = prompt("Please enter image URL: "); 
         if(newImg == null){
             return; 
@@ -68,14 +96,61 @@ class Account extends Component{
         while(!this.isUriImage(newImg)){
             newImg = prompt("Invalid URL, Please enter again: "); 
         }
+
+        let authorJSON = {
+            "authorBio": this.state.author.authorBio,
+            "authorEmail": this.state.author.authorEmail,
+            "authorFirstName": this.state.author.authorFirstName ,
+            "authorProfileUrl": newImg,
+            "authorLastName": this.state.author.authorLastName,
+            "authorRole": this.state.author.authorRole,
+            "authorAccess": this.state.author.authorAccess          
+        };
+
+      
+        axios.post(`http://localhost:5000/author/update/${this.state.sessionVar._id}`, authorJSON)
+            .then(res => {
+                // console.log(res);
+                // console.log(res.data);
+                // this.handleClose()
+                window.location.reload()
+            })
         
-        this.setState({imgURL: newImg}); 
+        this.setState({
+            author: authorJSON
+        });
         
     }
 
     updateBio= () =>{
         alert("Bio Updated"); 
-        this.setState({bio: this.state.tempBio}) 
+
+        let authorJSON = {
+            "authorBio": this.state.tempBio,
+            "authorEmail": this.state.author.authorEmail,
+            "authorFirstName": this.state.author.authorFirstName ,
+            "authorProfileUrl": this.state.author.authorProfileUrl,
+            "authorLastName": this.state.author.authorLastName,
+            "authorRole": this.state.author.authorRole,
+            "authorAccess": this.state.author.authorAccess          
+        };
+
+        axios.post(`http://localhost:5000/author/update/${this.state.sessionVar._id}`, authorJSON)
+            .then(res => {
+                // console.log(res);
+                // console.log(res.data);
+                // this.handleClose()
+                window.location.reload()
+            })
+        
+        this.setState({
+            author: authorJSON
+        });
+
+
+
+
+        
     
     }
 
@@ -86,16 +161,20 @@ class Account extends Component{
         
     }
 
+    
 
 
     render(){
         const {classes} = this.props; 
+
         return(
+            
 
             <Container className={classes.container}>
+
                 <Grid container spacing={6}>
                     <Grid item xs={12} sm={4}>
-                    <img alt={this.props.name} className={classes.pic} src={this.state.imgURL}></img>
+                    <img alt={this.state.author.authorFirstName+" " + this.state.author.authorLastName} className={classes.pic} src={this.state.author.authorProfileUrl}></img>
                     <Button  onClick={this.updatePicture} className={classes.updatePictureButton}>
                                 Update Picture
                             </Button>
@@ -103,7 +182,7 @@ class Account extends Component{
                     <Grid item xs={12} sm={8}>
                         <div className={classes.updateBio}>
                             <TextField
-                                // name="bio"
+                                
                                 id="Bio"
                                 label="Bio"
                                 rows='18'
@@ -111,6 +190,7 @@ class Account extends Component{
                                 multiline
                                 fullWidth
                                 onChange={this.handleChange}
+                                // defaultValue={this.state.author.authorBio}
 
                             />
                             <Button  onClick={this.updateBio} className={classes.updatePictureButton}>
@@ -120,7 +200,7 @@ class Account extends Component{
                     </Grid>
 
                 </Grid>
-                <Profile picture={this.state.imgURL} bio={this.state.bio}></Profile>
+                <Profile></Profile>
 
             </Container>
 
@@ -130,10 +210,3 @@ class Account extends Component{
 }
 
 export default withStyles(styles)(Account); 
-
-Account.defaultProps = {
-    picture: 'https://icon-library.net/images/free-account-icon/free-account-icon-0.jpg',
-    name: 'Author Author',
-    role: 'Chief Editor',
-    bio: "Welcome to your complete guide to the best Chow Chow names, giving you plenty of ideas for what to call your beautiful and powerful Chow Chow. Chow Chow dog names should highlight this ancient Chinese breed’s best qualities. Be that their gorgeous mane of red, white, blue, cream, blue, or tawny fur; their legendary “tough dog” presence; or perhaps their Chinese roots! No matter what inspires your potential dog names for Chow Chow, there are some things to keep in mind to ensure that your pooch both knows and answers to their name.",
-}

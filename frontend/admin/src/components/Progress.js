@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -51,6 +50,7 @@ class ProgressBar extends Component {
 		super(props)
 
 		this.state = {
+			sessionVar: JSON.parse(sessionStorage.getItem("user")),
 			article: '',
 			steps: ['Article information and text', 'Confirm the preview', 'Publish'],
 			activeStep: 0,
@@ -145,10 +145,10 @@ class ProgressBar extends Component {
 		let month = new Date().getMonth() + 1; //Current Month
 		let year = new Date().getFullYear(); //Current Year
 
-		const articleJSON = {
+		let articleJSON = {
 			"articleId": this.state.article.articleId,
 			"articleTitle": this.state.article.articleTitle,
-			"articleAuthor": this.state.article.articleAuthor,
+			"articleAuthor": this.state.sessionVar.authorFirstName + ' ' + this.state.sessionVar.authorLastName,
 			"articleImg": this.state.article.articleImg,
 			"articleImgDesc": this.state.article.articleImgDesc,
 			"articleTeaser": this.state.article.articleTeaser,

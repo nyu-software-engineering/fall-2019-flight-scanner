@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 
 const styles = theme => ({
@@ -43,16 +44,16 @@ class Teammember extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            redirect: false
         }
     }
 
     handleEditClick = () => {
-        console.log(this.props.firstName)
         this.props.pressEdit(this.props.info)
     }
 
     handleDelete = () => {
-        console.log(this.props.firstName)
+        alert("Team Member Deleted. Please Refresh Page.");
         axios.delete(`http://localhost:5000/author/${this.props.info._id}`)
             .then(res => {
                 console.log(res);
@@ -60,16 +61,27 @@ class Teammember extends Component {
             })
     }
 
+    handleSeeProfile = () =>{
+        this.setState({
+            redirect: true
+        }); 
+    }
+
 
     render() {
-        const { classes } = this.props
+        const { classes } = this.props; 
+
+        if (this.state.redirect) {
+			return (<Redirect to={{ pathname: `/profile/${this.props.info._id}`, state: { id: this.props.info } }} />)
+        }
+        
         return (
 
             <Card className={classes.card}>
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        image={this.props.info.authorProfileURL}
+                        image={this.props.info.authorProfileUrl}
                         title={this.props.info.authorFirstName} />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
@@ -82,7 +94,7 @@ class Teammember extends Component {
                 </CardActionArea>
                 <CardActions>
                     <Grid>
-                        <Button size="small" className={classes.button}  >
+                        <Button size="small" className={classes.button} onClick={this.handleSeeProfile} >
                             See Profile
 				        </Button>
                         <Button size="small" className={classes.delete} onClick={this.handleDelete} >
@@ -100,21 +112,4 @@ class Teammember extends Component {
 
 export default withStyles(styles)(Teammember);
 
-
-Teammember.defaultProps = {
-    info: {
-        authorBio: "CS Major",
-        authorEmail: "arz268@nyu.edu",
-        authorFirstName: "Abdullah",
-        authorId: "Auth001",
-        authorLastName: "Zameek",
-        authorProfileUrl: "lorempixel.com/400/200",
-        authorRole: "Editor",
-        createdAt: "2019-12-01T22:50:57.090Z",
-        updatedAt: "2019-12-01T22:50:57.090Z",
-        __v: 0,
-        _id: "5de443d1a3ca300a85e34bc9",
-    }
-
-}
 
