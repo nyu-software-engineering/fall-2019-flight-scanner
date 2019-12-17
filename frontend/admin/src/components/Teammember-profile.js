@@ -69,7 +69,7 @@ class Profile extends Component {
         })
 
         let name = this.state.sessionVar.authorFirstName + ' ' + this.state.sessionVar.authorLastName; 
-        console.log(name)
+
         axios.get(`http://localhost:5000/article/getByAuthorName/${name}`)
         .then(response => {
             console.log("didmount", response.data)

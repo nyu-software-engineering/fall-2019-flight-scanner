@@ -110,8 +110,8 @@ class Account extends Component{
       
         axios.post(`http://localhost:5000/author/update/${this.state.sessionVar._id}`, authorJSON)
             .then(res => {
-                console.log(res);
-                console.log(res.data);
+                // console.log(res);
+                // console.log(res.data);
                 // this.handleClose()
                 window.location.reload()
             })
@@ -137,8 +137,8 @@ class Account extends Component{
 
         axios.post(`http://localhost:5000/author/update/${this.state.sessionVar._id}`, authorJSON)
             .then(res => {
-                console.log(res);
-                console.log(res.data);
+                // console.log(res);
+                // console.log(res.data);
                 // this.handleClose()
                 window.location.reload()
             })

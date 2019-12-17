@@ -61,8 +61,6 @@ class Article extends Component {
         const slug = this.props.match.params.id
         axios.get(`http://localhost:5000/article/getBySlug/${slug}`)
             .then(response => {
-                console.log("response ", response.data)
-                console.log("the id is", response.data[0]._id)
                 this.setState({
                     article: response.data[0]
                 })
