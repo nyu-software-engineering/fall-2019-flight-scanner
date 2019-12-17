@@ -47,7 +47,6 @@ class Teammember extends Component {
     }
 
     handleEditClick = () => {
-        
         this.props.pressEdit(this.props.info)
     }
 
@@ -60,6 +59,10 @@ class Teammember extends Component {
             })
     }
 
+    handleSeeProfile = () =>{
+
+    }
+
 
     render() {
         const { classes } = this.props
@@ -69,7 +72,7 @@ class Teammember extends Component {
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        image={this.props.info.authorProfileURL}
+                        image={this.props.info.authorProfileUrl}
                         title={this.props.info.authorFirstName} />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
@@ -82,7 +85,7 @@ class Teammember extends Component {
                 </CardActionArea>
                 <CardActions>
                     <Grid>
-                        <Button size="small" className={classes.button}  >
+                        <Button size="small" className={classes.button} onClick={this.handSeeProfile} >
                             See Profile
 				        </Button>
                         <Button size="small" className={classes.delete} onClick={this.handleDelete} >
@@ -100,21 +103,4 @@ class Teammember extends Component {
 
 export default withStyles(styles)(Teammember);
 
-
-Teammember.defaultProps = {
-    info: {
-        authorBio: "CS Major",
-        authorEmail: "arz268@nyu.edu",
-        authorFirstName: "Abdullah",
-        authorId: "Auth001",
-        authorLastName: "Zameek",
-        authorProfileUrl: "lorempixel.com/400/200",
-        authorRole: "Editor",
-        createdAt: "2019-12-01T22:50:57.090Z",
-        updatedAt: "2019-12-01T22:50:57.090Z",
-        __v: 0,
-        _id: "5de443d1a3ca300a85e34bc9",
-    }
-
-}
 

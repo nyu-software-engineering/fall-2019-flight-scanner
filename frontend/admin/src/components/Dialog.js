@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { TextField } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -40,6 +39,7 @@ class EditDialog extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      author: '',
       gmail: '',
       first_name:'',
       last_name: '',
@@ -51,17 +51,22 @@ class EditDialog extends Component {
   handleClose = () => {
     this.props.close()
   }
+  
 
   handleSaveClick = () => {
-    const authorJSON = {
+
+    
+
+    let authorJSON = {
       "authorBio":this.props.info.authorBio,
       "authorEmail": this.props.info.authorEmail,
       "authorFirstName": ((this.state.first_name === '') ? this.props.info.authorFirstName : this.state.first_name) ,
-      "authorProfileUrl": 'http://lorempixel.com/200/400/sports/',
+      "authorProfileUrl": this.props.info.authorProfileUrl,
       "authorLastName": ((this.state.last_name === '') ? this.props.info.authorLastName : this.state.last_name),
       "authorRole": ((this.state.role === '') ? this.props.info.authorRole : this.state.role),
       "authorAccess": ((this.state.access === '') ? this.props.info.authorAccess : this.state.access)          
-  };
+    };
+
 
   axios.post(`http://localhost:5000/author/update/${this.props.info._id}`, authorJSON)
       .then(res => {

@@ -190,7 +190,7 @@ class Account extends Component{
                                 multiline
                                 fullWidth
                                 onChange={this.handleChange}
-                                defaultValue={this.state.author.authorBio}
+                                // defaultValue={this.state.author.authorBio}
 
                             />
                             <Button  onClick={this.updateBio} className={classes.updatePictureButton}>
