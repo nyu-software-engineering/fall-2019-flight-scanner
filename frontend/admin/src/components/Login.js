@@ -2,14 +2,32 @@ import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { withStyles, Typography } from '@material-ui/core';
 
+const styles = theme => ({
+    container: {
+        width: "100vw",
+        height: "100vh",
+        background: "#2E3B55",
+        display: "flex"
+    },
+    subcontainer: {
+        margin: "auto",
+    },
+    typo: {
+        color: "white",
+        marginTop: "50px",
+        marginBottom: "25px"
+    }
+})
 
 class Login extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            auth: false
+            auth: false,
+            invalid: false
         }
     }
 
@@ -20,11 +38,17 @@ class Login extends Component {
             axios.post('http://localhost:5000/author/validate', { email: res.profileObj.email, token: res.tokenObj.id_token })
                 .then(response => {
                     console.log(response)
-                    sessionStorage.setItem("authToken", response.data.authToken)
-                    sessionStorage.setItem("user", JSON.stringify(response.data.author))
-                    this.setState({
-                        auth: true,
-                    })
+                    if (response.data.authToken !== undefined) {
+                        sessionStorage.setItem("authToken", response.data.authToken)
+                        sessionStorage.setItem("user", JSON.stringify(response.data.author))
+                        this.setState({
+                            auth: true,
+                        })
+                    } else {
+                        this.setState({
+                            invalid: true
+                        })
+                    }
                 })
                 .catch(err => {
                     console.log(err)
@@ -33,16 +57,26 @@ class Login extends Component {
     }
 
     render() {
+        const { classes } = this.props
 
-        if (this.state.auth!==true) {
+        if (this.state.auth !== true && sessionStorage.getItem("authToken") === null) {
             return (
-                <div>
-                    <GoogleLogin
-                        clientId="841597979703-ujo0ol992t85ug1ngfu5p6c5j017l00l.apps.googleusercontent.com"
-                        buttonText="Login"
-                        onSuccess={this.responseGoogle}
-                        onFailure={this.responseGoogle}
-                    />
+                <div className={classes.container}>
+                    <div className={classes.subcontainer}>
+                        <img src='translogo.png' alt="lightshare logo"/>
+                        <Typography variant="h3" className={classes.typo}>Welcome to Lightshare's Admin Interface</Typography>
+                        <GoogleLogin
+                            clientId="841597979703-ujo0ol992t85ug1ngfu5p6c5j017l00l.apps.googleusercontent.com"
+                            buttonText="Login"
+                            onSuccess={this.responseGoogle}
+                            onFailure={this.responseGoogle}
+                        />
+                        {this.state.invalid ? (
+                            <Typography variant='h4' className={classes.typo}>Sorry, you do not have permission to access this interface</Typography>
+                        ) : (
+                            null
+                        )}
+                    </div>
                 </div>
             );
         }
@@ -91,6 +125,6 @@ function passwordEntered(password) {
     return !(password.length === 0)
 }
 
-export default Login
+export default withStyles(styles)(Login)
 
 export { passwordEntered, conversion, checkEmailExists, checkSignedIn, checkSignInProvider, availableSignInOptions, emailValid, emailRegex, passwordHasSpecialChars, passwordLongEnough }
