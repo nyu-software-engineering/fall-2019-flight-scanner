@@ -31,7 +31,7 @@ class MiniArticle extends Component {
 	}
 
 	handleClick = () => {
-		// alert("Coming soon!")
+
 		this.setState({
 			redirectToArticle: true
 		})

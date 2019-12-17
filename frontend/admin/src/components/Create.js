@@ -10,10 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import { Container, Typography } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
 
-// import Chip from '@material-ui/core/Chip';
-import axios from 'axios';
 
-// const authorName = "Abdullah Zameek" //temp author name added for the sake of it 
+import axios from 'axios';
 
 const styles = theme => ({
 
