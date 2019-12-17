@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 
 const styles = theme => ({
@@ -43,6 +44,7 @@ class Teammember extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            redirect: false
         }
     }
 
@@ -60,12 +62,19 @@ class Teammember extends Component {
     }
 
     handleSeeProfile = () =>{
-
+        this.setState({
+            redirect: true
+        }); 
     }
 
 
     render() {
-        const { classes } = this.props
+        const { classes } = this.props; 
+
+        if (this.state.redirect) {
+			return (<Redirect to={{ pathname: `/profile/${this.props.info._id}`, state: { id: this.props.info } }} />)
+        }
+        
         return (
 
             <Card className={classes.card}>
@@ -85,7 +94,7 @@ class Teammember extends Component {
                 </CardActionArea>
                 <CardActions>
                     <Grid>
-                        <Button size="small" className={classes.button} onClick={this.handSeeProfile} >
+                        <Button size="small" className={classes.button} onClick={this.handleSeeProfile} >
                             See Profile
 				        </Button>
                         <Button size="small" className={classes.delete} onClick={this.handleDelete} >

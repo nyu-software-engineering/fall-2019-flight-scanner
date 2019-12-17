@@ -10,6 +10,7 @@ import Progress from './components/Progress';
 import './App.css'
 import Login from './components/Login';
 import Article from './components/Article';
+import Profile from './components/Teammember-profile'
 
 // const Refresh = ({ path = '/' }) => (
 //     <Route
@@ -66,6 +67,7 @@ class App extends Component {
                         <AuthenticatedRoute exact path="/edit" component={Create} />
                         <AuthenticatedRoute exact path="/approve" component={Progress} />
                         <AuthenticatedRoute exact path="/article/:id" component={Article} />
+                        <AuthenticatedRoute exact path="/profile/:id" component={Profile} />
                         <AuthenticatedRoute component={ErrorPage} />
                         {/* <Refresh /> */}
                     </Switch>

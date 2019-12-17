@@ -49,12 +49,21 @@ class Profile extends Component {
         this.state = {
             sessionVar: JSON.parse(sessionStorage.getItem("user")),
             author: "",
-            articles: []
+            articles: [],
+            is_admin_window: (window.location.href.slice(-10) === 'my-account')
         }
     }
 
     componentDidMount(){
-        axios.get(`http://localhost:5000/author/${this.state.sessionVar._id}`)
+        let myAuthor = ""; 
+        if(this.state.is_admin_window){
+            myAuthor = this.state.sessionVar; 
+        }
+        else{
+            myAuthor = this.props.location.state.id; 
+        }
+
+        axios.get(`http://localhost:5000/author/${myAuthor._id}`)
         .then(response => {
 
             console.log("didmount", response.data)
@@ -68,7 +77,7 @@ class Profile extends Component {
             console.log("ERROR in Category loading ", error)
         })
 
-        let name = this.state.sessionVar.authorFirstName + ' ' + this.state.sessionVar.authorLastName; 
+        let name = myAuthor.authorFirstName + ' ' + myAuthor.authorLastName; 
 
         axios.get(`http://localhost:5000/article/getByAuthorName/${name}`)
         .then(response => {
