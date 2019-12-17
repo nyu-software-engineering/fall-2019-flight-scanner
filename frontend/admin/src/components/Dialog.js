@@ -78,6 +78,12 @@ class EditDialog extends Component {
     })
 }
 
+  handleChange = (event) => {
+    this.setState({
+        [event.target.id]: event.target.value
+    })
+}
+
   render() {
     const { classes } = this.props
 

@@ -47,12 +47,12 @@ class Teammember extends Component {
     }
 
     handleEditClick = () => {
-        console.log(this.props.firstName)
+        
         this.props.pressEdit(this.props.info)
     }
 
     handleDelete = () => {
-        console.log(this.props.firstName)
+        alert("Team Member Deleted. Please Refresh Page.");
         axios.delete(`http://localhost:5000/author/${this.props.info._id}`)
             .then(res => {
                 console.log(res);
