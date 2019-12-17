@@ -8,26 +8,6 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
-  console.log(req.body)
-  const authorId = "DELETE LATER17"
-  const authorFirstName = req.body.authorFirstName;
-  const authorLastName = req.body.authorLastName;
-  const authorEmail = req.body.authorEmail;
-  const authorProfileUrl = "";
-  const authorRole = req.body.authorRole;
-  const authorBio = "";
-
-  const newAuthor = new Author({
-    authorId,
-    authorFirstName,
-    authorLastName,
-    authorEmail,
-    authorProfileUrl,
-    authorRole,
-    authorBio
-  });
-
   router.route('/add').post((req, res) => {
     console.log(req.body)
     const authorFirstName = req.body.authorFirstName;
@@ -54,9 +34,10 @@ router.route('/add').post((req, res) => {
   });
 
   router.route('/:id').get((req, res) => {
-    Author.findById(req.params.id)
-      .then(author => res.json(author))
-      .catch(err => res.status(400).json('Error: ' + err));
+      console.log(req.params.id);
+      Author.findById(req.params.id)
+        .then(author => res.json(author))
+        .catch(err => res.status(400).json('Error: ' + err));
   });
 
   router.route('/:id').delete((req, res) => {
@@ -65,27 +46,7 @@ router.route('/add').post((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
-  router.route('/update/:id').post((req, res) => {
-    console.log(req.body);
-    Author.findById(req.params.id)
-      .then(author => {
-        author.authorFirstName = req.body.authorFirstName;
-        author.authorLastName = req.body.authorLastName;
-        author.auhtorEmail = req.body.authorEmail;
-        author.authorProfileUrl = req.body.authorProfileUrl;
-        author.authorRole = req.body.authorRole;
-        author.authorBio = req.body.authorBio;
-        author.authorAccess = req.body.authorAccess;
-
-        author.save()
-          .then(() => res.json('Author updated!'))
-          .catch(err => res.status(400).json('Error: ' + err));
-      })
-      .catch(err => res.status(400).json('Error: ' + err));
-  })
-    .catch(err => res.status(400).json('Error: ' + err));
-});
-
+    
 router.route('/validate').post((req, res) => {
 
   let payload = {
@@ -111,6 +72,7 @@ router.route('/validate').post((req, res) => {
       res.status(404).json("Error " + e)
     })
 
-})
+});
+
 
 module.exports = router;
