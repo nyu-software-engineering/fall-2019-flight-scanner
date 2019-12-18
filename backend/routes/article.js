@@ -99,7 +99,7 @@ router.route("/getByCategory/:category").get((req, res) => {
         'articleCategory': req.params.category,
         'articleStatus': "published"
     })
-        .then(article => res.json(article))
+        .then(article => res.json(article.reverse()))
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
@@ -109,7 +109,7 @@ router.route("/getByAuthorName/:articleAuthor").get((req, res) => {
         'articleAuthor': req.params.articleAuthor,
         'articleStatus': "published"
     })
-        .then(article => res.json(article))
+        .then(article => res.json(article.reverse()))
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
@@ -118,7 +118,7 @@ router.route("/getSavedByAuthorName/:articleAuthor").get((req, res) => {
         'articleAuthor': req.params.articleAuthor,
         'articleStatus': "unpublished"
     })
-        .then(article => res.json(article))
+        .then(article => res.json(article.reverse()))
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
@@ -130,7 +130,7 @@ router.route("/getBySlug/:slug").get((req, res) => {
 
 router.route("/getByState/:state").get((req, res) => {
     Article.find({ 'articleStatus': req.params.state })
-        .then(article => res.json(article))
+        .then(article => res.json(article.reverse()))
         .catch(err => res.status(400).json('Error: ' + err));
 })
 router.route("/searchBar/:searchQuery").get((req, res) => {
