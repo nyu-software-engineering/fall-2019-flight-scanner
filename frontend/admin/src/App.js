@@ -12,18 +12,18 @@ import Login from './components/Login';
 import Article from './components/Article';
 import Profile from './components/Teammember-profile'
 
-// const Refresh = ({ path = '/' }) => (
-//     <Route
-//         path={path}
-//         component={({ history, location, match }) => {
-//             history.replace({
-//                 ...location,
-//                 pathname: location.pathname.substring(match.path.length)
-//             });
-//             return null;
-//         }}
-//     />
-// );
+const Refresh = ({ path = '/' }) => (
+    <Route
+        path={path}
+        component={({ history, location, match }) => {
+            history.replace({
+                ...location,
+                pathname: location.pathname.substring(match.path.length)
+            });
+            return null;
+        }}
+    />
+);
 
 export const isAuthenticated = () => {
     if (sessionStorage.getItem("user") === null)
@@ -68,6 +68,7 @@ class App extends Component {
                         <AuthenticatedRoute exact path="/approve" component={Progress} />
                         <AuthenticatedRoute exact path="/article/:id" component={Article} />
                         <AuthenticatedRoute exact path="/profile/:id" component={Profile} />
+                        <Refresh path="/refresh" />
                         <AuthenticatedRoute component={ErrorPage} />
                         {/* <Refresh /> */}
                     </Switch>

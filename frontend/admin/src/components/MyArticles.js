@@ -50,7 +50,10 @@ class MyArticles extends Component {
                 console.log("Could not get the pending review articles: ", error)
             })
 
-        axios.get(`http://localhost:5000/article/getByState/unpublished`)
+        const myAuthor = JSON.parse(sessionStorage.getItem("user"))
+        let name = myAuthor.authorFirstName + ' ' + myAuthor.authorLastName
+
+        axios.get(`http://localhost:5000/article/getSavedByAuthorName/${name}`)
             .then(response => {
                 console.log("didmount", response.data)
                 this.setState({
@@ -91,11 +94,11 @@ class MyArticles extends Component {
                         </div>
                     ) : null}
 
-                    {JSON.parse(sessionStorage.getItem("user")).authorAccess === "Admin" ? 
-                        this.showWaiting() : null } 
+                    {JSON.parse(sessionStorage.getItem("user")).authorAccess === "Admin" ?
+                        this.showWaiting() : null}
 
-                        <Typography variant='body1' className={classes.section}>Saved Drafts ({this.state.savedArticles.length})</Typography>
-                        <Divider className={classes.divider} variant="middle" />
+                    <Typography variant='body1' className={classes.section}>Saved Drafts ({this.state.savedArticles.length})</Typography>
+                    <Divider className={classes.divider} variant="middle" />
 
                     {this.showSaved()}
 

@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button'
 import Article from './AdminArticle';
 import Grid from '@material-ui/core/Grid';
 import { Container, Typography } from '@material-ui/core';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 
 import axios from 'axios';
@@ -69,7 +69,7 @@ class Create extends Component {
 
             is_edit_window: (window.location.href.slice(-4) === 'edit'),
             is_admin_window: (window.location.href.slice(-7) === 'approve'),
-            redirect: false
+            // redirect: false
         }
     }
 
@@ -196,17 +196,16 @@ class Create extends Component {
                 "articleKeywords": this.state.keywords
             };
 
+            console.log("article json", articleJSON)
 
             axios.post(`http://localhost:5000/article/add`, articleJSON)
-            // .then(res => {
-            //     console.log(res);
-            //     console.log(res.data);
-            // })
+            
         }
 
-        this.setState({
-            redirect: true
-        })
+        // this.setState({
+        //     redirect: true
+        // })
+        this.props.history.push("/refresh/my-articles")
 
     }
 
@@ -286,9 +285,11 @@ class Create extends Component {
                 // })
             }
 
-            this.setState({
-                redirect: true
-            })
+            // this.setState({
+            //     redirect: true
+            // })
+
+            this.props.history.push("/refresh/my-articles")
 
         }
     }
@@ -299,9 +300,10 @@ class Create extends Component {
             if (answer.toUpperCase() === 'YES') {
                 axios.delete(`http://localhost:5000/article/${this.props.location.state.id.info._id}`)
                     .then(
-                        this.setState({
-                            redirect: true
-                        })
+                        // this.setState({
+                        //     redirect: true
+                        // })
+                        this.props.history.push("/refresh/my-articles")
                     )
 
 
@@ -397,12 +399,9 @@ class Create extends Component {
 
     render() {
         const { classes } = this.props
-        if (this.state.redirect && (!this.state.is_admin_window)) {
-            // window.location.reload()
-            return (<Redirect to={`/my-articles`} />)
-
-
-        }
+        // if (this.state.redirect && (!this.state.is_admin_window)) {
+        //     return (<Redirect to={`/my-articles`} />)
+        // }
         return (
             <div >
                 {this.showTitle()}
@@ -515,4 +514,4 @@ class Create extends Component {
     }
 }
 
-export default withStyles(styles)(Create); 
+export default withRouter(withStyles(styles)(Create)); 

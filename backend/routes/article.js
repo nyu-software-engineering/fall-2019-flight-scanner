@@ -11,7 +11,7 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
 
-    // console.log(req.body);
+    console.log(req.body);
 
     // const body = req.body; 
     const articleId = req.body.articleId;
@@ -26,7 +26,7 @@ router.route('/add').post((req, res) => {
     const articleDate = Date.parse(req.body.articleDate);
     const articleStatus = req.body.articleStatus; //will be sent as string, not bool
     const articleKeywords = req.body.articleKeywords;
-    
+
     // const newArticle = new Article(body); 
     const newArticle = new Article({
         articleId,
@@ -42,9 +42,14 @@ router.route('/add').post((req, res) => {
         articleKeywords
     });
 
+    console.log(newArticle)
+
     newArticle.save()
         .then(() => res.json('Added Article!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => {
+            console.log("error "+err)
+            res.status(400).json('Error: ' + err)
+        });
 
 });
 
@@ -88,37 +93,50 @@ router.route('/update/:id').post((req, res) => {
 //need to create sub-routes if youre trying to get something by some value
 
 router.route("/getByCategory/:category").get((req, res) => {
-    Article.find({'articleCategory':req.params.category,
-                  'articleStatus': "published"
-                })
-    .then(article => res.json(article))
-    .catch(err => res.status(400).json('Error: ' + err));
+    Article.find({
+        'articleCategory': req.params.category,
+        'articleStatus': "published"
+    })
+        .then(article => res.json(article))
+        .catch(err => res.status(400).json('Error: ' + err));
 })
 
 router.route("/getByAuthorName/:articleAuthor").get((req, res) => {
     console.log(req.params)
-    Article.find({'articleAuthor':req.params.articleAuthor
-                })
-    .then(article => res.json(article))
-    .catch(err => res.status(400).json('Error: ' + err));
+    Article.find({
+        'articleAuthor': req.params.articleAuthor,
+        'articleStatus': "published"
+    })
+        .then(article => res.json(article))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.route("/getSavedByAuthorName/:articleAuthor").get((req, res) => {
+    Article.find({
+        'articleAuthor': req.params.articleAuthor,
+        'articleStatus': "unpublished"
+    })
+        .then(article => res.json(article))
+        .catch(err => res.status(400).json('Error: ' + err))
 })
 
 router.route("/getBySlug/:slug").get((req, res) => {
-    Article.find({'articleId':req.params.slug})
-    .then(article => res.json(article))
-    .catch(err => res.status(400).json('Error: ' + err));
+    Article.find({ 'articleId': req.params.slug })
+        .then(article => res.json(article))
+        .catch(err => res.status(400).json('Error: ' + err));
 })
 
 router.route("/getByState/:state").get((req, res) => {
-    Article.find({'articleStatus':req.params.state})
-    .then(article => res.json(article))
-    .catch(err => res.status(400).json('Error: ' + err));
+    Article.find({ 'articleStatus': req.params.state })
+        .then(article => res.json(article))
+        .catch(err => res.status(400).json('Error: ' + err));
 })
 router.route("/searchBar/:searchQuery").get((req, res) => {
     Article.find({
-    $text: { $search: req.params.searchQuery },})
-    .then(article => res.json(article))
-    .catch(err => res.status(400).json('Error: ' + err));
+        $text: { $search: req.params.searchQuery },
+    })
+        .then(article => res.json(article))
+        .catch(err => res.status(400).json('Error: ' + err));
 })
 
 module.exports = router;
