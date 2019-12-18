@@ -75,7 +75,7 @@ const SearchAppBar = (props) => {
 			<AppBar position="static" style={{ background: '#2E3B55' }}>
 				<Toolbar>
 					<Typography className={classes.title} variant="h6" noWrap>
-						<Link to="/landing" className={classes.link}>The LightShare News</Link>
+						<Link to="/" className={classes.link}>The LightShare News</Link>
 					</Typography>
 					<div className={classes.search}>
 						<div className={classes.searchIcon}>

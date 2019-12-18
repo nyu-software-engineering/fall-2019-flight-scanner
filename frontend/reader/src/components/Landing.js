@@ -47,7 +47,7 @@ class Landing extends Component {
         // To add in some default articles for when DB does not provide any, add them to the Array Below
         this.state = {
             articles: [],
-            is_search_results: !(window.location.href.slice(-7) === 'landing'),
+            is_search_results: (window.location.href.includes("search-results")),
             found: 0, 
             mounted: false,  
 
