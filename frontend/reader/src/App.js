@@ -32,10 +32,10 @@ class App extends Component {
 					<Header />
 					<Switch>
 						
-						<Route exact path="/" component={MiniArticle} />
+						<Route exact path="/" component={LandingWrapper} />
 						<Route exact path="/category/:id" component={Category} />
 						<Route exact path="/article/:id" component={Article} />
-						<Route exact path="/landing" component={LandingWrapper} />
+						{/* <Route exact path="/landing" component={LandingWrapper} /> */}
 						<Route exact path="/team" component={Team} />
 						<Route exact path="/search-results" component={Landing} />
 						<Route exact path="/profile" component={Profile} />
