@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
-import { Typography} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 const styles = theme => ({
     nav: {
@@ -69,9 +69,12 @@ class Header extends Component {
                     <li className={classes.nav_item} key={'my-account'}>
                         <Link className={classes.nav_link} to={`/my-account`}>My Account</Link>
                     </li>
-                    <li className={classes.nav_item} key={'team-management'}>
-                        <Link className={classes.nav_link} to={`/team-management`}>Team Management</Link>
-                    </li>
+                    {JSON.parse(sessionStorage.getItem("user")).authorAccess === "Admin" ? (
+                        <li className={classes.nav_item} key={'team-management'}>
+                            <Link className={classes.nav_link} to={`/team-management`}>Team Management</Link>
+                        </li>
+                    ) : null}
+
                 </ul>
             </div>
         )
