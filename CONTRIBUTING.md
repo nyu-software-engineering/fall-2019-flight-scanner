@@ -4,8 +4,7 @@ When contributing to this project, please follow the [feature branch version con
 
 ## Download and Use
 - Download the repository from github. 
-- Navigate to the `backend` directory, and run `npm install`. 
-- Navigate to the `frontend` directory, and run `npm install`. 
+- Navigate to the `backend` directory, and run `npm install`.  
 - Navigate to the `frontend/admin` directory, run `npm install`.
 - Navigate to the `frontend/reader` directory, run `npm install`.
 - Navigate to the `backend` directory, run `nodemon`, and make sure the backend is always running. 
