@@ -117,7 +117,7 @@ class Create extends Component {
                 banner={this.state.URL === "" ? this.showDefault().articleImg : this.state.URL}
                 teaser={this.state.teaser === "" ? this.showDefault().articleTeaser : this.state.teaser}
                 body={this.state.text === "" ? this.showDefault().articleText : this.state.text}
-
+                author={this.showDefault().articleAuthor}
             />
         }
         else {

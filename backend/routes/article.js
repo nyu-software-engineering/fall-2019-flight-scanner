@@ -4,8 +4,10 @@ let Article = require('../models/article.model');
 
 router.route('/').get((req, res) => {
     console.log("hi we here");
-    Article.find()
-        .then(article => res.json(article))
+    Article.find({
+        articleStatus: "published",
+    })
+        .then(article => res.json(article.reverse()))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
