@@ -148,7 +148,7 @@ class ProgressBar extends Component {
 		let articleJSON = {
 			"articleId": this.state.article.articleId,
 			"articleTitle": this.state.article.articleTitle,
-			"articleAuthor": this.state.sessionVar.authorFirstName + ' ' + this.state.sessionVar.authorLastName,
+			"articleAuthor": this.state.article.articleAuthor,
 			"articleImg": this.state.article.articleImg,
 			"articleImgDesc": this.state.article.articleImgDesc,
 			"articleTeaser": this.state.article.articleTeaser,
