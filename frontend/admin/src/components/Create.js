@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button'
 import Article from './AdminArticle';
 import Grid from '@material-ui/core/Grid';
 import { Container, Typography } from '@material-ui/core';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 import axios from 'axios';
@@ -54,7 +54,7 @@ class Create extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sessionVar: JSON.parse(sessionStorage.getItem("user")),  
+            sessionVar: JSON.parse(sessionStorage.getItem("user")),
             title: '',
             URL: '',
             img_caption: '',
@@ -117,7 +117,7 @@ class Create extends Component {
                 banner={this.state.URL === "" ? this.showDefault().articleImg : this.state.URL}
                 teaser={this.state.teaser === "" ? this.showDefault().articleTeaser : this.state.teaser}
                 body={this.state.text === "" ? this.showDefault().articleText : this.state.text}
-                
+
             />
         }
         else {
@@ -199,7 +199,7 @@ class Create extends Component {
             console.log("article json", articleJSON)
 
             axios.post(`http://localhost:5000/article/add`, articleJSON)
-            
+
         }
 
         // this.setState({

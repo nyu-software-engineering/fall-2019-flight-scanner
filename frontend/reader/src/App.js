@@ -4,7 +4,6 @@ import Header from './components/Header';
 import './App.css';
 import Article from './components/Article';
 import Category from './components/Category';
-import MiniArticle from './components/Mini-article';
 import LandingWrapper from './components/LandingWrapper';
 import Team from './components/TeamPage';
 import ErrorPage from './components/404';
