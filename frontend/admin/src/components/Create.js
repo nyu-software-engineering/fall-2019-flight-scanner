@@ -112,11 +112,12 @@ class Create extends Component {
     }
 
     showPreview = () => {
+        console.log(this.state.is_edit_window, "<")
         if (this.state.is_edit_window || this.state.is_admin_window) {
-            return <Article title={this.state.title === "" ? this.showDefault().articleTitle : this.state.title}
-                banner={this.state.URL === "" ? this.showDefault().articleImg : this.state.URL}
-                teaser={this.state.teaser === "" ? this.showDefault().articleTeaser : this.state.teaser}
-                body={this.state.text === "" ? this.showDefault().articleText : this.state.text}
+            return <Article title={this.state.title === " " ? this.showDefault().articleTitle : this.state.title}
+                banner={this.state.URL === " " ? this.showDefault().articleImg : this.state.URL}
+                teaser={this.state.teaser === " " ? this.showDefault().articleTeaser : this.state.teaser}
+                body={this.state.text === " " ? this.showDefault().articleText : this.state.text}
                 author={this.showDefault().articleAuthor}
             />
         }
@@ -138,17 +139,17 @@ class Create extends Component {
         if (this.state.is_edit_window) {
 
             let articleJSON = {
-                "articleId": (this.state.slug === "" ? this.props.location.state.id.info.articleId : this.state.slug),
-                "articleTitle": (this.state.title === "" ? this.props.location.state.id.info.articleTitle : this.state.title),
+                "articleId": (this.state.slug === " " ? this.props.location.state.id.info.articleId : this.state.slug),
+                "articleTitle": (this.state.title === " " ? this.props.location.state.id.info.articleTitle : this.state.title),
                 "articleAuthor": this.state.sessionVar.authorFirstName + " " + this.state.sessionVar.authorLastName,
-                "articleImg": (this.state.URL === "" ? this.props.location.state.id.info.articleImg : this.state.URL),
-                "articleImgDesc": (this.state.img_caption === "" ? this.props.location.state.id.info.articleImgDesc : this.state.img_caption),
-                "articleTeaser": (this.state.teaser === "" ? this.props.location.state.id.info.articleTeaser : this.state.teaser),
-                "articleText": (this.state.text === "" ? this.props.location.state.id.info.articleText : this.state.text),
-                "articleCategory": (this.state.category === "" ? this.props.location.state.id.info.articleCategory : this.state.category),
+                "articleImg": (this.state.URL === " " ? this.props.location.state.id.info.articleImg : this.state.URL),
+                "articleImgDesc": (this.state.img_caption === " " ? this.props.location.state.id.info.articleImgDesc : this.state.img_caption),
+                "articleTeaser": (this.state.teaser === " " ? this.props.location.state.id.info.articleTeaser : this.state.teaser),
+                "articleText": (this.state.text === " " ? this.props.location.state.id.info.articleText : this.state.text),
+                "articleCategory": (this.state.category === " " ? this.props.location.state.id.info.articleCategory : this.state.category),
                 "articleDate": month.toString() + '/' + dayDate.toString() + '/' + year.toString(),
                 "articleStatus": "unpublished",
-                "articleKeywords": (this.state.keywords === "" ? this.props.location.state.id.info.articleKeywords : this.state.keywords)
+                "articleKeywords": (this.state.keywords === " " ? this.props.location.state.id.info.articleKeywords : this.state.keywords)
             };
 
 
@@ -162,17 +163,17 @@ class Create extends Component {
         }
         else if (this.state.is_admin_window) {
             let articleJSON = {
-                "articleId": (this.state.slug === "" ? this.props.info.articleId : this.state.slug),
-                "articleTitle": (this.state.title === "" ? this.props.info.articleTitle : this.state.title),
+                "articleId": (this.state.slug === " " ? this.props.info.articleId : this.state.slug),
+                "articleTitle": (this.state.title === " " ? this.props.info.articleTitle : this.state.title),
                 "articleAuthor": this.state.sessionVar.authorFirstName + " " + this.state.sessionVar.authorLastName,
-                "articleImg": (this.state.URL === "" ? this.props.info.articleImg : this.state.URL),
-                "articleImgDesc": (this.state.img_caption === "" ? this.props.info.articleImgDesc : this.state.img_caption),
-                "articleTeaser": (this.state.teaser === "" ? this.props.info.articleTeaser : this.state.teaser),
-                "articleText": (this.state.text === "" ? this.props.info.articleText : this.state.text),
-                "articleCategory": (this.state.category === "" ? this.props.info.articleCategory : this.state.category),
+                "articleImg": (this.state.URL === " " ? this.props.info.articleImg : this.state.URL),
+                "articleImgDesc": (this.state.img_caption === " " ? this.props.info.articleImgDesc : this.state.img_caption),
+                "articleTeaser": (this.state.teaser === " " ? this.props.info.articleTeaser : this.state.teaser),
+                "articleText": (this.state.text === " " ? this.props.info.articleText : this.state.text),
+                "articleCategory": (this.state.category === " " ? this.props.info.articleCategory : this.state.category),
                 "articleDate": month.toString() + '/' + dayDate.toString() + '/' + year.toString(),
                 "articleStatus": "pendingreview",
-                "articleKeywords": (this.state.keywords === "" ? this.props.info.articleKeywords : this.state.keywords)
+                "articleKeywords": (this.state.keywords === " " ? this.props.info.articleKeywords : this.state.keywords)
             };
 
 
@@ -212,28 +213,28 @@ class Create extends Component {
 
     allProvided = () => {
         const missing = []
-        if (this.state.title === '' && this.props.location.state.id.info.articleTitle === "") {
+        if (this.state.title === ' ' && this.props.location.state.id.info.articleTitle === " ") {
             missing.push('Title')
         }
-        if (this.state.URL === '' && this.props.location.state.id.info.articleImg === "") {
+        if (this.state.URL === ' ' && this.props.location.state.id.info.articleImg === " ") {
             missing.push('URL')
         }
-        if (this.state.slug === '' && this.props.location.state.id.info.articleId === "") {
+        if (this.state.slug === ' ' && this.props.location.state.id.info.articleId === " ") {
             missing.push('Slug')
         }
-        if (this.state.img_caption === '' && this.props.location.state.id.info.articleImgDesc === "") {
+        if (this.state.img_caption === ' ' && this.props.location.state.id.info.articleImgDesc === " ") {
             missing.push('Image caption')
         }
-        if (this.state.teaser === '' && this.props.location.state.id.info.articleTeaser === "") {
+        if (this.state.teaser === ' ' && this.props.location.state.id.info.articleTeaser === " ") {
             missing.push('Teaser')
         }
-        if (this.state.category === '' && this.props.location.state.id.info.articleCategory === "") {
+        if (this.state.category === ' ' && this.props.location.state.id.info.articleCategory === " ") {
             missing.push('Category')
         }
-        if (this.state.text === '' && this.props.location.state.id.info.articleText === "") {
+        if (this.state.text === ' ' && this.props.location.state.id.info.articleText === " ") {
             missing.push('Text')
         }
-        if (this.state.keywords === '' && this.props.location.state.id.info.keywords === "") {
+        if (this.state.keywords === ' ' && this.props.location.state.id.info.keywords === " ") {
             missing.push("Keywords")
         }
         if (missing.length !== 0) {
@@ -257,17 +258,17 @@ class Create extends Component {
             let year = new Date().getFullYear(); //Current Year
 
             let articleJSON = {
-                "articleId": (this.state.slug === "" ? this.props.location.state.id.info.articleId : this.state.slug),
-                "articleTitle": (this.state.title === "" ? this.props.location.state.id.info.articleTitle : this.state.title),
+                "articleId": (this.state.slug === " " ? this.props.location.state.id.info.articleId : this.state.slug),
+                "articleTitle": (this.state.title === " " ? this.props.location.state.id.info.articleTitle : this.state.title),
                 "articleAuthor": this.state.sessionVar.authorFirstName + " " + this.state.sessionVar.authorLastName,
-                "articleImg": (this.state.URL === "" ? this.props.location.state.id.info.articleImg : this.state.URL),
-                "articleImgDesc": (this.state.img_caption === "" ? this.props.location.state.id.info.articleImgDesc : this.state.img_caption),
-                "articleTeaser": (this.state.teaser === "" ? this.props.location.state.id.info.articleTeaser : this.state.teaser),
-                "articleText": (this.state.text === "" ? this.props.location.state.id.info.articleText : this.state.text),
-                "articleCategory": (this.state.category === "" ? this.props.location.state.id.info.articleCategory : this.state.category),
+                "articleImg": (this.state.URL === " " ? this.props.location.state.id.info.articleImg : this.state.URL),
+                "articleImgDesc": (this.state.img_caption === " " ? this.props.location.state.id.info.articleImgDesc : this.state.img_caption),
+                "articleTeaser": (this.state.teaser === " " ? this.props.location.state.id.info.articleTeaser : this.state.teaser),
+                "articleText": (this.state.text === " " ? this.props.location.state.id.info.articleText : this.state.text),
+                "articleCategory": (this.state.category === " " ? this.props.location.state.id.info.articleCategory : this.state.category),
                 "articleDate": month.toString() + '/' + dayDate.toString() + '/' + year.toString(),
                 "articleStatus": "pendingreview",
-                "articleKeywords": (this.state.keywords === "" ? this.props.location.state.id.info.articleKeywords : this.state.keywords)
+                "articleKeywords": (this.state.keywords === " " ? this.props.location.state.id.info.articleKeywords : this.state.keywords)
             };
 
             if (this.state.is_edit_window) {
