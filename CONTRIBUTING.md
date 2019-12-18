@@ -2,6 +2,17 @@
 # Contributing
 When contributing to this project, please follow the [feature branch version control workflow](https://knowledge.kitchen/Feature_branch_version_control_workflow). 
 
+## Download and Use
+- Download the repository from github. 
+- Navigate to the `backend` directory, and run `npm install`. 
+- Navigate to the `frontend` directory, and run `npm install`. 
+- Navigate to the `frontend/admin` directory, run `npm install`.
+- Navigate to the `frontend/reader` directory, run `npm install`.
+- Navigate to the `backend` directory, run `nodemon`, and make sure the backend is always running. 
+- Keep the terminal running the backend open. In another terminal, navigate to the `frontend/admin` directory, run `npm start` to launch the admin interface. Make sure the backend is running. 
+- If you would like to launch the reader interface, navigate to the `frontend/reader` directory, run `npm start`, and also make sure the backend is running at the same time. 
+- Only "Admin" users registered can add new users via the interface. Please create your own account with a gmail address in the database, and log in with the same gmail address. The credentials for the database is shared via private messages. Then you will be able to login via Google Authentification in the admin interface. No login is requried for the reader interface. 
+
 ## Pull Request Process
 Please make sure to issue a pull request after a feature branch is pushed to the repository and wait for a teammate to check the new changes and accept the request. 
 
