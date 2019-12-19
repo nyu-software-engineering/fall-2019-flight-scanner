@@ -5,6 +5,7 @@ When contributing to this project, please follow the [feature branch version con
 ## Download and Use
 - Download the repository from github. 
 - Navigate to the `backend` directory, and run `npm install`.  
+- You also have to create a `.env` file in the `backend` folder and include the MongoDB and JWT access tokens. These have been provided on the private slack channel. 
 - Navigate to the `frontend/admin` directory, run `npm install`.
 - Navigate to the `frontend/reader` directory, run `npm install`.
 - Navigate to the `backend` directory, run `nodemon`, and make sure the backend is always running. 
